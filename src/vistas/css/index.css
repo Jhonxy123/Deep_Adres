@@ -1,6 +1,6 @@
 :root{
     --color-blanco: #ffff;
-    --color-negro: #374151;
+    --color-negro: #000000;
     --color-azul_claro: #356CDA;
     --color-azul_oscuro: #1C3974;
 }
@@ -62,13 +62,4 @@ header {
   .btn:hover {
     opacity: 0.9;
   }
-  footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    background: linear-gradient(to right, var(--color-azul_claro), var(--color-azul_oscuro));
-    text-align: center;
-    padding: 0.75rem 0;
-    color: var(--color-blanco);
-    font-size: 0.875rem;
-  }
+  
