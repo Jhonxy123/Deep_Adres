@@ -1,6 +1,6 @@
 :root {
     --color-blanco: #ffff;
-    --color-negro: #0000;   
+    --color-negro: #000000;   
     --color-fondo: #EBEDEF;
     --color-azul_claro: #356CDA;
     --color-azul_oscuro: #1C3974;
@@ -11,13 +11,13 @@
     box-sizing: border-box;
 }
 body{
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "Open Sans", sans-serif;
     background-color: var(--color-fondo);
     color: var(--color-negro);
     height: 100vh;
 }
 footer {
-    position: absolute;
+    position:absolute;
     bottom: 0;
     width: 100%;
     background: linear-gradient(to right, var(--color-azul_claro), var(--color-azul_oscuro));

@@ -1,0 +1,75 @@
+:root{
+    --color-blanco: #ffff;
+    --color-negro: #000000;   
+    --color-fondo: #EBEDEF;
+    --color-gris: #445151;
+    --color-azul_claro: #356CDA;
+    --color-azul_oscuro: #1C3974;
+}
+body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.form-container {
+    width: 100%;
+    max-width: 500px;
+    padding: 1rem;
+}
+.form-container h1 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: var(--color-azul_claro);
+    margin-bottom: 2rem;
+}
+.form-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+.form-group label {
+    flex: 1;
+    font-size: 1.125rem;
+    padding-right: 1rem;
+}
+.form-group input {
+    flex: 2;
+    padding: 0.75rem 1rem;
+    border: 2px solid var(--color-azul_claro);
+    border-radius: 25px;
+    background-color: var(--color-blanco);
+    font-size: 1rem;
+    outline: none;
+    box-shadow: 4px 4px 8px rgba(59, 130, 246, 0.5);
+    transition: border-color 0.2s;
+}
+.form-group input:focus {
+    border-color: var(--color-azul_oscuro);
+}
+.actions {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+.btn {
+    flex: 1;
+    max-width: 200px;
+    padding: 0.75rem;
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--color-blanco);
+    border: none;
+    border-radius: 9999px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+.btn:hover {
+    opacity: 0.9;
+}
+.btn-registrar {
+    background: linear-gradient(to right, var(--color-azul_claro), var(--color-azul_oscuro));
+}
+.btn-volver {
+    background: linear-gradient(to right, var(--color-gris), var(--color-negro));
+}
