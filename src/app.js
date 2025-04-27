@@ -1,9 +1,21 @@
 // src/app.js
 const express = require('express');
 const path = require('path');
+const session = require('express-session');
 const indexRouter = require('./routes/indexRouter');
 
 const app = express();
+
+// 1. Para poder leer datos de formularios POST:
+app.use(express.urlencoded({ extended: false }));
+
+// 2. Configuración de sesiones:
+app.use(session({
+    secret: 'clave_super_secreta',      // reemplaza por una cadena segura
+    resave: false,
+    saveUninitialized: false,
+    cookie: { maxAge: 1000 * 60 * 30 }   // 30 minutos
+  }));
 
 // 1. Middleware para servir archivos estáticos (CSS, imágenes, etc.)
 //app.use('/css', express.static(path.join(__dirname, 'vistas/css')));
