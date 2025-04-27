@@ -12,8 +12,8 @@
     :ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,
     900&display=swap" rel="stylesheet">
     <!--archivos CSS-->
-    <link rel="stylesheet" href="vistas/css/style.css">
-    <link rel="stylesheet" href="vistas/css/index.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
     <header>
@@ -23,14 +23,14 @@
     
       <div class="hero-content">
         <!-- Íconos e imagenes: reemplaza src por rutas válidas -->
-        <img src="public/img/Salud.png" alt="Ícono Médico" />
-        <img class="logo" src="public/img/Logo_Adres.png" alt="Logo ADRES" />
-        <img src="public/img/Dinero.png" alt="Ícono Dinero" />
+        <img src="/img/Salud.png" alt="Ícono Médico" />
+        <img class="logo" src="/img/Logo_Adres.png" alt="Logo ADRES" />
+        <img src="/img/Dinero.png" alt="Ícono Dinero" />
       </div>
     
       <div class="buttons">
-        <button class="btn">Iniciar Sesión</button>
-        <button id="btn_registrarse" class="btn">Registrarse</button>
+        <button class="btn" onclick="window.location.href='/login'">Iniciar Sesión</button>
+        <button id="btn_registrarse" class="btn" onclick="window.location.href='/registro'">Registrarse</button>
       </div>
     
       <footer>
