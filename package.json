@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/Jhonxy123/Deep_Adres/issues"
   },
-  "homepage": "https://github.com/Jhonxy123/Deep_Adres#readme"
+  "homepage": "https://github.com/Jhonxy123/Deep_Adres#readme",
+  "dependencies": {
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "pg": "^8.15.6"
+  }
 }
