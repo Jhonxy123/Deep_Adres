@@ -4,6 +4,7 @@
 /*-- Sustituye esto con el hash que obtuviste en el paso anterior:
 UPDATE usuario
 SET contrasena = '$2b$10$FGU5skrQRkal9h6YIho41.hsdFpQCK4yVx6wcODvhfhE44UKcFjEu'
+claveSinHash = admin123
 WHERE correo = 'carlos.mendoza@example.com';
 */ 
 
