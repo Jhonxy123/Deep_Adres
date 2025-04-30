@@ -10,10 +10,23 @@
 </head>
 
 <body>
-
-  <nav class="navbar">
+  <main>
+  <nav class="navbar" >
     <!-- Reemplaza src por tu icono de menú -->
-    <img class="menu-icon" src="../public/img/hamburguesa.svg" alt="Menú" />
+    <input type="checkbox" id="menu-toggle" class="menu-toggle">
+    <label for="menu-toggle" class="menu-icon-container">
+      <img class="menu-icon" src="../public/img/hamburguesa.svg" alt="Menú"/>
+    </label>
+    
+    <!-- Menú desplegable -->
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="#">     </a>
+      <a class="dropdown-item" href="#">     </a>
+      <a class="dropdown-item" href="#">      </a>
+      <a class="dropdown-item" href="#">       </a>
+      <a class="dropdown-item" href="#">Salir</a>
+    </div>
+    
     <div class="user-info">
       <span>Usuario</span>
       <!-- Reemplaza src por tu icono de usuario -->
@@ -41,7 +54,7 @@
     </div>
 
   </section>
-
+</main>
   <footer class="footer">
     © Hech por: Jhon Gonzalez - Daniel Guiza - Karen Alarcón - Santiago Alfonso
   </footer>
