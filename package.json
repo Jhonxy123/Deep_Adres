@@ -1,0 +1,28 @@
+{
+  "name": "deep_adres",
+  "version": "1.0.0",
+  "description": "Aplicación web ADRES",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jhonxy123/Deep_Adres.git"
+  },
+  "author": "Inge software",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Jhonxy123/Deep_Adres/issues"
+  },
+  "homepage": "https://github.com/Jhonxy123/Deep_Adres#readme",
+  "dependencies": {
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "pg": "^8.15.6"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
