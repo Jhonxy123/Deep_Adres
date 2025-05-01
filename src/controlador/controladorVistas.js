@@ -6,19 +6,51 @@ exports.paginaIndex = (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'vistas', 'index.html'));
 };
 
-exports.paginaLogin = (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'vistas', 'login.html'));
+exports.paginaRegistro = async (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'vistas', 'registro.html'));
 };
 
-exports.paginaRegistro = (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'vistas', 'registro.html'));
-  };
+
+
+exports.registrarUsuario = async (req, res) => {
+  const { nombre, correo, cedula, contrasena, confirmar_contrasena } = req.body;
+
+  try {
+    const usuarioRegistrado = await usuarioDAO.registrar_usuario(
+      nombre,
+      correo, // <-- Faltaba incluir el correo en los parámetros
+      cedula,
+      contrasena,
+      confirmar_contrasena
+    );
+    
+    // Eliminar la respuesta duplicada (tenías dos res.xxx seguidos)
+    req.session.user = usuarioRegistrado; // <-- Usar usuarioRegistrado en lugar de user
+    res.redirect('/login.html');
+
+  } catch (err) {
+    console.error('Error en registro:', err);
+    
+    if (err.message === 'El correo electronico ya esta registrado') {
+      return res.status(400).json({ error: err.message });
+    } else if (err.message === 'Las contraseñas no coinciden') {
+      return res.status(400).json({ error: err.message });
+    }
+    
+    res.status(500).json({ error: 'Error en el servidor' });
+  }
+};
+
+
+
+
+
 
 // GET /login
 exports.paginaLogin = (req, res) => {
     if (req.session.user) return res.redirect('/paginaMenuUSer');
     res.sendFile(path.join(__dirname, '..', 'vistas', 'login.html'));
-  };
+};
   
 
 // POST /login
@@ -41,6 +73,12 @@ exports.loginProcess = async (req, res) => {
       res.redirect('/login?error=Error%20del%20servidor');
     }
   };
+
+
+
+
+
+
 
   // GET /dashboard
 exports.paginaMenuUser = (req, res) => {

@@ -31,6 +31,8 @@ app.use(express.static(path.join(__dirname, 'vistas')));
 // 3. Registra tu router principal
 app.use('/', indexRouter);
 
+
+
 // 4. Manejo de 404 para rutas no definidas
 app.use((req, res) => {
   res.status(404).send('Página no encontrada');

@@ -21,6 +21,45 @@ async function findByEmail(email) {
   return result.rows[0] || null;
 }
 
+
+async function registrar_usuario(nombre, correo, cedula, contrasena, comprobar_contrasena) {
+  // Validación de contraseñas
+  if (contrasena !== comprobar_contrasena) {
+    throw new Error('Las contraseñas no coinciden');
+  }
+
+  // Verificar correo existente
+  const usuarioExistente = await findByEmail(correo);
+  if (usuarioExistente) {
+    throw new Error('El correo electronico ya esta registrado');
+  }
+
+  // Hash de la contraseña
+  const hashedPassword = await bcrypt.hash(contrasena, 10);
+
+  // Inserción en la base de datos
+  const result = await db.query(
+    `INSERT INTO Usuario (
+       Nombre,
+       Cedula,
+       Correo,
+       Contrasena,
+       ID_Tipo_usuario
+     ) VALUES ($1, $2, $3, $4, 2)
+     RETURNING 
+       ID,
+       Correo AS email,
+       Nombre`,
+    [nombre, cedula, correo, hashedPassword]
+  );
+
+  if (!result.rows[0]) {
+    throw new Error('Error al registrar usuario');
+  }
+
+  return result.rows[0];
+}
+
 /**
  * Valida que la contraseña en texto plano coincida con el hash almacenado.
  * @param {string} email
@@ -55,4 +94,10 @@ async function authenticate(email, plainPassword) {
   return { id, email: correo, nombre };
 }
 
-module.exports = { findByEmail, authenticate };
+
+
+
+
+
+
+module.exports = { findByEmail, authenticate, registrar_usuario};
