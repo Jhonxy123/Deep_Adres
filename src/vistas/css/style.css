@@ -14,10 +14,11 @@ body{
     font-family: "Open Sans", sans-serif;
     background-color: var(--color-fondo);
     color: var(--color-negro);
+    font-weight: 300;
     height: 100vh;
 }
 footer {
-    position:absolute;
+    position: fixed;
     bottom: 0;
     width: 100%;
     background: linear-gradient(to right, var(--color-azul_claro), var(--color-azul_oscuro));
