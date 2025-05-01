@@ -6,11 +6,15 @@
     --color-azul_claro: #356CDA;
     --color-azul_oscuro: #1C3974;
 }
+
 body{
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    min-height: 100vh;
 }
+
+
 .navbar {
     background: linear-gradient(to right, #356CDA, #1C3974);
     padding: 1rem;
