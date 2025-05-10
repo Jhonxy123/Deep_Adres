@@ -4,24 +4,26 @@
     --color-azul_claro: #356CDA;
     --color-azul_oscuro: #1C3974;
 }
-body{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: relative;
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;  /* alinea todo desde arriba */
+  padding-top: 2rem;             /* ajusta este valor a tu gusto */
+  position: relative;
 }
 header {
     text-align: center;
-    margin-bottom: 2rem;
+    margin-top: 1px;
+    /*margin-bottom: 2rem;*/
   }
   header h1 {
     color: var(--color-azul_claro);
-    font-size: 2.5rem;
-    margin-bottom: 0.5rem;
+    font-size: 1.875rem;
+    font-weight: 500;
   }
   header p {
-    font-size: 1.25rem;
+    font-size: 1.875rem;
     color: var(--color-negro);
   }
   .hero-content {
@@ -37,23 +39,32 @@ header {
     opacity: 0.4;
   }
   .hero-content .logo {
-    width: 200px;
+    width: 300px;
     opacity: 1;
+  }
+  .hero-content .salud_img {
+    width: 120px;
+    opacity: 0.7;
+  }
+  .hero-content .dinero_img {
+    width: 120px;
+    opacity: 0.7;
   }
   .buttons {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    width: 220px;
+    width: 350px;
   }
   .btn {
     display: block;
     text-align: center;
     padding: 0.75rem 1rem;
     border: none;
-    border-radius: 9999px;
-    font-size: 1rem;
-    font-weight: 500;
+    border-radius: 25px;
+    font-size: 18px;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 300;
     color: var(--color-blanco);
     background: linear-gradient(to right, var(--color-azul_claro), var(--color-azul_oscuro));
     cursor: pointer;
