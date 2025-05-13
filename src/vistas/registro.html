@@ -35,7 +35,7 @@
          <div class="error-message" id="error_contrasena"></div>
       </div>
       <div class="actions">
-        <button type="submit" class="btn btn-registrar">Registrarse</button>
+        <button type="submit" id="btn-registrar" class="btn btn-registrar" disabled>Registrarse</button>
         <button type="button" class="btn btn-volver" onclick="window.location.href='/'">Volver</button>
       </div>
     </form>
@@ -44,30 +44,46 @@
     © Hecho por: Jhon Gonzalez - Daniel Guiza - Karen Alarcón - Santiago Alfonso
   </footer>
   <script>
-  document.getElementById('formulario-registro').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    // Limpiar errores anteriores
-    document.getElementById('error_contrasena').style.display = 'none';
-    document.getElementById('confirmar_contrasena').classList.remove('input-error');
-    document.getElementById('contrasena').classList.remove('input-error');
+  const contrasenaInput = document.getElementById('contrasena');
+  const confirmarInput = document.getElementById('confirmar_contrasena');
+  const errorElement = document.getElementById('error_contrasena');
+  const btnRegistrar = document.getElementById('btn-registrar');
 
-    // Validación de contraseñas
-    const contrasena = document.getElementById('contrasena').value;
-    const confirmarContrasena = document.getElementById('confirmar_contrasena').value;
-    
-    if (contrasena !== confirmarContrasena) {
-      mostrarErrorCampo('error_contrasena', 'Las contraseñas no coinciden');
-      document.getElementById('confirmar_contrasena').classList.add('input-error');
-      document.getElementById('contrasena').classList.add('input-error');
-      return;
+  function validarContrasenas() {
+    const contrasena = contrasenaInput.value;
+    const confirmar = confirmarInput.value;
+
+    if (confirmar && contrasena !== confirmar) {
+      errorElement.textContent = 'Las contraseñas no coinciden';
+      errorElement.style.display = 'block';
+      contrasenaInput.classList.add('input-error');
+      confirmarInput.classList.add('input-error');
+      btnRegistrar.disabled = true;
+    } else {
+      errorElement.style.display = 'none';
+      contrasenaInput.classList.remove('input-error');
+      confirmarInput.classList.remove('input-error');
+
+      // Solo habilita si ambas están llenas y coinciden
+      if (contrasena && confirmar && contrasena === confirmar) {
+        btnRegistrar.disabled = false;
+      } else {
+        btnRegistrar.disabled = true;
+      }
     }
-    
-    // Si las contraseñas coinciden, puedes enviar el formulario aquí
-    alert('Contraseñas válidas! Formulario listo para enviar.');
+  }
+
+  contrasenaInput.addEventListener('input', validarContrasenas);
+  confirmarInput.addEventListener('input', validarContrasenas);
+
+  // Prevención del envío si las contraseñas no coinciden
+  document.getElementById('formulario-registro').addEventListener('submit', function(e) {
+    if (contrasenaInput.value !== confirmarInput.value) {
+      e.preventDefault();
+      mostrarErrorCampo('error_contrasena', 'Las contraseñas no coinciden');
+    }
   });
 
-  // Función para mostrar errores
   function mostrarErrorCampo(idElemento, mensaje) {
     const elemento = document.getElementById(idElemento);
     if (elemento) {
@@ -75,24 +91,7 @@
       elemento.style.display = 'block';
     }
   }
-  
-  // Validación en tiempo real de contraseñas
-  document.getElementById('confirmar_contrasena').addEventListener('input', function() {
-    const contrasena = document.getElementById('contrasena').value;
-    const confirmacion = this.value;
-    const errorElement = document.getElementById('error_contrasena');
-    
-    if (confirmacion && contrasena !== confirmacion) {
-      errorElement.textContent = 'Las contraseñas no coinciden';
-      errorElement.style.display = 'block';
-      this.classList.add('input-error');
-      document.getElementById('contrasena').classList.add('input-error');
-    } else {
-      errorElement.style.display = 'none';
-      this.classList.remove('input-error');
-      document.getElementById('contrasena').classList.remove('input-error');
-    }
-  });
-  </script>
+</script>
+
 </body>
 </html>
