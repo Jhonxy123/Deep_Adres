@@ -83,6 +83,18 @@ export const loginProcess = async (req, res) => {
 };
 
 
+export const logout = (req, res) => {
+    req.session.destroy((err) => {
+        if (err) {
+            console.error('Error al destruir sesión:', err);
+            return res.status(500).redirect('/login.html?error=Error%20al%20cerrar%20sesión');
+        }
+        
+        res.clearCookie('jwt');
+        return res.redirect('/login.html'); // Redirección directa
+    });
+};
+
 export const paginaMenuUser = (req, res) => {
     if (!req.session.user) {
       return res.redirect('/login?error=Debes%20loguearte');
