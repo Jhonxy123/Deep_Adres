@@ -1,4 +1,3 @@
-// src/models/DAO_usuario.js
 const db     = require('../config/db');
 const bcrypt = require('bcrypt');
 
@@ -61,7 +60,7 @@ async function registrar_usuario(nombre, correo, cedula, contrasena, comprobar_c
 }
 
 /**
- * Valida que la contraseña en texto plano coincida con el hash almacenado.
+ * 
  * @param {string} email
  * @param {string} plainPassword
  * @returns {Promise<null|{id,email,nombre}>}  // usuario sin el hash si ok; null si falla
@@ -73,7 +72,7 @@ async function authenticate(email, plainPassword) {
     return null;
   }
 
-  // imprime para depurar
+
   console.log('authenticate: password plano:', `"${plainPassword}"`);
   console.log('authenticate: hash en DB   :', user.password_hash);
 
@@ -89,7 +88,6 @@ async function authenticate(email, plainPassword) {
     return null;
   }
 
-  // Devolvemos sólo lo que el controlador necesita
   const { id, email: correo, nombre } = user;
   return { id, email: correo, nombre };
 }
