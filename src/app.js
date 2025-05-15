@@ -5,6 +5,8 @@ const indexRouter = require('./routes/indexRouter');
 
 const app = express();
 
+
+app.use(express.json());
 //Para poder leer datos de formularios POST:
 app.use(express.urlencoded({ extended: false }));
 

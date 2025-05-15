@@ -33,7 +33,6 @@ export const registrarUsuario = async (req, res) => {
     
     req.session.user = usuarioRegistrado;
     res.status(200).json({ success: true });
-    res.redirect('/login.html'); //cambio backend
 
   } catch (err) {
     console.error('Error en registro:', err);
@@ -41,6 +40,8 @@ export const registrarUsuario = async (req, res) => {
     if (err.message === 'El correo electronico ya esta registrado') {
       return res.status(400).json({ error: err.message });
     } else if (err.message === 'Las contraseñas no coinciden') {
+      return res.status(400).json({ error: err.message });
+    } else if (err.message === 'La cédula ya está registrada') {
       return res.status(400).json({ error: err.message });
     }
     

@@ -1,3 +1,4 @@
+// src/models/DAO_usuario.js
 const db     = require('../config/db');
 const bcrypt = require('bcrypt');
 
@@ -20,6 +21,22 @@ async function findByEmail(email) {
   return result.rows[0] || null;
 }
 
+/**
+ * Busca un usuario por su cédula
+ * @param {string} cedula
+ * @returns {Promise<null|{id:number, cedula:string}>}
+ */
+async function findByCedula(cedula) {
+  const result = await db.query(
+    `SELECT 
+       id,
+       cedula
+     FROM usuario
+     WHERE cedula = $1`,
+    [cedula]
+  );
+  return result.rows[0] || null;
+}
 
 async function registrar_usuario(nombre, correo, cedula, contrasena, comprobar_contrasena) {
   // Validación de contraseñas
@@ -31,6 +48,11 @@ async function registrar_usuario(nombre, correo, cedula, contrasena, comprobar_c
   const usuarioExistente = await findByEmail(correo);
   if (usuarioExistente) {
     throw new Error('El correo electronico ya esta registrado');
+  }
+
+    const cedulaExistente = await findByCedula(cedula);
+  if (cedulaExistente) {
+    throw new Error('La cédula ya está registrada');
   }
 
   // Hash de la contraseña
@@ -60,7 +82,7 @@ async function registrar_usuario(nombre, correo, cedula, contrasena, comprobar_c
 }
 
 /**
- * 
+ * Valida que la contraseña en texto plano coincida con el hash almacenado.
  * @param {string} email
  * @param {string} plainPassword
  * @returns {Promise<null|{id,email,nombre}>}  // usuario sin el hash si ok; null si falla
@@ -72,7 +94,7 @@ async function authenticate(email, plainPassword) {
     return null;
   }
 
-
+  // imprime para depurar
   console.log('authenticate: password plano:', `"${plainPassword}"`);
   console.log('authenticate: hash en DB   :', user.password_hash);
 
@@ -88,6 +110,7 @@ async function authenticate(email, plainPassword) {
     return null;
   }
 
+  // Devolvemos sólo lo que el controlador necesita
   const { id, email: correo, nombre } = user;
   return { id, email: correo, nombre };
 }

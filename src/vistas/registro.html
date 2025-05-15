@@ -26,6 +26,7 @@
       <div class="form-group">
         <label for="cedula">Cédula</label>
         <input type="text" id="cedula" name="cedula" placeholder="" minlength="7" maxlength="10"required/>
+        <div class="error-message" id="error_cedula"></div>
       </div>
       <div class="form-group">
         <label for="contrasena">Contraseña</label>
@@ -104,7 +105,7 @@
     };
 
     try {
-      const response = await fetch('/registrarUsuario', {
+      const response = await fetch('/registro', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
@@ -114,13 +115,17 @@
 
       if (response.ok) {
         window.location.href = '/login.html'; // Redirigir si éxito
+
       } else {
         // Mostrar errores del servidor
         if (data.error === 'El correo electronico ya esta registrado') {
           mostrarErrorCampo('error_correo', data.error);
         } else if (data.error === 'Las contraseñas no coinciden') {
           mostrarErrorCampo('error_contrasena', data.error);
+        } else if (data.error === 'La cédula ya está registrada') {
+          mostrarErrorCampo('error_cedula', data.error);
         }
+        
       }
     } catch (error) {
       console.error('Error:', error);
