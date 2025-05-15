@@ -17,7 +17,6 @@ router.post('/registro',controladorVistas.registrarUsuario);
 //Ruta /r → registro.html
 router.get('/paginaMenuUser', controladorVistas.paginaMenuUser);
 
-// (Aquí puedes añadir más rutas como /registro, /dashboard, etc.)
 
 
 module.exports = router;
