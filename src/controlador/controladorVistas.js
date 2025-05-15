@@ -18,15 +18,14 @@ exports.registrarUsuario = async (req, res) => {
   try {
     const usuarioRegistrado = await usuarioDAO.registrar_usuario(
       nombre,
-      correo, // <-- Faltaba incluir el correo en los parámetros
+      correo,
       cedula,
       contrasena,
       confirmar_contrasena
     );
     
-    // Eliminar la respuesta duplicada (tenías dos res.xxx seguidos)
-    req.session.user = usuarioRegistrado; // <-- Usar usuarioRegistrado en lugar de user
-    res.redirect('/login.html');
+    req.session.user = usuarioRegistrado;
+    res.status(200).json({ success: true });
 
   } catch (err) {
     console.error('Error en registro:', err);
@@ -40,8 +39,6 @@ exports.registrarUsuario = async (req, res) => {
     res.status(500).json({ error: 'Error en el servidor' });
   }
 };
-
-
 
 
 

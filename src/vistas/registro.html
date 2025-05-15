@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/registro.css">
   <!-- Añadir SweetAlert para mensajes bonitos -->
+   
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
@@ -20,10 +21,11 @@
       <div class="form-group">
         <label for="correo">Correo</label>
         <input type="email" id="correo" name="correo" placeholder="" required/>
+     <div class="error-message" id="error_correo"></div>
       </div>
       <div class="form-group">
         <label for="cedula">Cédula</label>
-        <input type="text" id="cedula" name="cedula" placeholder="" required/>
+        <input type="text" id="cedula" name="cedula" placeholder="" minlength="7" maxlength="10"required/>
       </div>
       <div class="form-group">
         <label for="contrasena">Contraseña</label>
@@ -77,10 +79,52 @@
   confirmarInput.addEventListener('input', validarContrasenas);
 
   // Prevención del envío si las contraseñas no coinciden
-  document.getElementById('formulario-registro').addEventListener('submit', function(e) {
+  document.getElementById('formulario-registro').addEventListener('submit', async function(e) {
+    e.preventDefault(); // Prevenimos el envío normal
+    
+    // Validación de contraseñas en el cliente
     if (contrasenaInput.value !== confirmarInput.value) {
-      e.preventDefault();
       mostrarErrorCampo('error_contrasena', 'Las contraseñas no coinciden');
+      return;
+    }
+
+    // Limpiar errores previos
+    document.querySelectorAll('.error-message').forEach(el => {
+      el.textContent = '';
+      el.style.display = 'none';
+    });
+
+    // Recolectar datos
+    const formData = {
+      nombre: document.getElementById('nombre').value,
+      correo: document.getElementById('correo').value,
+      cedula: document.getElementById('cedula').value,
+      contrasena: contrasenaInput.value,
+      confirmar_contrasena: confirmarInput.value
+    };
+
+    try {
+      const response = await fetch('/registrarUsuario', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        window.location.href = '/login.html'; // Redirigir si éxito
+      } else {
+        // Mostrar errores del servidor
+        if (data.error === 'El correo electronico ya esta registrado') {
+          mostrarErrorCampo('error_correo', data.error);
+        } else if (data.error === 'Las contraseñas no coinciden') {
+          mostrarErrorCampo('error_contrasena', data.error);
+        }
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      mostrarErrorCampo('error_contrasena', 'Error al conectar con el servidor');
     }
   });
 
@@ -91,6 +135,9 @@
       elemento.style.display = 'block';
     }
   }
+  document.getElementById('cedula').addEventListener('input', function (e) {
+    this.value = this.value.replace(/\D/g, '');
+  });
 </script>
 
 </body>
