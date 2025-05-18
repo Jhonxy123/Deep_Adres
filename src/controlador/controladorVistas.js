@@ -76,7 +76,14 @@ export const loginProcess = async (req, res) => {
       };
 
       res.cookie("jwt", token, cookieOptions);
-      return res.redirect('/paginaMenuUser'); // Redirección directa
+
+if (user.tipo === 1) {
+  console.log('Redirigiendo a admin...');
+  return res.redirect('/paginaMenuAdmin');
+} else {
+  console.log('Redirigiendo a user...');
+  return res.redirect('/paginaMenuUser');
+}// Redirección directa
   
     } catch (err) {
       console.error('Error en loginProcess:', err);
@@ -98,8 +105,15 @@ export const logout = (req, res) => {
 };
 
 export const paginaMenuUser = (req, res) => {
-    if (!req.session.user) {
-      return res.redirect('/login?error=Debes%20loguearte');
-    }
-    res.sendFile(path.join(__dirname, '..', 'vistas', 'menu_user.html'));
+  if (!req.session.user || req.session.user.tipo !== 2) {
+    return res.redirect('/login?error=Acceso%20denegado');
+  }
+  res.sendFile(path.join(__dirname, '..', 'vistas', 'menu_user.html'));
+};
+
+export const paginaMenuAdmin = (req, res) => {
+  if (!req.session.user || req.session.user.tipo !== 1) {
+    return res.redirect('/login?error=Acceso%20denegado');
+  }
+  res.sendFile(path.join(__dirname, '..', 'vistas', 'menu_admin.html'));
 };

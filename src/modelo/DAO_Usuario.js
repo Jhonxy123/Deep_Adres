@@ -13,7 +13,8 @@ async function findByEmail(email) {
        id,
        correo       AS email,
        contrasena   AS password_hash,
-       nombre
+       nombre,
+       ID_Tipo_usuario AS id_tipo_usuario
      FROM usuario
      WHERE correo = $1`,
     [ email ]
@@ -37,6 +38,8 @@ async function findByCedula(cedula) {
   );
   return result.rows[0] || null;
 }
+
+
 
 async function registrar_usuario(nombre, correo, cedula, contrasena, comprobar_contrasena) {
   // Validación de contraseñas
@@ -65,7 +68,7 @@ async function registrar_usuario(nombre, correo, cedula, contrasena, comprobar_c
        Cedula,
        Correo,
        Contrasena,
-       ID_Tipo_usuario
+       ID_Tipo_usuario 
      ) VALUES ($1, $2, $3, $4, 2)
      RETURNING 
        ID,
@@ -85,7 +88,8 @@ async function registrar_usuario(nombre, correo, cedula, contrasena, comprobar_c
  * Valida que la contraseña en texto plano coincida con el hash almacenado.
  * @param {string} email
  * @param {string} plainPassword
- * @returns {Promise<null|{id,email,nombre}>}  // usuario sin el hash si ok; null si falla
+ * @returns {Promise<null|{id,email,nombre,tipo}>}
+ // usuario sin el hash si ok; null si falla
  */
 async function authenticate(email, plainPassword) {
   const user = await findByEmail(email);
@@ -94,6 +98,7 @@ async function authenticate(email, plainPassword) {
     return null;
   }
 
+  
   // imprime para depurar
   console.log('authenticate: password plano:', `"${plainPassword}"`);
   console.log('authenticate: hash en DB   :', user.password_hash);
@@ -111,8 +116,9 @@ async function authenticate(email, plainPassword) {
   }
 
   // Devolvemos sólo lo que el controlador necesita
-  const { id, email: correo, nombre } = user;
-  return { id, email: correo, nombre };
+
+  const { id, email: correo, nombre, id_tipo_usuario } = user;
+  return { id, email: correo, nombre, tipo: id_tipo_usuario };
 }
 
 

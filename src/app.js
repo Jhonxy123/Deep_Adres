@@ -21,6 +21,7 @@ app.use(session({
 //Middleware para servir archivos estáticos (CSS, imágenes, etc.)
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'vistas')));
+app.use(express.static(path.join(__dirname, 'vistas/componentes')));
 
 
 app.use('/', indexRouter);
