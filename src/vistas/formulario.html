@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulario de Reclamación</title>
+  <link rel="stylesheet" href="css/formulario.css">
+</head>
+<body>
+  <header class="encabezado">
+    <div class="menu-icono">&#9776;</div>
+    <div class="usuario">Usuario <span class="icono-usuario">👤</span></div>
+  </header>
+
+  <main>
+    <h2>I. Datos del beneficiario de la reclamación</h2>
+
+    <form class="formulario">
+      <div class="fila">
+        <input type="text" placeholder="Primer Apellido">
+        <input type="text" placeholder="Segundo Apellido">
+      </div>
+
+      <div class="fila">
+        <input type="text" placeholder="Primer Nombre">
+        <input type="text" placeholder="Segundo Nombre">
+      </div>
+
+      <div class="fila">
+        <select>
+          <option>Tipo de documento</option>
+          <option>Cédula</option>
+          <option>Pasaporte</option>
+        </select>
+        <input type="text" placeholder="No. de documento">
+      </div>
+
+      <div class="fila">
+        <label>Dirección de domicilio:</label>
+        <input type="text">
+      </div>
+
+      <div class="fila">
+        <label>Correo electrónico:</label>
+        <input type="email">
+      </div>
+
+      <div class="fila">
+        <label>Departamento:</label>
+        <input type="text">
+        <label>Teléfono:</label>
+        <input type="text">
+      </div>
+
+      <div class="fila">
+        <label>Municipio:</label>
+        <input type="text">
+        <label>Celular:</label>
+        <input type="text">
+      </div>
+
+      <div class="fila">
+        <label>Cuenta bancaria:</label>
+        <input type="text">
+      </div>
+
+      <div class="fila">
+        <label>Banco:</label>
+        <input type="text">
+        <label>Tipo de cuenta:</label>
+        <input type="text">
+      </div>
+    </form>
+    <!-- Sección II -->
+    <hr>
+    <h2>II. Datos del apoderado (abogado con poder para tramitar la reclamación)</h2>
+
+    <div class="fila">
+        <input type="text" placeholder="Primer Apellido">
+        <input type="text" placeholder="Segundo Apellido">
+    </div>
+
+    <div class="fila">
+        <input type="text" placeholder="Primer Nombre">
+        <input type="text" placeholder="Segundo Nombre">
+    </div>
+
+    <div class="fila">
+        <select>
+            <option>Tipo de documento</option>
+            <option>Cédula</option>
+            <option>Pasaporte</option>
+        </select>
+        <input type="text" placeholder="No. de documento">
+    </div>
+
+    <div class="fila">
+        <label>Dirección:</label>
+        <input type="text">
+    </div>
+
+    <div class="fila">
+        <label>Correo electrónico:</label>
+        <input type="email">
+    </div>
+
+    <div class="fila">
+        <label>Departamento:</label>
+        <input type="text">
+        <label>Teléfono:</label>
+        <input type="text">
+    </div>
+
+    <div class="fila">
+        <label>Municipio:</label>
+        <input type="text">
+        <label>Tarjeta Profesional:</label>
+        <input type="text">
+    </div>
+
+    <!-- Sección III -->
+    <hr>
+    <h2>III. Datos de la víctima del evento catastrófico o accidente de tránsito</h2>
+
+    <div class="fila">
+        <input type="text" placeholder="Primer Apellido">
+        <input type="text" placeholder="Segundo Apellido">
+    </div>
+
+    <div class="fila">
+        <input type="text" placeholder="Primer Nombre">
+        <input type="text" placeholder="Segundo Nombre">
+    </div>
+
+    <div class="fila">
+        <select>
+            <option>Tipo de documento</option>
+            <option>Cédula</option>
+            <option>Pasaporte</option>
+        </select>
+        <input type="text" placeholder="No. de documento">
+    </div>
+
+    <div class="fila">
+        <label>Fecha de nacimiento:</label>
+        <input type="date">
+        <label>Sexo:</label>
+        <select>
+            <option>Seleccione</option>
+            <option>Masculino</option>
+            <option>Femenino</option>
+            <option>Otro</option>
+        </select>
+    </div>
+
+    <div class="fila">
+        <label>Dirección de domicilio:</label>
+        <input type="text">
+    </div>
+
+    <div class="fila">
+        <label>Departamento:</label>
+        <input type="text">
+        <label>Municipio:</label>
+        <input type="text">
+    </div>
+
+    <div class="fila">
+        <label>Zona:</label>
+        <select>
+            <option>Urbana</option>
+            <option>Rural</option>
+        </select>
+        <label>Condición del accidentado:</label>
+        <select>
+            <option>Seleccione</option>
+            <option>Lesionado</option>
+            <option>Fallecido</option>
+        </select>
+    </div>
+
+    <div class="fila">
+        <label>Teléfono:</label>
+        <input type="text">
+        <label>Fecha en caso de muerte:</label>
+        <input type="date">
+    </div>
+
+    <!-- Sección IV -->
+    <hr>
+    <h2>IV. Datos del sitio donde ocurrió el evento catastrófico o accidente de tránsito</h2>
+
+    <p><strong>Naturaleza del evento</strong></p>
+
+    <div class="fila">
+        <label>Naturales:</label>
+        <select>
+            <option>Ninguno</option>
+            <option>Sismo</option>
+            <option>Inundación</option>
+            <option>Deslizamiento</option>
+            <!-- Agrega más si lo deseas -->
+        </select>
+
+        <label>Terroristas:</label>
+        <select>
+            <option>Ninguno</option>
+            <option>Atentado</option>
+            <option>Explosivo</option>
+            <!-- Más opciones si se requiere -->
+        </select>
+    </div>
+
+    <div class="fila">
+        <label>Accidente de tránsito:</label>
+        <input type="checkbox">
+
+        <label>Otros:</label>
+        <input type="checkbox">
+        <label>Cuál:</label>
+        <input type="text" placeholder="Especificar otro tipo de evento">
+    </div>
+
+    <div class="fila">
+        <label>Dirección de la ocurrencia:</label>
+        <input type="text">
+    </div>
+
+    <div class="fila">
+        <label>Fecha evento/accidente:</label>
+        <input type="date">
+        <label>Hora:</label>
+        <input type="time" step="1">
+    </div>
+
+    <div class="fila">
+        <label>Departamento:</label>
+        <input type="text">
+        <label>Municipio:</label>
+        <input type="text">
+    </div>
+
+    <div class="fila">
+        <p><strong>Descripción breve del evento catastrófico o accidente de tránsito</strong></p>
+        <p>Enuncie las principales características del evento / accidente:</p>
+        <textarea rows="5" style="width: 100%; border-radius: 10px;"></textarea>
+    </div>
+
+    <!-- Sección V -->
+    <hr>
+    <h2>V. Información del vehículo del accidente de tránsito</h2>
+
+    <div class="fila">
+      <label>Estado de aseguramiento:</label>
+      <select>
+        <option value="">Seleccione...</option>
+        <option value="asegurado">Asegurado</option>
+        <option value="no_asegurado">No asegurado</option>
+      </select>
+    </div>
+
+    <div class="fila">
+      <label>Marca:</label>
+      <input type="text">
+      
+      <label>Placa:</label>
+      <input type="text">
+    </div>
+
+    <div class="fila">
+      <label>Tipo de servicio:</label>
+      <select>
+        <option value="">Seleccione...</option>
+        <option value="publico">Público</option>
+        <option value="particular">Particular</option>
+        <option value="oficial">Oficial</option>
+      </select>
+
+      <label>Intervención de la autoridad:</label>
+      <select>
+        <option value="">Seleccione...</option>
+        <option value="si">Sí</option>
+        <option value="no">No</option>
+      </select>
+    </div>
+
+    <div class="fila">
+      <label>Nombre de la aseguradora:</label>
+      <input type="text">
+    </div>
+
+    <div class="fila">
+      <label>Número de la póliza:</label>
+      <input type="text">
+    </div>
+
+    <div class="fila">
+      <label>Vigencia desde:</label>
+      <input type="date">
+
+      <label>hasta:</label>
+      <input type="date">
+    </div>
+    <!-- Sección VI -->
+    <hr>
+    <h2>VI. Datos del propietario del vehículo</h2>
+
+    <div class="fila">
+      <input type="text" placeholder="Primer Apellido">
+      <input type="text" placeholder="Segundo Apellido">
+    </div>
+
+    <div class="fila">
+      <input type="text" placeholder="Primer Nombre">
+      <input type="text" placeholder="Segundo Nombre">
+    </div>
+
+    <div class="fila">
+      <select>
+        <option value="">Tipo de documento</option>
+        <option value="cc">Cédula de ciudadanía</option>
+        <option value="ti">Tarjeta de identidad</option>
+        <option value="ce">Cédula de extranjería</option>
+        <option value="pasaporte">Pasaporte</option>
+      </select>
+      <input type="text" placeholder="No. de documento">
+    </div>
+
+    <div class="fila">
+      <label>Dirección de domicilio:</label>
+      <input type="text">
+    </div>
+
+    <div class="fila">
+      <label>Departamento:</label>
+      <input type="text">
+
+      <label>Teléfono o celular:</label>
+      <input type="tel">
+    </div>
+
+    <div class="fila">
+      <label>Municipio:</label>
+      <input type="text">
+    </div>
+
+    <!-- Sección VII -->
+    <hr>
+    <h2>VII. Datos del conductor del vehículo</h2>
+
+    <div class="fila">
+      <input type="text" placeholder="Primer Apellido">
+      <input type="text" placeholder="Segundo Apellido">
+    </div>
+
+    <div class="fila">
+      <input type="text" placeholder="Primer Nombre">
+      <input type="text" placeholder="Segundo Nombre">
+    </div>
+
+    <div class="fila">
+      <select>
+        <option value="">Tipo de documento</option>
+        <option value="cc">Cédula de ciudadanía</option>
+        <option value="ti">Tarjeta de identidad</option>
+        <option value="ce">Cédula de extranjería</option>
+        <option value="pasaporte">Pasaporte</option>
+      </select>
+      <input type="text" placeholder="No. de documento">
+    </div>
+
+    <div class="fila">
+      <label>Dirección de domicilio:</label>
+      <input type="text">
+    </div>
+
+    <div class="fila">
+      <label>Departamento:</label>
+      <input type="text">
+      <label>Teléfono o celular:</label>
+      <input type="tel">
+    </div>
+
+    <div class="fila">
+      <label>Municipio:</label>
+      <input type="text">
+    </div>
+
+    <!-- Sección VIII -->
+    <hr>
+    <h2>VIII. Amparos que reclama</h2>
+
+    <div class="fila">
+      <label>Concepto reclamado:</label>
+      <select>
+        <option value="">Seleccione...</option>
+        <option value="indemnizacion">Indemnización por muerte y Gastos funerarios</option>
+        <option value="gastos_medicos">Gastos médicos</option>
+        <option value="rehabilitacion">Rehabilitación</option>
+      </select>
+    </div>
+
+    <div class="fila">
+      <label>Valor:</label>
+      <input type="number" placeholder="$">
+    </div>
+
+    <!-- Botones -->
+     <hr>
+    <div class="fila" style="margin-top: 20px;">
+      <button type="submit" style="background-color: #0057ff; color: white;">Enviar</button>
+      <button type="button" style="background-color: #222; color: white; margin-left: 10px;">Volver</button>
+    </div>
+
+
+  </main>
+</body>
+</html>
