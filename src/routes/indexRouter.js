@@ -15,6 +15,7 @@ router.post('/registro', controladorVistas.registrarUsuario);
 
 // Ruta protegida /paginaMenuUser
 router.get('/paginaMenuUser', controladorVistas.paginaMenuUser);
+router.get('/paginaMenuAdmin', controladorVistas.paginaMenuAdmin);
 
 // Ruta para logout
 router.get('/logout', controladorVistas.logout);

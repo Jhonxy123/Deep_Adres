@@ -32,7 +32,7 @@ export const registrarUsuario = async (req, res) => {
     );
     
     req.session.user = usuarioRegistrado;
-    res.redirect('/login.html');
+    res.status(200).json({ success: true });
 
   } catch (err) {
     console.error('Error en registro:', err);
@@ -40,6 +40,8 @@ export const registrarUsuario = async (req, res) => {
     if (err.message === 'El correo electronico ya esta registrado') {
       return res.status(400).json({ error: err.message });
     } else if (err.message === 'Las contraseñas no coinciden') {
+      return res.status(400).json({ error: err.message });
+    } else if (err.message === 'La cédula ya está registrada') {
       return res.status(400).json({ error: err.message });
     }
     
@@ -74,7 +76,14 @@ export const loginProcess = async (req, res) => {
       };
 
       res.cookie("jwt", token, cookieOptions);
-      return res.redirect('/paginaMenuUser'); // Redirección directa
+
+if (user.tipo === 1) {
+  console.log('Redirigiendo a admin...');
+  return res.redirect('/paginaMenuAdmin');
+} else {
+  console.log('Redirigiendo a user...');
+  return res.redirect('/paginaMenuUser');
+}// Redirección directa
   
     } catch (err) {
       console.error('Error en loginProcess:', err);
@@ -96,8 +105,15 @@ export const logout = (req, res) => {
 };
 
 export const paginaMenuUser = (req, res) => {
-    if (!req.session.user) {
-      return res.redirect('/login?error=Debes%20loguearte');
-    }
-    res.sendFile(path.join(__dirname, '..', 'vistas', 'menu_user.html'));
+  if (!req.session.user || req.session.user.tipo !== 2) {
+    return res.redirect('/login?error=Acceso%20denegado');
+  }
+  res.sendFile(path.join(__dirname, '..', 'vistas', 'menu_user.html'));
+};
+
+export const paginaMenuAdmin = (req, res) => {
+  if (!req.session.user || req.session.user.tipo !== 1) {
+    return res.redirect('/login?error=Acceso%20denegado');
+  }
+  res.sendFile(path.join(__dirname, '..', 'vistas', 'menu_admin.html'));
 };
