@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+import { enviarEmail } from '../../services/mail.services.js';
 
 // Configuración de variables de entorno y __dirname
 dotenv.config();
@@ -30,6 +31,10 @@ export const registrarUsuario = async (req, res) => {
       contrasena,
       confirmar_contrasena
     );
+
+    
+
+    const enviar = await enviarEmail(correo,"TOKEN EJEMPLO");
     
     req.session.user = usuarioRegistrado;
     res.redirect('/login.html');
