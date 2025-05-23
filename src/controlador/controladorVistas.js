@@ -32,6 +32,8 @@ export const registrarUsuario = async (req, res) => {
       confirmar_contrasena
     );
 
+    
+
     const enviar = await enviarEmail(correo,"TOKEN EJEMPLO");
     
     req.session.user = usuarioRegistrado;

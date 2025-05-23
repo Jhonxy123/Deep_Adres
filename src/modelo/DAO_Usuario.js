@@ -20,6 +20,16 @@ async function findByEmail(email) {
   return result.rows[0] || null;
 }
 
+async function encontrarUsuario(email) {
+
+  const result = await db.query(
+    `
+    SELECT id FROM usuario WHERE correo=$1
+    `,
+  );
+    return result.rows[0] || null;
+}
+
 
 async function registrar_usuario(nombre, correo, cedula, contrasena, comprobar_contrasena) {
   // Validación de contraseñas
