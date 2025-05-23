@@ -16,6 +16,7 @@ router.post('/registro',controladorVistas.registrarUsuario);
 
 //Ruta /r → registro.html
 router.get('/paginaMenuUser', controladorVistas.paginaMenuUser);
+router.get('/paginaMenuAdmin', controladorVistas.paginaMenuAdmin);
 
 // Nueva ruta para el logout
 router.get('/logout', controladorVistas.logout); // Usando GET

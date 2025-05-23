@@ -6,6 +6,9 @@
   <title>Registro</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/registro.css">
+  <!-- Añadir SweetAlert para mensajes bonitos -->
+   
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
   <div class="form-container">
@@ -18,10 +21,12 @@
       <div class="form-group">
         <label for="correo">Correo</label>
         <input type="email" id="correo" name="correo" placeholder="" required/>
+     <div class="error-message" id="error_correo"></div>
       </div>
       <div class="form-group">
         <label for="cedula">Cédula</label>
-        <input type="text" id="cedula" name="cedula" placeholder="" required/>
+        <input type="text" id="cedula" name="cedula" placeholder="" minlength="7" maxlength="10"required/>
+        <div class="error-message" id="error_cedula"></div>
       </div>
       <div class="form-group">
         <label for="contrasena">Contraseña</label>
@@ -30,9 +35,10 @@
       <div class="form-group">
         <label for="confirmar_contrasena">Comprobar contraseña</label>
         <input type="password" id="confirmar_contrasena" name="confirmar_contrasena" placeholder="" required/>
+         <div class="error-message" id="error_contrasena"></div>
       </div>
       <div class="actions">
-        <button type="submit" class="btn btn-registrar">Registrarse</button>
+        <button type="submit" id="btn-registrar" class="btn btn-registrar" disabled>Registrarse</button>
         <button type="button" class="btn btn-volver" onclick="window.location.href='/'">Volver</button>
       </div>
     </form>
@@ -40,5 +46,104 @@
   <footer>
     © Hecho por: Jhon Gonzalez - Daniel Guiza - Karen Alarcón - Santiago Alfonso
   </footer>
+  <script>
+  const contrasenaInput = document.getElementById('contrasena');
+  const confirmarInput = document.getElementById('confirmar_contrasena');
+  const errorElement = document.getElementById('error_contrasena');
+  const btnRegistrar = document.getElementById('btn-registrar');
+
+  function validarContrasenas() {
+    const contrasena = contrasenaInput.value;
+    const confirmar = confirmarInput.value;
+
+    if (confirmar && contrasena !== confirmar) {
+      errorElement.textContent = 'Las contraseñas no coinciden';
+      errorElement.style.display = 'block';
+      contrasenaInput.classList.add('input-error');
+      confirmarInput.classList.add('input-error');
+      btnRegistrar.disabled = true;
+    } else {
+      errorElement.style.display = 'none';
+      contrasenaInput.classList.remove('input-error');
+      confirmarInput.classList.remove('input-error');
+
+      // Solo habilita si ambas están llenas y coinciden
+      if (contrasena && confirmar && contrasena === confirmar) {
+        btnRegistrar.disabled = false;
+      } else {
+        btnRegistrar.disabled = true;
+      }
+    }
+  }
+
+  contrasenaInput.addEventListener('input', validarContrasenas);
+  confirmarInput.addEventListener('input', validarContrasenas);
+
+  // Prevención del envío si las contraseñas no coinciden
+  document.getElementById('formulario-registro').addEventListener('submit', async function(e) {
+    e.preventDefault(); // Prevenimos el envío normal
+    
+    // Validación de contraseñas en el cliente
+    if (contrasenaInput.value !== confirmarInput.value) {
+      mostrarErrorCampo('error_contrasena', 'Las contraseñas no coinciden');
+      return;
+    }
+
+    // Limpiar errores previos
+    document.querySelectorAll('.error-message').forEach(el => {
+      el.textContent = '';
+      el.style.display = 'none';
+    });
+
+    // Recolectar datos
+    const formData = {
+      nombre: document.getElementById('nombre').value,
+      correo: document.getElementById('correo').value,
+      cedula: document.getElementById('cedula').value,
+      contrasena: contrasenaInput.value,
+      confirmar_contrasena: confirmarInput.value
+    };
+
+    try {
+      const response = await fetch('/registro', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        window.location.href = '/login.html'; // Redirigir si éxito
+
+      } else {
+        // Mostrar errores del servidor
+        if (data.error === 'El correo electronico ya esta registrado') {
+          mostrarErrorCampo('error_correo', data.error);
+        } else if (data.error === 'Las contraseñas no coinciden') {
+          mostrarErrorCampo('error_contrasena', data.error);
+        } else if (data.error === 'La cédula ya está registrada') {
+          mostrarErrorCampo('error_cedula', data.error);
+        }
+        
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      mostrarErrorCampo('error_contrasena', 'Error al conectar con el servidor');
+    }
+  });
+
+  function mostrarErrorCampo(idElemento, mensaje) {
+    const elemento = document.getElementById(idElemento);
+    if (elemento) {
+      elemento.textContent = mensaje;
+      elemento.style.display = 'block';
+    }
+  }
+  document.getElementById('cedula').addEventListener('input', function (e) {
+    this.value = this.value.replace(/\D/g, '');
+  });
+</script>
+
 </body>
 </html>

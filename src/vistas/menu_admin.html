@@ -11,7 +11,8 @@
 
 <body>
   <main>
-  <div id="layout"></div>
+  <div id="layout"></div> <!-- Aquí se cargará el navbar + footer -->
+
   <header class="main-header">
 
     <h1>Bienvenido</h1>
@@ -22,13 +23,13 @@
   <section class="cards">
 
     <div class="card">
-      <img src="/img/solicitar.png" alt="Solicitar Indemnización" />
-      <div class="card-text">Solicitar<br>Indemnización</div>
+      <img src="/img/calculadora.png" alt="Gestion de Indemnizaciones" />
+      <div class="card-text">Gestion de<br>Indemnizaciones</div>
     </div>
 
     <div class="card">
-      <img src="/img/historial.png" alt="Historial de Indemnizaciones" />
-      <div class="card-text">Historial de<br>Indemnizaciones</div>
+      <img src="/img/computador.png" alt="Reportes de Indemnizaciones" />
+      <div class="card-text">Reportes de<br>Indemnizaciones</div>
     </div>
 
   </section>
@@ -36,10 +37,7 @@
  <script src="componentes_html/cargarcomponentes.js"></script>
 
   <script>
-    cargarComponente("#layout", "componentes_html/layout_user.html");
+    cargarComponente("#layout", "componentes_html/layout_admin.html");
   </script>
-
 </body>
-
-
 </html>

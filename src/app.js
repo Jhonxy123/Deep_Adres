@@ -5,6 +5,8 @@ const indexRouter = require('./routes/indexRouter');
 
 const app = express();
 
+
+app.use(express.json());
 //Para poder leer datos de formularios POST:
 app.use(express.urlencoded({ extended: false }));
 
@@ -19,6 +21,7 @@ app.use(session({
 //Middleware para servir archivos estáticos (CSS, imágenes, etc.)
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'vistas')));
+app.use(express.static(path.join(__dirname, 'vistas/componentes')));
 
 
 app.use('/', indexRouter);
