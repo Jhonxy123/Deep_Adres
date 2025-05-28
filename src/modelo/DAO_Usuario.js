@@ -21,14 +21,14 @@ async function findByEmail(email) {
 }
 
 async function encontrarUsuario(email) {
-
   const result = await db.query(
-    `
-    SELECT id FROM usuario WHERE correo=$1
-    `,
+    `SELECT id FROM usuario WHERE correo=$1`,
+    [email]
   );
-    return result.rows[0] || null;
+  return result.rows[0]?.id || null; // Devuelve directamente el ID o null
 }
+
+
 
 
 async function registrar_usuario(nombre, correo, cedula, contrasena, comprobar_contrasena) {
@@ -108,4 +108,4 @@ async function authenticate(email, plainPassword) {
 
 
 
-module.exports = { findByEmail, authenticate, registrar_usuario};
+module.exports = { findByEmail, authenticate, registrar_usuario, encontrarUsuario};

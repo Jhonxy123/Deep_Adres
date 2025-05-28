@@ -32,9 +32,10 @@ export const registrarUsuario = async (req, res) => {
       confirmar_contrasena
     );
 
-    
+    const id = await usuarioDAO.encontrarUsuario(correo);
 
-    const enviar = await enviarEmail(correo,"TOKEN EJEMPLO");
+
+    const enviar = await enviarEmail(correo,id,"TOKEN EJEMPLO");
     
     req.session.user = usuarioRegistrado;
     res.redirect('/login.html');
