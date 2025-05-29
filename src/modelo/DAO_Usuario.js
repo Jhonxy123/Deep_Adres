@@ -22,6 +22,16 @@ async function findByEmail(email) {
   return result.rows[0] || null;
 }
 
+async function encontrarUsuario(email) {
+
+  const result = await db.query(
+    `
+    SELECT id FROM usuario WHERE correo=$1
+    `,
+  );
+    return result.rows[0] || null;
+}
+
 /**
  * Busca un usuario por su cédula
  * @param {string} cedula
@@ -73,7 +83,8 @@ async function registrar_usuario(nombre, correo, cedula, contrasena, comprobar_c
      RETURNING 
        ID,
        Correo AS email,
-       Nombre`,
+       Nombre,
+       ID_Tipo_usuario AS tipo`,
     [nombre, cedula, correo, hashedPassword]
   );
 
@@ -95,7 +106,8 @@ async function authenticate(email, plainPassword) {
   const user = await findByEmail(email);
   if (!user) {
     console.log('authenticate: usuario no encontrado:', email);
-    return null;
+    throw new Error('El correo electronico no fue encontrado');
+    //return null;
   }
 
   
@@ -112,7 +124,8 @@ async function authenticate(email, plainPassword) {
   const match = await bcrypt.compare(plainPassword, user.password_hash);
   if (!match) {
     console.log('authenticate: contraseña no coincide para', email);
-    return null;
+    throw new Error('La contraseña no coincide para el correo proporcionado');
+    //return null;
   }
 
   // Devolvemos sólo lo que el controlador necesita
