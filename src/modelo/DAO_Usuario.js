@@ -28,7 +28,8 @@ async function findByUser(email) {
        id,
        correo       AS email,
        contrasena   AS password_hash,
-       nombre
+       nombre,
+       ID_Tipo_usuario AS id_tipo_usuario
      FROM usuario
      WHERE id = $1`,
     [ email ]
