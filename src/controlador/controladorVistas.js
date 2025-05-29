@@ -20,16 +20,18 @@ export const paginaRegistro = async (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'vistas', 'registro.html'));
 };
 
+export const paginaFormulario = async (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'vistas', 'formulario.html'));
+};
+
 export const registrarUsuario = async (req, res) => {
-  const { nombre, correo, cedula, contrasena, confirmar_contrasena } = req.body;
+  const { nombre, correo, cedula} = req.body;
 
   try {
     const usuarioRegistrado = await usuarioDAO.registrar_usuario(
       nombre,
       correo,
-      cedula,
-      contrasena,
-      confirmar_contrasena
+      cedula
     );
 
     const id = await usuarioDAO.encontrarUsuario(correo);
