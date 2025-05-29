@@ -81,8 +81,6 @@ async function registrar_usuario(nombre, correo, cedula) {
 
   // Verificar correo existente
 
-  const basura = "basura";
-
   const usuarioExistente = await findByEmail(correo);
   if (usuarioExistente) {
     throw new Error('El correo electronico ya esta registrado');
