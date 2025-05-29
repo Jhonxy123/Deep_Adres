@@ -19,16 +19,16 @@ const transporter = nodemailer.createTransport({
 
 })
 
-export async function enviarEmail(direccion,token) {
+export async function enviarEmail(direccion,id,token) {
     transporter.sendMail({
         from: '"DEEP_ADRES" <adrescolombia1578@gmail.com>',
         to:direccion,
         subject:"VERIFICACIÓN DE LA CUENTA",
-        html:crearEmail(token)
+        html:crearEmail(token,id)
     })
 }
 
-function crearEmail(token){
+function crearEmail(token, id) {
     return `<!DOCTYPE html>
 <html lang="es">
 <head>
@@ -72,7 +72,17 @@ function crearEmail(token){
         p {
             font-size: 16px;
             line-height: 1.6;
-            margin-bottom: 25px;
+            margin-bottom: 10px;
+        }
+        
+        .user-id {
+            font-weight: bold;
+            color: #2c3e50;
+            background-color: #f8f9fa;
+            padding: 5px 10px;
+            border-radius: 4px;
+            display: inline-block;
+            margin: 10px 0;
         }
         
         .btn {
@@ -84,6 +94,7 @@ function crearEmail(token){
             border-radius: 5px;
             font-weight: bold;
             transition: background-color 0.3s;
+            margin-top: 20px;
         }
         
         .btn:hover {
@@ -95,9 +106,12 @@ function crearEmail(token){
     <div class="success-container">
         <div class="success-icon">✓</div>
         <h1>¡Correo enviado exitosamente!</h1>
-        <p>El mensaje ha sido enviado correctamente al destinatario. Recibirás una copia en tu bandeja de entrada.</p>
+        <p>El mensaje ha sido enviado correctamente al destinatario.</p>
+        <p>Su número de usuario es:</p>
+        <div class="user-id">${id}</div>
+        <p>Recibirás una copia en tu bandeja de entrada.</p>
         <a href="/" class="btn">Volver al inicio</a>
     </div>
 </body>
-</html>`
+</html>`;
 }

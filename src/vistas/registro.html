@@ -27,17 +27,16 @@
         <input type="text" id="cedula" name="cedula" placeholder="" minlength="7" maxlength="10"required/>
         <div class="error-message" id="error_cedula"></div>
       </div>
-      <div class="form-group">
+    <!--<div class="form-group">
         <label for="contrasena">Contraseña</label>
         <input type="password" id="contrasena" name="contrasena" placeholder="" required/>
       </div>
       <div class="form-group">
         <label for="confirmar_contrasena">Comprobar contraseña</label>
         <input type="password" id="confirmar_contrasena" name="confirmar_contrasena" placeholder="" required/>
-         <div class="error-message" id="error_contrasena"></div>
-      </div>
+      </div>-->
       <div class="actions">
-        <button type="submit" id="btn-registrar" class="btn btn-registrar" disabled>Registrarse</button>
+        <button type="submit" id="btn-registrar" class="btn btn-registrar" >Registrarse</button>
         <button type="button" class="btn btn-volver" onclick="window.location.href='/'">Volver</button>
       </div>
     </form>
@@ -46,9 +45,7 @@
     © Hecho por: Jhon Gonzalez - Daniel Guiza - Karen Alarcón - Santiago Alfonso
   </footer>
   <script>
-  const contrasenaInput = document.getElementById('contrasena');
-  const confirmarInput = document.getElementById('confirmar_contrasena');
-  const errorElement = document.getElementById('error_contrasena');
+
   const btnRegistrar = document.getElementById('btn-registrar');
 
   function validarContrasenas() {
@@ -75,18 +72,11 @@
     }
   }
 
-  contrasenaInput.addEventListener('input', validarContrasenas);
-  confirmarInput.addEventListener('input', validarContrasenas);
-
   // Prevención del envío si las contraseñas no coinciden
   document.getElementById('formulario-registro').addEventListener('submit', async function(e) {
     e.preventDefault(); // Prevenimos el envío normal
     
     // Validación de contraseñas en el cliente
-    if (contrasenaInput.value !== confirmarInput.value) {
-      mostrarErrorCampo('error_contrasena', 'Las contraseñas no coinciden');
-      return;
-    }
 
     // Limpiar errores previos
     document.querySelectorAll('.error-message').forEach(el => {
@@ -98,9 +88,7 @@
     const formData = {
       nombre: document.getElementById('nombre').value,
       correo: document.getElementById('correo').value,
-      cedula: document.getElementById('cedula').value,
-      contrasena: contrasenaInput.value,
-      confirmar_contrasena: confirmarInput.value
+      cedula: document.getElementById('cedula').value
     };
 
     try {
