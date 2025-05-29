@@ -20,5 +20,8 @@ router.get('/paginaMenuUser', controladorVistas.paginaMenuUser);
 // Nueva ruta para el logout
 router.get('/logout', controladorVistas.logout); // Usando GET
 
+//Nueva ruta para formulario
+router.get('/formulario', controladorVistas.paginaFormulario);
+
 
 module.exports = router;

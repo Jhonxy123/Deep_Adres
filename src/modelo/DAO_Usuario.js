@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 /**
  * Busca un usuario por su email y mapea los campos a {id, email, password_hash, nombre}
  * @param {string} email
- * @returns {Promise<null|{id:number,email:string,password_hash:string,nombre:string}>}
+ * @returns {Promise<null|{id:String,email:string,password_hash:string,nombre:string}>}
  */
 async function findByEmail(email) {
   const result = await db.query(
@@ -14,28 +14,35 @@ async function findByEmail(email) {
        contrasena   AS password_hash,
        nombre
      FROM usuario
-     WHERE correo = $1`,
+     WHERE id = $1`,
     [ email ]
   );
   return result.rows[0] || null;
 }
 
 async function encontrarUsuario(email) {
-
   const result = await db.query(
-    `
-    SELECT id FROM usuario WHERE correo=$1
-    `,
+    `SELECT id FROM usuario WHERE correo=$1`,
+    [email]
   );
-    return result.rows[0] || null;
+  return result.rows[0]?.id || null; // Devuelve directamente el ID o null
+}
+
+async function encontrarContrasena(email) {
+  const result = await db.query(
+    `SELECT contrasena FROM usuario WHERE correo=$1`,
+    [email]
+  );
+  return result.rows[0]?.contrasena || null;
 }
 
 
-async function registrar_usuario(nombre, correo, cedula, contrasena, comprobar_contrasena) {
-  // Validación de contraseñas
+
+async function registrar_usuario(nombre, correo, cedula) {
+  /* Validación de contraseñas
   if (contrasena !== comprobar_contrasena) {
     throw new Error('Las contraseñas no coinciden');
-  }
+  }*/
 
   // Verificar correo existente
   const usuarioExistente = await findByEmail(correo);
@@ -43,24 +50,32 @@ async function registrar_usuario(nombre, correo, cedula, contrasena, comprobar_c
     throw new Error('El correo electronico ya esta registrado');
   }
 
-  // Hash de la contraseña
-  const hashedPassword = await bcrypt.hash(contrasena, 10);
-
   // Inserción en la base de datos
   const result = await db.query(
     `INSERT INTO Usuario (
        Nombre,
        Cedula,
        Correo,
-       Contrasena,
-       ID_Tipo_usuario
-     ) VALUES ($1, $2, $3, $4, 2)
+       id_tipo_usuario
+     ) VALUES ($1, $2, $3, 2)
      RETURNING 
        ID,
        Correo AS email,
        Nombre`,
-    [nombre, cedula, correo, hashedPassword]
+    [nombre, cedula, correo]
   );
+
+  if (result.rows[0]) {
+    const contrasena = await encontrarContrasena(correo);
+    const hashedPassword = await bcrypt.hash(contrasena, 10);;
+    
+    await db.query(
+      `UPDATE usuario 
+      SET contrasena = $1
+      WHERE ID = $2`,
+      [hashedPassword, result.rows[0].id]
+    );
+  }
 
   if (!result.rows[0]) {
     throw new Error('Error al registrar usuario');
@@ -108,4 +123,4 @@ async function authenticate(email, plainPassword) {
 
 
 
-module.exports = { findByEmail, authenticate, registrar_usuario};
+module.exports = { findByEmail, authenticate, registrar_usuario, encontrarUsuario};
