@@ -79,7 +79,8 @@ body {
 main {
   padding: 20px;
   max-width: 900px;
-  margin: auto;
+  margin: 0 auto;
+  
 }
 
 h2 {
@@ -114,6 +115,8 @@ label {
   min-width: 150px;
   font-weight: bold;
   color: #333;
+  margin-right: 8px;
+  font-weight: 500;
 }
 
 hr {
@@ -128,7 +131,33 @@ h2 {
   color: #1a3f8d;
 }
 
-label {
-  margin-right: 8px;
-  font-weight: 500;
+
+.actions {
+    display: flex;
+    gap: 2rem;
+    margin-top: 2rem;
+    justify-content: center; /* Centra los botones */
+    width: 100%; /* Asegura que ocupe todo el ancho disponible */
+}
+.btn {
+    flex: 0 0 auto; /* Anula crecimiento/encogimiento (tamaño fijo) */
+    width: 180px; /* Ancho fijo (ajústalo a tu gusto) */
+    padding: 0.75rem 1rem; /* Reduce el padding horizontal */
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--color-blanco);
+    border: none;
+    border-radius: 9999px;
+    cursor: pointer;
+    text-align: center; /* Centra el texto dentro del botón */
+    transition: opacity 0.2s;
+}
+.btn:hover {
+    opacity: 0.9;
+}
+#btn-enviar {
+    background: linear-gradient(to right, var(--color-azul_claro), var(--color-azul_oscuro));
+}
+#btn-volver {
+    background: linear-gradient(to right, var(--color-gris), var(--color-negro));
 }
