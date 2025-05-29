@@ -60,40 +60,34 @@ export const paginaLogin = (req, res) => {
 };
 
 export const loginProcess = async (req, res) => {
-    const { email, password } = req.body;
-  
-    try {
-      const user = await usuarioDAO.authenticate(email, password);
-      if (!user) {
-        return res.redirect('/login?error=Credenciales%20incorrectas');
-      }
-  
-      req.session.user = user;
-      const token = jwt.sign(
-        {user: email},
-        process.env.JWT_SECRET,
-        {expiresIn: process.env.JWT_EXPIRATION}
-      );
+  const { email, password } = req.body;
 
-      const cookieOptions = {
-        expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRE * 24 * 60 * 60 * 1000),
-        path: "/"
-      };
+  try {
+    const user = await usuarioDAO.authenticate(email, password);
 
-      res.cookie("jwt", token, cookieOptions);
+    req.session.user = user;
 
-if (user.tipo === 1) {
-  console.log('Redirigiendo a admin...');
-  return res.redirect('/paginaMenuAdmin');
-} else {
-  console.log('Redirigiendo a user...');
-  return res.redirect('/paginaMenuUser');
-}// Redirección directa
-  
-    } catch (err) {
-      console.error('Error en loginProcess:', err);
-      return res.redirect('/login?error=Error%20del%20servidor');
-    }
+    const token = jwt.sign(
+      { user: email },
+      process.env.JWT_SECRET,
+      { expiresIn: process.env.JWT_EXPIRATION }
+    );
+
+    const cookieOptions = {
+      expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRE * 24 * 60 * 60 * 1000),
+      path: "/"
+    };
+
+    res.cookie("jwt", token, cookieOptions);
+
+    const redirectPath = user.tipo === 1 ? '/paginaMenuAdmin' : '/paginaMenuUser';
+
+    return res.status(200).json({ message: "Login exitoso", redirect: redirectPath });
+
+  } catch (err) {
+    console.error('Error en loginProcess:', err.message);
+    return res.status(400).json({ error: err.message });
+  }
 };
 
 
