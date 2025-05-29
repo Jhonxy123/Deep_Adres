@@ -37,7 +37,8 @@ body{
     margin-bottom: 1.5rem;
 }
 .form-group {
-    margin-bottom: 1.5rem;
+   margin-bottom: 20px;
+  position: relative;
 }
 .form-group label {
     display: block;
@@ -83,4 +84,21 @@ body{
 }
 .btn-volver {
     background: linear-gradient(to right, var(--color-gris), var(--color-negro));
+}
+
+.error-message {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 8px 12px;
+  border: 1px solid #f5c6cb;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+  display: none;
+  text-align: center;
+}
+
+input.error {
+  border-color: #dc3545;
+  background-color: #f8d7da;
 }

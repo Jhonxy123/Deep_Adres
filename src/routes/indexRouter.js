@@ -17,7 +17,11 @@ router.post('/registro', controladorVistas.registrarUsuario);
 router.get('/paginaMenuUser', controladorVistas.paginaMenuUser);
 router.get('/paginaMenuAdmin', controladorVistas.paginaMenuAdmin);
 
-// Ruta para logout
-router.get('/logout', controladorVistas.logout);
+// Nueva ruta para el logout
+router.get('/logout', controladorVistas.logout); // Usando GET
+
+//Nueva ruta para formulario
+router.get('/formulario', controladorVistas.paginaFormulario);
+
 
 module.exports = router;

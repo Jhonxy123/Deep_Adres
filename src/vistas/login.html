@@ -6,6 +6,7 @@
   <title>Inicio de sesión</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/login.css">
+
 </head>
 <body>
   <div class="container">
@@ -14,24 +15,71 @@
     </div>
     <div class="form-container">
       <h1>Inicio de sesión</h1>
-      <form  action="/login" method="POST">
-        <div class="form-group">
-          <label for="usuario">Usuario</label>
-          <input type="text" id="usuario" name="email" placeholder="user" required/>
-        </div>
-        <div class="form-group">
-          <label for="password">Contraseña</label>
-          <input type="password" id="password" name="password" placeholder="***********" required/>
-        </div>
-        <div class="actions">
-          <button type="submit" class="btn btn-ingresar">Ingresar</button>
-          <button type="button" class="btn btn-volver" onclick="window.location.href='/'">Volver</button>
-        </div>
-      </form>
+<form id="formulario-login">
+  <div id="error_general" class="error-message">Credenciales Incorrectas</div>
+
+  <div class="form-group">
+    <label for="usuario">Usuario</label>
+    <input type="text" id="usuario" name="email" placeholder="user" required />
+  </div>
+
+  <div class="form-group">
+    <label for="password">Contraseña</label>
+    <input type="password" id="password" name="password" placeholder="***********" required />
+  </div>
+
+  <div class="actions">
+    <button type="submit" class="btn btn-ingresar">Ingresar</button>
+    <button type="button" class="btn btn-volver" onclick="window.location.href='/'">Volver</button>
+  </div>
+</form>
+
     </div>
   </div>
   <footer>
     © Hecho por: Jhon Gonzalez - Daniel Guiza - Karen Alarcón - Santiago Alfonso
   </footer>
+<script>
+  document.getElementById('formulario-login').addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    const email = document.getElementById('usuario');
+    const password = document.getElementById('password');
+    const errorDiv = document.getElementById('error_general');
+
+    // Limpiar estados previos
+    errorDiv.style.display = 'none';
+    email.classList.remove('error');
+    password.classList.remove('error');
+
+    try {
+      const response = await fetch('/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email.value, password: password.value })
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.redirect) {
+        window.location.href = data.redirect;
+      } else {
+        mostrarError('Credenciales Incorrectas');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      mostrarError('Error al conectar con el servidor');
+    }
+
+    function mostrarError(mensaje) {
+      errorDiv.textContent = mensaje;
+      errorDiv.style.display = 'block';
+      email.classList.add('error');
+      password.classList.add('error');
+    }
+  });
+</script>
+
+</script>
 </body>
 </html>
