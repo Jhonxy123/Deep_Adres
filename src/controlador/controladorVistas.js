@@ -77,13 +77,13 @@ export const loginProcess = async (req, res) => {
 
       res.cookie("jwt", token, cookieOptions);
 
-if (user.tipo === 1) {
-  console.log('Redirigiendo a admin...');
-  return res.redirect('/paginaMenuAdmin');
-} else {
-  console.log('Redirigiendo a user...');
-  return res.redirect('/paginaMenuUser');
-}// Redirección directa
+      if (user.tipo === 1) {
+        console.log('Redirigiendo a admin...');
+        return res.redirect('/paginaMenuAdmin');
+      } else {
+        console.log('Redirigiendo a user...');
+        return res.redirect('/paginaMenuUser');
+      }// Redirección directa
   
     } catch (err) {
       console.error('Error en loginProcess:', err);
