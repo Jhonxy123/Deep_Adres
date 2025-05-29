@@ -58,9 +58,14 @@ export const registrarUsuario = async (req, res) => {
 };
 
 export const paginaLogin = (req, res) => {
-    if (req.session.user) return res.redirect('/paginaMenuUSer');
-    res.sendFile(path.join(__dirname, '..', 'vistas', 'login.html'));
+  if (req.session.user) {
+    const tipo = req.session.user.tipo;
+    if (tipo === 1) return res.redirect('/paginaMenuAdmin');
+    if (tipo === 2) return res.redirect('/paginaMenuUser');
+  }
+  res.sendFile(path.join(__dirname, '..', 'vistas', 'login.html'));
 };
+
 
 export const loginProcess = async (req, res) => {
   const { email, password } = req.body;

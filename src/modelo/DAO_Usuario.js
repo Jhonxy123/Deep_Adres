@@ -16,6 +16,20 @@ async function findByEmail(email) {
        nombre,
        ID_Tipo_usuario AS id_tipo_usuario
      FROM usuario
+     WHERE correo = $1`,
+    [ email ]
+  );
+  return result.rows[0] || null;
+}
+
+async function findByUser(email) {
+  const result = await db.query(
+    `SELECT
+       id,
+       correo       AS email,
+       contrasena   AS password_hash,
+       nombre
+     FROM usuario
      WHERE id = $1`,
     [ email ]
   );
@@ -69,7 +83,10 @@ async function registrar_usuario(nombre, correo, cedula) {
   if (usuarioExistente) {
     throw new Error('El correo electronico ya esta registrado');
   }
-
+    const cedulaExistente = await findByCedula(cedula);
+  if (cedulaExistente) {
+    throw new Error('La cédula ya está registrada');
+  }
   // Inserción en la base de datos
   const result = await db.query(
     `INSERT INTO Usuario (
@@ -82,7 +99,7 @@ async function registrar_usuario(nombre, correo, cedula) {
        ID,
        Correo AS email,
        Nombre,
-       ID_Tipo_usuario AS tipo`,
+       ID_Tipo_usuario`,
     [nombre, cedula, correo]
   );
 
@@ -113,10 +130,11 @@ async function registrar_usuario(nombre, correo, cedula) {
  // usuario sin el hash si ok; null si falla
  */
 async function authenticate(email, plainPassword) {
-  const user = await findByEmail(email);
+  
+  const user = await findByUser(email);
   if (!user) {
     console.log('authenticate: usuario no encontrado:', email);
-    throw new Error('El correo electronico no fue encontrado');
+    throw new Error('El usuario no fue encontrado');
     //return null;
   }
 
