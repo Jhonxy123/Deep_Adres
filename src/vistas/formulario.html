@@ -5,30 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Formulario de Reclamación</title>
   <link rel="stylesheet" href="css/formulario.css">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <nav class="navbar" >
-    <input type="checkbox" id="menu-toggle" class="menu-toggle">
-    <label for="menu-toggle" class="menu-icon-container">
-      <img class="menu-icon" src="/img/hamburguesa.svg" alt="Menú"/>
-    </label>
-    
-    <div class="dropdown-menu">
-        <a class="dropdown-item" href="#">Perfil</a>
-        <a class="dropdown-item" href="#">Configuración</a>
-        <a class="dropdown-item" href="#">Ayuda</a>
-        <a class="dropdown-item" href="/logout" id="logoutbtn">Salir</a>
-      </div>
-    
-    <div class="user-info">
-      <span>Usuario</span>
-      <img class="user-icon" src="/img/user_mini.svg" alt="Perfil" />
-    </div>
-  </nav>
-
+    <div id="layout"></div>
   <main>
-    <h2>I. Datos del beneficiario de la reclamación</h2>
 
+    <h2>I. Datos del beneficiario de la reclamación</h2>
     <form class="formulario">
       <div class="fila">
         <input type="text" placeholder="Primer Apellido">
@@ -421,12 +404,15 @@
 
     <!-- Botones -->
      <hr>
-    <div class="fila" style="margin-top: 20px;">
-      <button type="submit" style="background-color: #0057ff; color: white;">Enviar</button>
-      <button type="button" style="background-color: #222; color: white; margin-left: 10px;">Volver</button>
+    <div class="actions" style="margin-top: 20px;">
+      <button type="submit" id="btn-enviar" class="btn btn-enviar" style="background-color: #0057ff; color: white;">Enviar</button>
+      <button type="button" id="btn-volver" class="btn btn-volver" style="background-color: #222; color: white; margin-left: 10px;">Volver</button>
     </div>
-
-
   </main>
+   <script src="componentes_html/cargarcomponentes.js"></script>
+
+  <script>
+    cargarComponente("#layout", "componentes_html/layout_admin.html");
+  </script>
 </body>
 </html>

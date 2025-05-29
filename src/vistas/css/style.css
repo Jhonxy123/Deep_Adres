@@ -11,14 +11,20 @@
     box-sizing: border-box;
 }
 body{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
     font-family: "Open Sans", sans-serif;
     background-color: var(--color-fondo);
     color: var(--color-negro);
     font-weight: 300;
-    height: 100vh;
 }
+
 footer {
     position: fixed;
+    font-family: "Open Sans", sans-serif;
     bottom: 0;
     width: 100%;
     background: linear-gradient(to right, var(--color-azul_claro), var(--color-azul_oscuro));
@@ -27,3 +33,10 @@ footer {
     color: var(--color-blanco);
     font-size: 0.875rem;
   }
+
+
+main {
+    flex: 1;
+    width: 100%;
+    margin-bottom: 60px; /* Ajusta este valor según la altura de tu footer */
+}
