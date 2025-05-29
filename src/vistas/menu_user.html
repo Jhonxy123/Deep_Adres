@@ -11,7 +11,25 @@
 
 <body>
   <main>
-  <div id="layout"></div>
+  <nav class="navbar" >
+    <input type="checkbox" id="menu-toggle" class="menu-toggle">
+    <label for="menu-toggle" class="menu-icon-container">
+      <img class="menu-icon" src="/img/hamburguesa.svg" alt="Menú"/>
+    </label>
+    
+    <div class="dropdown-menu">
+        <a class="dropdown-item" href="#">Perfil</a>
+        <a class="dropdown-item" href="#">Configuración</a>
+        <a class="dropdown-item" href="#">Ayuda</a>
+        <a class="dropdown-item" href="/logout" id="logoutbtn">Salir</a>
+      </div>
+    
+    <div class="user-info">
+      <span>Usuario</span>
+      <img class="user-icon" src="/img/user_mini.svg" alt="Perfil" />
+    </div>
+  </nav>
+
   <header class="main-header">
 
     <h1>Bienvenido</h1>
@@ -35,11 +53,10 @@
 
   </section>
 </main>
- <script src="componentes_html/cargarcomponentes.js"></script>
-
-  <script>
-    cargarComponente("#layout", "componentes_html/layout_user.html");
-  </script>
+  <footer class="footer">
+    © Hech por: Jhon Gonzalez - Daniel Guiza - Karen Alarcón - Santiago Alfonso
+  </footer>
+  
 
 </body>
 
