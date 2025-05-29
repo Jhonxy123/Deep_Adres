@@ -181,7 +181,7 @@ INSERT INTO departamento (id, departamento) VALUES
 -- Insertar en conc_reclamado
 
 INSERT INTO  conc_reclamado (id,conc_reclamado) VALUES
-(1,'accidente'),
-(2,'defunción');
+(1,'indemnización por muerte y gastos funerarios'),
+(2,'incapacidad permanente');
 
 
