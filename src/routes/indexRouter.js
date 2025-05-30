@@ -23,9 +23,11 @@ router.get('/logout', controladorVistas.logout); // Usando GET
 
 //Nueva ruta para formulario
 router.get('/formulario', controladorVistas.paginaFormulario);
+router.post('/formulario', controladorVistas.guardarFormulario);
 
 // Nueva ruta para cambio de contraseña
 router.post('/recuperar_cont', controladorUsuario.cambiarContrasena);
+
 
 
 module.exports = router;
