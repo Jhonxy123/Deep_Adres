@@ -71,118 +71,117 @@
         <label>Tipo de cuenta:</label>
         <input type="text" name="beneficiario.tipo_cuenta">
       </div>
-      <!--
     <hr>
     <h2>II. Datos del apoderado (abogado con poder para tramitar la reclamación)</h2>
 
     <div class="fila">
-        <input type="text" placeholder="Primer Apellido">
-        <input type="text" placeholder="Segundo Apellido">
+        <input type="text" name="apoderado.primer_apellido" placeholder="Primer Apellido">
+        <input type="text" name="apoderado.segundo_apellido" placeholder="Segundo Apellido">
     </div>
 
     <div class="fila">
-        <input type="text" placeholder="Primer Nombre">
-        <input type="text" placeholder="Segundo Nombre">
+        <input type="text" name="apoderado.primer_nombre" placeholder="Primer Nombre">
+        <input type="text" name="apoderado.segundo_nombre" placeholder="Segundo Nombre">
     </div>
 
     <div class="fila">
-        <select>
-            <option>Tipo de documento</option>
-            <option>Cédula</option>
-            <option>Pasaporte</option>
+        <select name="apoderado.tipo_documento">
+            <option value="">Tipo de documento</option>
+            <option value="Cédula">Cédula</option>
+            <option value="Pasaporte">Pasaporte</option>
         </select>
-        <input type="text" placeholder="No. de documento">
+        <input type="text" name="apoderado.numero_documento" placeholder="No. de documento">
     </div>
 
     <div class="fila">
         <label>Dirección:</label>
-        <input type="text">
+        <input type="text" name="apoderado.direccion">
     </div>
 
     <div class="fila">
         <label>Correo electrónico:</label>
-        <input type="email">
+        <input type="email" name="apoderado.correo">
     </div>
 
     <div class="fila">
         <label>Departamento:</label>
-        <input type="text">
+        <input type="text" name="apoderado.departamento">
         <label>Teléfono:</label>
-        <input type="text">
+        <input type="text" name="apoderado.telefono">
     </div>
 
     <div class="fila">
         <label>Municipio:</label>
-        <input type="text">
+        <input type="text" name="apoderado.municipio">
         <label>Tarjeta Profesional:</label>
-        <input type="text">
+        <input type="text" name="apoderado.tarjeta_profesional">
     </div>
 
     <hr>
     <h2>III. Datos de la víctima del evento catastrófico o accidente de tránsito</h2>
 
     <div class="fila">
-        <input type="text" placeholder="Primer Apellido">
-        <input type="text" placeholder="Segundo Apellido">
+        <input type="text" name="victima.primer_apellido" placeholder="Primer Apellido">
+        <input type="text" name="victima.segundo_apellido" placeholder="Segundo Apellido">
     </div>
 
     <div class="fila">
-        <input type="text" placeholder="Primer Nombre">
-        <input type="text" placeholder="Segundo Nombre">
+        <input type="text" name="victima.primer_nombre" placeholder="Primer Nombre">
+        <input type="text" name="victima.segundo_nombre" placeholder="Segundo Nombre">
     </div>
 
     <div class="fila">
-        <select>
-            <option>Tipo de documento</option>
-            <option>Cédula</option>
-            <option>Pasaporte</option>
+        <select name="victima.tipo_documento">
+            <option value="">Tipo de documento</option>
+            <option value="Cédula">Cédula</option>
+            <option value="Pasaporte">Pasaporte</option>
         </select>
-        <input type="text" placeholder="No. de documento">
+        <input type="text" name="victima.numero_documento" placeholder="No. de documento">
     </div>
 
     <div class="fila">
         <label>Fecha de nacimiento:</label>
-        <input type="date">
+        <input type="date" name="victima.fecha_nacimiento">
         <label>Sexo:</label>
-        <select>
-            <option>Seleccione</option>
-            <option>Masculino</option>
-            <option>Femenino</option>
-            <option>Otro</option>
+        <select name="victima.sexo">
+            <option value="">Seleccione</option>
+            <option value="Masculino">Masculino</option>
+            <option value="Femenino">Femenino</option>
+            <option value="Otro">Otro</option>
         </select>
     </div>
 
     <div class="fila">
         <label>Dirección de domicilio:</label>
-        <input type="text">
+        <input type="text" name="victima.direccion">
     </div>
 
     <div class="fila">
         <label>Departamento:</label>
-        <input type="text">
+        <input type="text" name="victima.departamento">
         <label>Municipio:</label>
-        <input type="text">
+        <input type="text" name="victima.municipio">
     </div>
 
     <div class="fila">
         <label>Zona:</label>
-        <select>
-            <option>Urbana</option>
-            <option>Rural</option>
+        <select name="victima.zona">
+            <option value="Urbana">Urbana</option>
+            <option value="Rural">Rural</option>
         </select>
         <label>Condición del accidentado:</label>
-        <select>
-            <option>Seleccione</option>
-            <option>Lesionado</option>
-            <option>Fallecido</option>
+        <select name="victima.condicion">
+            <option value="">Seleccione</option>
+            <option value="Lesionado">Lesionado</option>
+            <option value="Fallecido">Fallecido</option>
         </select>
     </div>
 
     <div class="fila">
         <label>Teléfono:</label>
-        <input type="text">
+        <input type="text" name="victima.telefono">
         <label>Fecha en caso de muerte:</label>
-        <input type="date">
+        <input type="date" name="victima.fecha_muerte">
     </div>
 
     <hr>
@@ -192,56 +191,54 @@
 
     <div class="fila">
         <label>Naturales:</label>
-        <select>
-            <option>Ninguno</option>
-            <option>Sismo</option>
-            <option>Inundación</option>
-            <option>Deslizamiento</option>
-
+        <select name="evento.natural">
+            <option value="Ninguno">Ninguno</option>
+            <option value="Sismo">Sismo</option>
+            <option value="Inundación">Inundación</option>
+            <option value="Deslizamiento">Deslizamiento</option>
         </select>
 
         <label>Terroristas:</label>
-        <select>
-            <option>Ninguno</option>
-            <option>Atentado</option>
-            <option>Explosivo</option>
-
+        <select name="evento.terrorista">
+            <option value="Ninguno">Ninguno</option>
+            <option value="Atentado">Atentado</option>
+            <option value="Explosivo">Explosivo</option>
         </select>
     </div>
 
     <div class="fila">
         <label>Accidente de tránsito:</label>
-        <input type="checkbox">
+        <input type="checkbox" name="evento.accidente_transito" value="true">
 
         <label>Otros:</label>
-        <input type="checkbox">
+        <input type="checkbox" name="evento.otro" value="true">
         <label>Cuál:</label>
-        <input type="text" placeholder="Especificar otro tipo de evento">
+        <input type="text" name="evento.otro_descripcion" placeholder="Especificar otro tipo de evento">
     </div>
 
     <div class="fila">
         <label>Dirección de la ocurrencia:</label>
-        <input type="text">
+        <input type="text" name="evento.direccion">
     </div>
 
     <div class="fila">
         <label>Fecha evento/accidente:</label>
-        <input type="date">
+        <input type="date" name="evento.fecha">
         <label>Hora:</label>
-        <input type="time" step="1">
+        <input type="time" name="evento.hora" step="1">
     </div>
 
     <div class="fila">
         <label>Departamento:</label>
-        <input type="text">
+        <input type="text" name="evento.departamento">
         <label>Municipio:</label>
-        <input type="text">
+        <input type="text" name="evento.municipio">
     </div>
 
     <div class="fila">
         <p><strong>Descripción breve del evento catastrófico o accidente de tránsito</strong></p>
         <p>Enuncie las principales características del evento / accidente:</p>
-        <textarea rows="5" style="width: 100%; border-radius: 10px;"></textarea>
+        <textarea rows="5" style="width: 100%; border-radius: 10px;" name="evento.descripcion"></textarea>
     </div>
 
     <hr>
@@ -249,7 +246,7 @@
 
     <div class="fila">
       <label>Estado de aseguramiento:</label>
-      <select>
+      <select name="vehiculo.aseguramiento">
         <option value="">Seleccione...</option>
         <option value="asegurado">Asegurado</option>
         <option value="no_asegurado">No asegurado</option>
@@ -258,15 +255,15 @@
 
     <div class="fila">
       <label>Marca:</label>
-      <input type="text">
+      <input type="text" name="vehiculo.marca">
       
       <label>Placa:</label>
-      <input type="text">
+      <input type="text" name="vehiculo.placa">
     </div>
 
     <div class="fila">
       <label>Tipo de servicio:</label>
-      <select>
+      <select name="vehiculo.tipo_servicio">
         <option value="">Seleccione...</option>
         <option value="publico">Público</option>
         <option value="particular">Particular</option>
@@ -274,7 +271,7 @@
       </select>
 
       <label>Intervención de la autoridad:</label>
-      <select>
+      <select name="vehiculo.intervencion_autoridad">
         <option value="">Seleccione...</option>
         <option value="si">Sí</option>
         <option value="no">No</option>
@@ -283,103 +280,103 @@
 
     <div class="fila">
       <label>Nombre de la aseguradora:</label>
-      <input type="text">
+      <input type="text" name="vehiculo.aseguradora">
     </div>
 
     <div class="fila">
       <label>Número de la póliza:</label>
-      <input type="text">
+      <input type="text" name="vehiculo.numero_poliza">
     </div>
 
     <div class="fila">
       <label>Vigencia desde:</label>
-      <input type="date">
+      <input type="date" name="vehiculo.vigencia_desde">
 
       <label>hasta:</label>
-      <input type="date">
+      <input type="date" name="vehiculo.vigencia_hasta">
     </div>
 
     <hr>
     <h2>VI. Datos del propietario del vehículo</h2>
 
     <div class="fila">
-      <input type="text" placeholder="Primer Apellido">
-      <input type="text" placeholder="Segundo Apellido">
+      <input type="text" name="propietario.primer_apellido" placeholder="Primer Apellido">
+      <input type="text" name="propietario.segundo_apellido" placeholder="Segundo Apellido">
     </div>
 
     <div class="fila">
-      <input type="text" placeholder="Primer Nombre">
-      <input type="text" placeholder="Segundo Nombre">
+      <input type="text" name="propietario.primer_nombre" placeholder="Primer Nombre">
+      <input type="text" name="propietario.segundo_nombre" placeholder="Segundo Nombre">
     </div>
 
     <div class="fila">
-      <select>
+      <select name="propietario.tipo_documento">
         <option value="">Tipo de documento</option>
         <option value="cc">Cédula de ciudadanía</option>
         <option value="ti">Tarjeta de identidad</option>
         <option value="ce">Cédula de extranjería</option>
         <option value="pasaporte">Pasaporte</option>
       </select>
-      <input type="text" placeholder="No. de documento">
+      <input type="text" name="propietario.numero_documento" placeholder="No. de documento">
     </div>
 
     <div class="fila">
       <label>Dirección de domicilio:</label>
-      <input type="text">
+      <input type="text" name="propietario.direccion">
     </div>
 
     <div class="fila">
       <label>Departamento:</label>
-      <input type="text">
+      <input type="text" name="propietario.departamento">
 
       <label>Teléfono o celular:</label>
-      <input type="tel">
+      <input type="tel" name="propietario.telefono">
     </div>
 
     <div class="fila">
       <label>Municipio:</label>
-      <input type="text">
+      <input type="text" name="propietario.municipio">
     </div>
 
     <hr>
     <h2>VII. Datos del conductor del vehículo</h2>
 
     <div class="fila">
-      <input type="text" placeholder="Primer Apellido">
-      <input type="text" placeholder="Segundo Apellido">
+      <input type="text" name="conductor.primer_apellido" placeholder="Primer Apellido">
+      <input type="text" name="conductor.segundo_apellido" placeholder="Segundo Apellido">
     </div>
 
     <div class="fila">
-      <input type="text" placeholder="Primer Nombre">
-      <input type="text" placeholder="Segundo Nombre">
+      <input type="text" name="conductor.primer_nombre" placeholder="Primer Nombre">
+      <input type="text" name="conductor.segundo_nombre" placeholder="Segundo Nombre">
     </div>
 
     <div class="fila">
-      <select>
+      <select name="conductor.tipo_documento">
         <option value="">Tipo de documento</option>
         <option value="cc">Cédula de ciudadanía</option>
         <option value="ti">Tarjeta de identidad</option>
         <option value="ce">Cédula de extranjería</option>
         <option value="pasaporte">Pasaporte</option>
       </select>
-      <input type="text" placeholder="No. de documento">
+      <input type="text" name="conductor.numero_documento" placeholder="No. de documento">
     </div>
 
     <div class="fila">
       <label>Dirección de domicilio:</label>
-      <input type="text">
+      <input type="text" name="conductor.direccion">
     </div>
 
     <div class="fila">
       <label>Departamento:</label>
-      <input type="text">
+      <input type="text" name="conductor.departamento">
       <label>Teléfono o celular:</label>
-      <input type="tel">
+      <input type="tel" name="conductor.telefono">
     </div>
 
     <div class="fila">
       <label>Municipio:</label>
-      <input type="text">
+      <input type="text" name="conductor.municipio">
     </div>
 
     <hr>
@@ -387,7 +384,7 @@
 
     <div class="fila">
       <label>Concepto reclamado:</label>
-      <select>
+      <select name="reclamacion.concepto">
         <option value="">Seleccione...</option>
         <option value="indemnizacion">Indemnización por muerte y Gastos funerarios</option>
         <option value="gastos_medicos">Gastos médicos</option>
@@ -397,27 +394,16 @@
 
     <div class="fila">
       <label>Valor:</label>
-      <input type="number" placeholder="$">
-    </div>-->
+      <input type="number" name="reclamacion.valor" placeholder="$">
+    </div>
     
     <div class="actions" style="margin-top: 20px;">
       <button type="submit" id="btn-enviar" class="btn btn-enviar" style="background-color: #0057ff; color: white;">Enviar</button>
       <button type="button" id="btn-volver" class="btn btn-volver" style="background-color: #222; color: white; margin-left: 10px;">Volver</button>
     </div>
   
-  </form> <!-- Aquí se cierra el formulario -->
-
-
-
-
-     <hr>
-    
-  </main>
-   <script src="componentes_html/cargarcomponentes.js"></script>
-
-  <script>
-    cargarComponente("#layout", "componentes_html/layout_admin.html");
-  </script>
+  </form>
+</main>
 </body>
 </html>
 
