@@ -12,63 +12,66 @@
   <main>
 
     <h2>I. Datos del beneficiario de la reclamación</h2>
-    <form class="formulario">
+    <form class="formulario" method="POST" action="/formulario">
       <div class="fila">
-        <input type="text" placeholder="Primer Apellido">
-        <input type="text" placeholder="Segundo Apellido">
+        <input type="text" name="beneficiario.primer_apellido" placeholder="Primer Apellido">
+        <input type="text" name="beneficiario.segundo_apellido" placeholder="Segundo Apellido">
       </div>
 
       <div class="fila">
-        <input type="text" placeholder="Primer Nombre">
-        <input type="text" placeholder="Segundo Nombre">
+        <input type="text" name="beneficiario.primer_nombre" placeholder="Primer Nombre">
+        <input type="text" name="beneficiario.segundo_nombre" placeholder="Segundo Nombre">
       </div>
 
       <div class="fila">
-        <select>
-          <option>Tipo de documento</option>
-          <option>Cédula</option>
-          <option>Pasaporte</option>
+        <select name="beneficiario.tipo_documento">
+          <option value="">Tipo de documento</option>
+          <option value="Cédula">Cédula</option>
+          <option value="Pasaporte">Pasaporte</option>
         </select>
-        <input type="text" placeholder="No. de documento">
+      
+        <input type="text" name="beneficiario.numero_documento" placeholder="No. de documento">
       </div>
-
+      
       <div class="fila">
         <label>Dirección de domicilio:</label>
-        <input type="text">
+        <input type="text" name="beneficiario.direccion">
       </div>
-
+      
       <div class="fila">
         <label>Correo electrónico:</label>
-        <input type="email">
+        <input type="email" name="beneficiario.correo">
       </div>
 
       <div class="fila">
         <label>Departamento:</label>
-        <input type="text">
+        <input type="text" name="beneficiario.departamento">
+
         <label>Teléfono:</label>
-        <input type="text">
+        <input type="text" name="beneficiario.telefono">
       </div>
 
       <div class="fila">
         <label>Municipio:</label>
-        <input type="text">
+        <input type="text" name="beneficiario.municipio">
+
         <label>Celular:</label>
-        <input type="text">
+        <input type="text" name="beneficiario.celular">
       </div>
 
       <div class="fila">
         <label>Cuenta bancaria:</label>
-        <input type="text">
+        <input type="text" name="beneficiario.cuenta_bancaria">
       </div>
 
       <div class="fila">
         <label>Banco:</label>
-        <input type="text">
+        <input type="text" name="beneficiario.banco">
+
         <label>Tipo de cuenta:</label>
-        <input type="text">
+        <input type="text" name="beneficiario.tipo_cuenta">
       </div>
-    </form>
-    <!-- Sección II -->
+      <!--
     <hr>
     <h2>II. Datos del apoderado (abogado con poder para tramitar la reclamación)</h2>
 
@@ -115,7 +118,6 @@
         <input type="text">
     </div>
 
-    <!-- Sección III -->
     <hr>
     <h2>III. Datos de la víctima del evento catastrófico o accidente de tránsito</h2>
 
@@ -183,7 +185,6 @@
         <input type="date">
     </div>
 
-    <!-- Sección IV -->
     <hr>
     <h2>IV. Datos del sitio donde ocurrió el evento catastrófico o accidente de tránsito</h2>
 
@@ -196,7 +197,7 @@
             <option>Sismo</option>
             <option>Inundación</option>
             <option>Deslizamiento</option>
-            <!-- Agrega más si lo deseas -->
+
         </select>
 
         <label>Terroristas:</label>
@@ -204,7 +205,7 @@
             <option>Ninguno</option>
             <option>Atentado</option>
             <option>Explosivo</option>
-            <!-- Más opciones si se requiere -->
+
         </select>
     </div>
 
@@ -243,7 +244,6 @@
         <textarea rows="5" style="width: 100%; border-radius: 10px;"></textarea>
     </div>
 
-    <!-- Sección V -->
     <hr>
     <h2>V. Información del vehículo del accidente de tránsito</h2>
 
@@ -298,7 +298,7 @@
       <label>hasta:</label>
       <input type="date">
     </div>
-    <!-- Sección VI -->
+
     <hr>
     <h2>VI. Datos del propietario del vehículo</h2>
 
@@ -341,7 +341,6 @@
       <input type="text">
     </div>
 
-    <!-- Sección VII -->
     <hr>
     <h2>VII. Datos del conductor del vehículo</h2>
 
@@ -383,7 +382,6 @@
       <input type="text">
     </div>
 
-    <!-- Sección VIII -->
     <hr>
     <h2>VIII. Amparos que reclama</h2>
 
@@ -400,14 +398,20 @@
     <div class="fila">
       <label>Valor:</label>
       <input type="number" placeholder="$">
-    </div>
-
-    <!-- Botones -->
-     <hr>
+    </div>-->
+    
     <div class="actions" style="margin-top: 20px;">
       <button type="submit" id="btn-enviar" class="btn btn-enviar" style="background-color: #0057ff; color: white;">Enviar</button>
       <button type="button" id="btn-volver" class="btn btn-volver" style="background-color: #222; color: white; margin-left: 10px;">Volver</button>
     </div>
+  
+  </form> <!-- Aquí se cierra el formulario -->
+
+
+
+
+     <hr>
+    
   </main>
    <script src="componentes_html/cargarcomponentes.js"></script>
 
@@ -416,3 +420,48 @@
   </script>
 </body>
 </html>
+
+<!--<script>
+  
+document.getElementById('miFormulario').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  
+  const formData = new FormData(e.target);
+  const jsonData = {};
+  
+  // Convertir FormData a objeto plano (similar a tu función original)
+  for (const [key, value] of formData.entries()) {
+    const keys = key.split('.');
+    let currentLevel = jsonData;
+    
+    for (let i = 0; i < keys.length - 1; i++) {
+      const currentKey = keys[i];
+      if (!currentLevel[currentKey]) {
+        currentLevel[currentKey] = {};
+      }
+      currentLevel = currentLevel[currentKey];
+    }
+    
+    const lastKey = keys[keys.length - 1];
+    currentLevel[lastKey] = value;
+  }
+
+  try {
+    const response = await fetch('/formulario', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(jsonData)
+    });
+    
+    if (response.ok) {
+      window.location.href = '/paginaMenuUser';
+    }
+  } catch (error) {
+    console.error('Error:', error);
+  }
+});
+</script>
+
+-->

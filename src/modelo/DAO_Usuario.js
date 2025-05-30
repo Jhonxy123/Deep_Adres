@@ -71,6 +71,26 @@ async function findByCedula(cedula) {
 }
 
 
+async function guardarFormularioDB(datosFormulario) {
+  const noRadicado = `IND-${Date.now()}`;
+  
+  const result = await db.query(
+    `INSERT INTO Indemnizacion 
+     (No_radicado, Fecha_radicacion, ID_Departamento, ID_Conc_reclamado, ID_Usuario, Form_ingresado) 
+     VALUES ($1, $2, $3, $4, $5, $6) 
+     RETURNING No_radicado`,
+    [
+      noRadicado,
+      new Date(),
+      datosFormulario.departamento?.id,
+      datosFormulario.reclamacion?.concepto,
+      "2SantiagoA03805",
+      datosFormulario
+    ]
+  );
+
+  return result.rows[0]; // Devuelve el registro insertado
+}
 
 
 async function registrar_usuario(nombre, correo, cedula) {
@@ -170,4 +190,4 @@ async function authenticate(email, plainPassword) {
 
 
 
-module.exports = { findByEmail, authenticate, registrar_usuario, encontrarUsuario};
+module.exports = { findByEmail, authenticate, registrar_usuario, encontrarUsuario,guardarFormularioDB};
