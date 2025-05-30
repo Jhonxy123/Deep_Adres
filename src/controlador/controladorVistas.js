@@ -24,6 +24,34 @@ export const paginaFormulario = async (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'vistas', 'formulario.html'));
 };
 
+
+export const guardarFormulario = async (req, res) => {
+  try {
+    const jsonData = req.body;
+    
+    if (!jsonData || Object.keys(jsonData).length === 0) {
+      return res.status(400).send('Datos requeridos');
+    }
+
+    // Agrega el ID del usuario si está autenticado
+    const datosParaGuardar = {
+      ...jsonData,
+      userId: req.user?.id
+    };
+
+    const resultado = await usuarioDAO.guardarFormularioDB(datosParaGuardar);
+    console.log('Formulario guardado con radicado:', resultado.no_radicado);
+    
+    res.redirect('/paginaMenuUser');
+  } catch (error) {
+    console.error('Error al guardar formulario:', error);
+    res.status(500).send('Error interno');
+  }
+};
+
+
+
+
 export const registrarUsuario = async (req, res) => {
   const { nombre, correo, cedula} = req.body;
 
