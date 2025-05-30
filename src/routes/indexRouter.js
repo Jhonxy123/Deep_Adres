@@ -22,6 +22,6 @@ router.get('/logout', controladorVistas.logout); // Usando GET
 
 //Nueva ruta para formulario
 router.get('/formulario', controladorVistas.paginaFormulario);
-
+router.post('/formulario', controladorVistas.guardarFormulario);
 
 module.exports = router;
