@@ -22,7 +22,7 @@ async function findByEmail(email) {
   return result.rows[0] || null;
 }
 
-async function findByUser(email) {
+async function findByUser(userId) {
   const result = await db.query(
     `SELECT
        id,
@@ -32,7 +32,7 @@ async function findByUser(email) {
        ID_Tipo_usuario AS id_tipo_usuario
      FROM usuario
      WHERE id = $1`,
-    [ email ]
+    [ userId ]
   );
   return result.rows[0] || null;
 }
@@ -146,16 +146,16 @@ async function registrar_usuario(nombre, correo, cedula) {
 
 /**
  * Valida que la contraseña en texto plano coincida con el hash almacenado.
- * @param {string} email
+ * @param {string} userId
  * @param {string} plainPassword
  * @returns {Promise<null|{id,email,nombre,tipo}>}
  // usuario sin el hash si ok; null si falla
  */
-async function authenticate(email, plainPassword) {
+async function authenticate(userId, plainPassword) {
   
-  const user = await findByUser(email);
+  const user = await findByUser(userId);
   if (!user) {
-    console.log('authenticate: usuario no encontrado:', email);
+    console.log('authenticate: usuario no encontrado:', userId);
     throw new Error('El usuario no fue encontrado');
     //return null;
   }
@@ -173,7 +173,7 @@ async function authenticate(email, plainPassword) {
 
   const match = await bcrypt.compare(plainPassword, user.password_hash);
   if (!match) {
-    console.log('authenticate: contraseña no coincide para', email);
+    console.log('authenticate: contraseña no coincide para', userId);
     throw new Error('La contraseña no coincide para el correo proporcionado');
     //return null;
   }
@@ -184,10 +184,37 @@ async function authenticate(email, plainPassword) {
   return { id, email: correo, nombre, tipo: id_tipo_usuario };
 }
 
+/**
+ * Valida si la contraseña proporcionada coincide con la del usuario
+ * @param {string} userId - ID del usuario
+ * @param {string} currentPassword - Contraseña actual a validar
+ * @returns {Promise<boolean>}
+ */
+async function validateCurrentPassword(userId, currentPassword) {
+  const user = await this.findByUser(userId);
+  if (!user) {
+    throw new Error('Usuario no encontrado');
+  }
+  
+  if (!currentPassword || !user.password_hash) {
+    throw new Error('Datos de contraseña incompletos');
+  }
+
+  return bcrypt.compare(currentPassword, user.password_hash);
+}
+
+/**
+ * Actualiza la contraseña de un usuario
+ * @param {string} userId - ID del usuario
+ * @param {string} hashedPassword - Nueva contraseña hasheada
+ */
+async function actualizarContrasena(userId, hashedPassword) {
+  await db.query(
+    `UPDATE usuario SET contrasena = $1 WHERE id = $2`,
+    [hashedPassword, userId]
+  );
+}
 
 
 
-
-
-
-module.exports = { findByEmail, authenticate, registrar_usuario, encontrarUsuario,guardarFormularioDB};
+module.exports = { findByEmail, authenticate, registrar_usuario, encontrarUsuario,guardarFormularioDB , findByUser , validateCurrentPassword, actualizarContrasena};

@@ -1,0 +1,146 @@
+     :root {
+            --color-blanco: #ffff;
+            --color-negro: #000000;
+            --color-fondo: #EBEDEF;
+            --color-azul_claro: #356CDA;
+            --color-azul_oscuro: #1C3974;
+            --color-gris: #445151;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            font-family: "Open Sans", sans-serif;
+            background-color: var(--color-fondo);
+            color: var(--color-negro);
+            font-weight: 300;
+            padding: 2rem;
+        }
+        
+        .password-container {
+            max-width: 500px;
+            width: 100%;
+            padding: 2.5rem;
+            background-color: var(--color-blanco);
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(53, 108, 218, 0.2);
+            text-align: center;
+        }
+        
+        .password-container h1 {
+            font-size: 2rem;
+            font-weight: 400;
+            color: var(--color-azul_claro);
+            margin-bottom: 2rem;
+        }
+        
+        .user-logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 2rem;
+            background: linear-gradient(to bottom, var(--color-azul_claro), var(--color-azul_oscuro));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-blanco);
+            font-size: 3rem;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+            text-align: left;
+        }
+        
+ .form-group label {
+        display: block;
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+        color: var(--color-negro); /* Cambiado de azul_oscuro a negro */
+    }
+        
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem 1.5rem;
+            border: 2px solid var(--color-azul_claro);
+            border-radius: 25px;
+            background-color: var(--color-blanco);
+            font-size: 1rem;
+            outline: none;
+            box-shadow: 4px 4px 8px rgba(53, 108, 218, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus {
+            border-color: var(--color-azul_oscuro);
+            box-shadow: 4px 4px 12px rgba(53, 108, 218, 0.3);
+        }
+        
+        .btn-container {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .btn {
+            flex: 1;
+            padding: 0.75rem;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--color-blanco);
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-cambiar {
+            background: linear-gradient(to right, var(--color-azul_claro), var(--color-azul_oscuro));
+        }
+        
+        .btn-cancelar {
+            background: linear-gradient(to right, var(--color-gris), var(--color-negro));
+        }
+        
+        .btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+        
+        .error-message {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 0.5rem;
+            border: 1px solid #f5c6cb;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            display: none;
+        }
+        
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: linear-gradient(to right, var(--color-azul_claro), var(--color-azul_oscuro));
+            text-align: center;
+            padding: 0.75rem 0;
+            color: var(--color-blanco);
+            font-size: 0.875rem;
+        }
