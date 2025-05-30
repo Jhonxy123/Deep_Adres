@@ -71,7 +71,7 @@ async function findByCedula(cedula) {
 }
 
 
-async function guardarFormularioDB(datosFormulario) {
+async function guardarFormularioDB(datosFormulario, userId) {
   const noRadicado = `IND-${Date.now()}`;
   
   const result = await db.query(
@@ -84,7 +84,7 @@ async function guardarFormularioDB(datosFormulario) {
       new Date(),
       datosFormulario.departamento?.id,
       datosFormulario.reclamacion?.concepto,
-      "2SantiagoA03805",
+      userId,
       datosFormulario
     ]
   );

@@ -11,6 +11,7 @@ dotenv.config();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
+
 // Controladores
 export const paginaIndex = (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'vistas', 'index.html'));
@@ -28,6 +29,7 @@ export const paginaFormulario = async (req, res) => {
 export const guardarFormulario = async (req, res) => {
   try {
     const jsonData = req.body;
+    const userId = req.session.user.id;
     
     if (!jsonData || Object.keys(jsonData).length === 0) {
       return res.status(400).send('Datos requeridos');
@@ -39,7 +41,7 @@ export const guardarFormulario = async (req, res) => {
       userId: req.user?.id
     };
 
-    const resultado = await usuarioDAO.guardarFormularioDB(datosParaGuardar);
+    const resultado = await usuarioDAO.guardarFormularioDB(datosParaGuardar, userId);
     console.log('Formulario guardado con radicado:', resultado.no_radicado);
     
     res.redirect('/paginaMenuUser');
