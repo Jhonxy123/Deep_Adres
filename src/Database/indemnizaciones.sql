@@ -184,4 +184,3 @@ INSERT INTO  conc_reclamado (id,conc_reclamado) VALUES
 (1,'indemnización por muerte y gastos funerarios'),
 (2,'incapacidad permanente');
 
-
