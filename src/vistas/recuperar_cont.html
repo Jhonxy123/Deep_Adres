@@ -16,9 +16,8 @@
             <i class="bi bi-shield-lock"></i> <!-- Icono de Bootstrap Icons -->
         </div>
         
-        <div class="error-message" id="error-message">
-            Las contraseñas no coinciden
-        </div>
+    <div class="alert alert-danger" id="error-message" style="display: none;"></div>
+    <div class="alert alert-success" id="success-message" style="display: none;"></div>
         
         <form id="passwordForm">
             <div class="form-group">
@@ -44,7 +43,7 @@
     </div>
     
     <footer>
-        © 2023 Sistema de Gestión - Todos los derechos reservados
+        © Hecho por: Jhon Gonzalez - Daniel Guiza - Karen Alarcón - Santiago Alfonso
     </footer>
 
     <!-- Bootstrap Icons -->
@@ -52,21 +51,69 @@
     
     <script>
         // Validación básica del formulario
-        document.getElementById('passwordForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const newPassword = document.getElementById('new-password').value;
-            const confirmPassword = document.getElementById('confirm-password').value;
-            const errorMessage = document.getElementById('error-message');
-            
-            if (newPassword !== confirmPassword) {
-                errorMessage.style.display = 'block';
-            } else {
-                errorMessage.style.display = 'none';
-                // Aquí iría la lógica para enviar el formulario
-                alert('Contraseña cambiada con éxito');
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('passwordForm');
+    const errorElement = document.getElementById('error-message');
+    const successElement = document.getElementById('success-message');
+
+    form?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        // Reset estados
+        errorElement.style.display = 'none';
+        successElement.style.display = 'none';
+        
+        try {
+            const formData = {
+                currentPassword: document.getElementById('current-password').value,
+                newPassword: document.getElementById('new-password').value,
+                confirmPassword: document.getElementById('confirm-password').value
+            };
+
+            // Validación frontend
+            if (!formData.currentPassword) {
+                throw new Error('Ingrese su contraseña actual');
             }
-        });
+
+            if (formData.newPassword !== formData.confirmPassword) {
+                throw new Error('Las nuevas contraseñas no coinciden');
+            }
+
+            if (formData.newPassword.length < 6) {
+                throw new Error('La contraseña debe tener al menos 6 caracteres');
+            }
+
+            const response = await fetch('/recuperar_cont', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+                credentials: 'include'
+            });
+
+            const data = await response.json();
+            
+            if (!response.ok) {
+                throw new Error(data.error || 'Error al cambiar contraseña');
+            }
+
+            // Éxito
+            successElement.textContent = data.message || '¡Contraseña cambiada exitosamente!';
+            successElement.style.display = 'block';
+            form.reset();
+
+            setTimeout(() => {
+                window.history.back();; // Redirige al perfil
+            }, 5000);
+
+        } catch (err) {
+            console.error('Error:', err);
+            errorElement.textContent = err.message;
+            errorElement.style.display = 'block';
+        }
+    });
+});
     </script>
 </body>
 </html>
