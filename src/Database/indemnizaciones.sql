@@ -40,7 +40,7 @@ CREATE TABLE Indemnizacion
     ID_Departamento int,
     ID_Conc_reclamado int,
     ID_Usuario VARCHAR(15),
-    Form_ingresado TEXT,
+    Form_ingresado JSONB NOT NULL,
     Form_generado TEXT,
     PRIMARY KEY(No_radicado)
 );
@@ -141,3 +141,46 @@ INSERT INTO Usuario (Nombre, Cedula, Correo, ID_Tipo_usuario) VALUES
 UPDATE usuario
 SET contrasena = '$2b$10$FGU5skrQRkal9h6YIho41.hsdFpQCK4yVx6wcODvhfhE44UKcFjEu'
 WHERE correo = 'carlos.mendoza@example.com';
+
+--Insert Departamento
+INSERT INTO departamento (id, departamento) VALUES
+(1, 'Amazonas'),
+(2, 'Antioquia'),
+(3, 'Arauca'),
+(4, 'Atlántico'),
+(5, 'Bolívar'),
+(6, 'Boyacá'),
+(7, 'Caldas'),
+(8, 'Caquetá'),
+(9, 'Casanare'),
+(10, 'Cauca'),
+(11, 'Cesar'),
+(12, 'Chocó'),
+(13, 'Córdoba'),
+(14, 'Cundinamarca'),
+(15, 'Guainía'),
+(16, 'Guaviare'),
+(17, 'Huila'),
+(18, 'La Guajira'),
+(19, 'Magdalena'),
+(20, 'Meta'),
+(21, 'Nariño'),
+(22, 'Norte de Santander'),
+(23, 'Putumayo'),
+(24, 'Quindío'),
+(25, 'Risaralda'),
+(26, 'San Andrés y Providencia'),
+(27, 'Santander'),
+(28, 'Sucre'),
+(29, 'Tolima'),
+(30, 'Valle del Cauca'),
+(31, 'Vaupés'),
+(32, 'Vichada'),
+(33, 'Bogotá D.C.');
+
+-- Insertar en conc_reclamado
+
+INSERT INTO  conc_reclamado (id,conc_reclamado) VALUES
+(1,'indemnización por muerte y gastos funerarios'),
+(2,'incapacidad permanente');
+
