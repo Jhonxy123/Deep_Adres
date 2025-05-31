@@ -101,15 +101,87 @@ h2 {
   align-items: center;
 }
 
-input, select {
-  flex: 1;
-  padding: 10px;
-  border: 1px solid #c0d4ff;
-  border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0, 93, 255, 0.15);
-  min-width: 180px;
-  background-color: #f0f6ff;
+/* formulario.css - Solo cambios para inputs y checkboxes */
+
+/* Estilos para inputs normales */
+input:not([type="checkbox"], [type="date"], [type="time"]), 
+select {
+  padding: 10px 15px;
+  border: 2px solid var(--color-azul_claro);
+  border-radius: 25px;
+  background-color: var(--color-blanco);
+  box-shadow: 4px 4px 8px rgba(53, 108, 218, 0.2);
+  transition: border-color 0.2s;
 }
+
+/* Inputs de fecha y hora */
+input[type="date"],
+input[type="time"] {
+  padding: 9px 15px; /* Ajuste para compensar el borde */
+  border: 2px solid var(--color-azul_claro);
+  border-radius: 25px;
+  background-color: var(--color-blanco);
+  box-shadow: 4px 4px 8px rgba(53, 108, 218, 0.2);
+}
+
+/* Efecto focus */
+input:not([type="checkbox"]):focus, 
+select:focus {
+  border-color: var(--color-azul_oscuro);
+  outline: none;
+}
+
+/* Checkboxes */
+input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--color-azul_claro);
+  margin-right: 8px;
+}
+
+input:not([type="checkbox"]):focus, 
+select:focus, 
+textarea:focus {
+  border-color: var(--color-azul_oscuro);
+  box-shadow: 4px 4px 12px rgba(53, 108, 218, 0.3);
+}
+
+
+input:not([type="checkbox"]), 
+select {
+  flex: 1;
+  padding: 12px 15px;
+  border: 2px solid var(--color-azul_claro);
+  border-radius: 25px;
+  background-color: var(--color-blanco);
+  font-size: 1rem;
+  outline: none;
+  box-shadow: 4px 4px 8px rgba(53, 108, 218, 0.2);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  min-width: 200px;
+}
+
+textarea{ 
+  padding: 12px 15px;
+  border: 2px solid var(--color-azul_claro);
+  border-radius: 25px;
+  background-color: var(--color-blanco);
+  font-size: 1rem;
+  outline: none;
+  box-shadow: 4px 4px 8px rgba(53, 108, 218, 0.2);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  min-width: 200px;}
+
+select {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23356CDA' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 15px center;
+  background-size: 15px;
+  padding-right: 40px;
+}
+
+
 
 label {
   min-width: 150px;
