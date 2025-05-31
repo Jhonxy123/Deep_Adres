@@ -130,6 +130,25 @@
   document.getElementById('cedula').addEventListener('input', function (e) {
     this.value = this.value.replace(/\D/g, '');
   });
+
+
+  document.getElementById('nombre').addEventListener('input', function(e) {
+  // Elimina cualquier número que se intente ingresar
+  this.value = this.value.replace(/[0-9]/g, '');
+  
+  // Opcional: Mostrar advertencia
+  if (/[0-9]/.test(e.data)) {
+    Swal.fire({
+      icon: 'warning',
+      title: 'Solo letras',
+      text: 'El nombre no puede contener números',
+      toast: true,
+      position: 'top',
+      showConfirmButton: false,
+      timer: 2000
+    });
+  }
+});
 </script>
 
 </body>
