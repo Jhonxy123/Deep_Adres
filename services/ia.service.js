@@ -9,7 +9,7 @@ async function main() {
     try{
   const response = await ai.models.generateContent({
     model: "gemini-2.0-flash",
-    contents: "Qué es ADRES Colombia?",
+    contents: "Qué tal es la universidad distrital de bogotá colombia?",
   });
   console.log(response.text);
    } catch (error) {
