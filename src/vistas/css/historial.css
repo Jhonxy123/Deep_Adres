@@ -1,0 +1,129 @@
+/* historial.css - Versión con botones actualizados */
+:root {
+    --color-blanco: #ffff;
+    --color-negro: #000000;
+    --color-fondo: #EBEDEF;
+    --color-azul_claro: #356CDA;
+    --color-azul_oscuro: #1C3974;
+    --color-gris: #445151;
+}
+
+.historial-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.historial-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.historial-title {
+    font-size: 2rem;
+    color: var(--color-azul_oscuro);
+    margin: 0;
+}
+
+/* Botón Volver - Estilo consistente con tu otro CSS */
+.back-button {
+    padding: 0.75rem 2rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--color-blanco);
+    border: none;
+    border-radius: 9999px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(to right, var(--color-gris), var(--color-negro));
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.back-button:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+.historial-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--color-blanco);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.historial-table thead {
+    background: linear-gradient(to right, var(--color-azul_claro), var(--color-azul_oscuro));
+    color: var(--color-blanco);
+}
+
+.historial-table th {
+    padding: 1rem;
+    text-align: left;
+    font-weight: 600;
+}
+
+.historial-table td {
+    padding: 1rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    color: var(--color-gris);
+}
+
+.historial-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.historial-table tbody tr:hover {
+    background-color: rgba(53, 108, 218, 0.05);
+}
+
+/* Botón Acción - Estilo consistente */
+.action-button {
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--color-blanco);
+    border: none;
+    border-radius: 9999px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    background: linear-gradient(to right, var(--color-azul_claro), var(--color-azul_oscuro));
+    box-shadow: 4px 4px 8px rgba(53, 108, 218, 0.3);
+}
+
+.action-button:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    .historial-table {
+        display: block;
+        overflow-x: auto;
+    }
+    
+    .historial-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    .back-button {
+        align-self: flex-end;
+        padding: 0.6rem 1.5rem;
+        font-size: 0.9rem;
+    }
+    
+    .action-button {
+        padding: 0.4rem 1rem;
+        font-size: 0.9rem;
+    }
+}

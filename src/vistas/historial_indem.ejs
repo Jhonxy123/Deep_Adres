@@ -1,52 +1,61 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard - Historial de Indemnizaciones</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/menu_user.css">
+  <link rel="stylesheet" href="css/historial.css">
+  <!-- Iconos de Bootstrap -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
 </head>
- <body>
+<body>
   <main>
-  <div id="layout"></div>
-  <header class="main-header">
-    <h1>Historial</h1>
-  </header>
+    <div id="layout"></div>
+    
+    <div class="historial-container">
+      <div class="historial-header">
+        <h1 class="historial-title">Historial de Indemnizaciones</h1>
+        <a href="javascript:history.back()" class="back-button">
+          <i class="bi bi-arrow-left"></i> Volver
+        </a>
+      </div>
 
-
-  <table border="1">
+      <table class="historial-table">
         <thead>
-            <tr>
-                <th>ID</th>
-                <th>Fecha</th>
-                <th>Acción</th>
-            </tr>
+          <tr>
+            <th>No. Radicado</th>
+            <th>Fecha de Radicación</th>
+            <th>Acciones</th>
+          </tr>
         </thead>
         <tbody>
-  <% resultado.forEach(indem => { %>
-    <tr>
-      <td><%= indem.no_radicado %></td>
-      <td><%= new Date(indem.fecha_radicacion).toLocaleDateString() %></td>
-      <td><!-- Aquí podrías agregar un botón o enlace, por ejemplo --></td>
-    </tr>
-  <% }); %>
-</tbody>
-
-    </table>
- 
-</main>
- 
+          <% resultado.forEach(indem => { %>
+            <tr>
+              <td><%= indem.no_radicado %></td>
+              <td><%= new Date(indem.fecha_radicacion).toLocaleDateString('es-CO', { year: 'numeric', month: 'long', day: 'numeric' }) %></td>
+              <td>
+                <button class="action-button" onclick="verDetalle('<%= indem.no_radicado %>')">
+                  <i class="bi bi-eye-fill"></i> Ver
+                </button>
+              </td>
+            </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </div>
+  </main>
   
- <script src="componentes_html/cargarcomponentes.js"></script>
-
+  <script src="componentes_html/cargarcomponentes.js"></script>
   <script>
     cargarComponente("#layout", "componentes_html/layout_user.html");
+    
+    function verDetalle(radicado) {
+      // Aquí puedes implementar la lógica para ver el detalle
+      console.log("Ver detalle de:", radicado);
+      // window.location.href = `/detalle?id=${radicado}`;
+    }
   </script>
-
 </body>
-
-
 </html>
- 
