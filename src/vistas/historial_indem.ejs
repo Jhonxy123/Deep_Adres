@@ -14,6 +14,27 @@
   <header class="main-header">
     <h1>Historial</h1>
   </header>
+
+
+  <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Fecha</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+  <% resultado.forEach(indem => { %>
+    <tr>
+      <td><%= indem.no_radicado %></td>
+      <td><%= new Date(indem.fecha_radicacion).toLocaleDateString() %></td>
+      <td><!-- Aquí podrías agregar un botón o enlace, por ejemplo --></td>
+    </tr>
+  <% }); %>
+</tbody>
+
+    </table>
  
 </main>
  
