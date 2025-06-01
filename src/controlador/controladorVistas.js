@@ -1,5 +1,6 @@
 import path from 'path';
 import usuarioDAO from '../modelo/DAO_Usuario.js';
+import indemnizacionDAO from '../modelo/DAO_indemnizacion.js'
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import { fileURLToPath } from 'url';
@@ -25,6 +26,10 @@ export const paginaFormulario = async (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'vistas', 'formulario.html'));
 };
 
+export const historal_usuario = async (req,res) => {
+   res.sendFile(path.join(__dirname, '..', 'vistas', 'historial.ejs'));
+};
+
 
 export const guardarFormulario = async (req, res) => {
   try {
@@ -47,6 +52,20 @@ export const guardarFormulario = async (req, res) => {
     res.redirect('/paginaMenuUser');
   } catch (error) {
     console.error('Error al guardar formulario:', error);
+    res.status(500).send('Error interno');
+  }
+};
+
+export const traerHistorial = async (req,res) => {
+  try{
+    const userId = req.session.user.id;
+
+    const resultado = await indemnizacionDAO.encontrarIndemnizaciones(userId);
+
+    res.render('historial_indem',{resultado});
+
+  }catch(error){
+    console.error('Error al traer la información: '.error);
     res.status(500).send('Error interno');
   }
 };
