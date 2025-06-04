@@ -1,5 +1,6 @@
 import path from 'path';
 import usuarioDAO from '../modelo/DAO_Usuario.js';
+import indemnizacionDAO from '../modelo/DAO_indemnizacion.js'
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import { fileURLToPath } from 'url';
@@ -10,6 +11,7 @@ import { enviarEmail } from '../../services/mail.services.js';
 dotenv.config();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+
 
 // Controladores
 export const paginaIndex = (req, res) => {
@@ -24,10 +26,15 @@ export const paginaFormulario = async (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'vistas', 'formulario.html'));
 };
 
+export const historal_usuario = async (req,res) => {
+   res.sendFile(path.join(__dirname, '..', 'vistas', 'historial.ejs'));
+};
+
 
 export const guardarFormulario = async (req, res) => {
   try {
     const jsonData = req.body;
+    const userId = req.session.user.id;
     
     if (!jsonData || Object.keys(jsonData).length === 0) {
       return res.status(400).send('Datos requeridos');
@@ -39,12 +46,26 @@ export const guardarFormulario = async (req, res) => {
       userId: req.user?.id
     };
 
-    const resultado = await usuarioDAO.guardarFormularioDB(datosParaGuardar);
+    const resultado = await usuarioDAO.guardarFormularioDB(datosParaGuardar, userId);
     console.log('Formulario guardado con radicado:', resultado.no_radicado);
     
     res.redirect('/paginaMenuUser');
   } catch (error) {
     console.error('Error al guardar formulario:', error);
+    res.status(500).send('Error interno');
+  }
+};
+
+export const traerHistorial = async (req,res) => {
+  try{
+    const userId = req.session.user.id;
+
+    const resultado = await indemnizacionDAO.encontrarIndemnizaciones(userId);
+
+    res.render('historial_indem',{resultado});
+
+  }catch(error){
+    console.error('Error al traer la información: '.error);
     res.status(500).send('Error interno');
   }
 };

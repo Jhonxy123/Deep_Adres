@@ -11,33 +11,39 @@
 
 <body>
   <main>
-  <div id="layout"></div> <!-- Aquí se cargará el navbar + footer -->
+    <div id="layout"></div> <!-- Aquí se cargará el navbar + footer -->
 
-  <header class="main-header">
+    <header class="main-header">
 
-    <h1>Bienvenido</h1>
-    <p>Sistema de indemnizaciones</p>
+      <h1>Bienvenido</h1>
+      <p>Sistema de indemnizaciones</p>
 
-  </header>
+    </header>
 
-  <section class="cards">
+    <section class="cards">
 
-    <div class="card">
-      <img src="/img/calculadora.png" alt="Gestion de Indemnizaciones" />
-      <div class="card-text">Gestion de<br>Indemnizaciones</div>
-    </div>
 
-    <div class="card">
-      <img src="/img/computador.png" alt="Reportes de Indemnizaciones" />
-      <div class="card-text">Reportes de<br>Indemnizaciones</div>
-    </div>
+      <a href="/gestion.html" style="text-decoration: none; color: inherit;">
+      <div class="card">
+        <img src="/img/calculadora.png" alt="Gestion de Indemnizaciones" />
+        <div class="card-text">Gestion de<br>Indemnizaciones</div>
+      </div>
+      </a>
 
-  </section>
-</main>
- <script src="componentes_html/cargarcomponentes.js"></script>
+      <a href="/reportes.html" style="text-decoration: none; color: inherit;">
+      <div class="card">
+        <img src="/img/computador.png" alt="Reportes de Indemnizaciones" />
+        <div class="card-text">Reportes de<br>Indemnizaciones</div>
+      </div>
+      </a>
+
+    </section>
+  </main>
+  <script src="componentes_html/cargarcomponentes.js"></script>
 
   <script>
     cargarComponente("#layout", "componentes_html/layout_admin.html");
   </script>
 </body>
+
 </html>

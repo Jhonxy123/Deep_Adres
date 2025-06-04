@@ -11,8 +11,9 @@
     <div id="layout"></div>
   <main>
 
-    <h2>I. Datos del beneficiario de la reclamación</h2>
+   
     <form class="formulario" method="POST" action="/formulario">
+       <h2>I. Datos del beneficiario de la reclamación</h2>
       <div class="fila">
         <input type="text" name="beneficiario.primer_apellido" placeholder="Primer Apellido">
         <input type="text" name="beneficiario.segundo_apellido" placeholder="Segundo Apellido">
@@ -71,6 +72,20 @@
         <label>Tipo de cuenta:</label>
         <input type="text" name="beneficiario.tipo_cuenta">
       </div>
+
+      <div class="fila">
+        <label>parentesco con la victima:</label>
+        <select name="parentesco.tipo_victima">
+            <option value="Madre">Madre</option>
+            <option value="Padre">Padre</option>
+            <option value="Hermano">Hermano</option>
+            <option value="Tio">Tio</option>
+             <option value="Conyugue">Conyugue</option>
+              <option value="Hijo">Hijo</option>
+              <option value="Machete">Machete</option>
+        </select>
+    </div>
+
     <hr>
     <h2>II. Datos del apoderado (abogado con poder para tramitar la reclamación)</h2>
 

@@ -6,6 +6,11 @@ const indexRouter = require('./routes/indexRouter');
 const app = express();
 
 
+// Configuración del motor de plantillas EJS
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'vistas'));
+
+
 app.use(express.json());
 //Para poder leer datos de formularios POST:
 app.use(express.urlencoded({ extended: false }));

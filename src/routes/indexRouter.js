@@ -28,6 +28,9 @@ router.post('/formulario', controladorVistas.guardarFormulario);
 // Nueva ruta para cambio de contraseña
 router.post('/recuperar_cont', controladorUsuario.cambiarContrasena);
 
+//Ruta para el historial del usuario
+router.get('/historialusuario',controladorVistas.traerHistorial);
+
 
 
 module.exports = router;
