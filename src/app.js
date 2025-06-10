@@ -23,6 +23,15 @@ app.use(session({
     cookie: { maxAge: 1000 * 60 * 30 } 
   }));
 
+app.get('/historial_sinverificar', (req, res) => {
+  const resultado = []; // o datos reales desde la base de datos
+  res.render('historial_sinverificar', { resultado });
+});
+
+app.get('/historial_verificado', (req, res) => {
+  const resultado = []; // o datos reales desde la base de datos
+  res.render('historial_verificado', { resultado });
+});
 //Middleware para servir archivos estáticos (CSS, imágenes, etc.)
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'vistas')));

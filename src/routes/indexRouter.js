@@ -32,5 +32,4 @@ router.post('/recuperar_cont', controladorUsuario.cambiarContrasena);
 router.get('/historialusuario',controladorVistas.traerHistorial);
 
 
-
 module.exports = router;
