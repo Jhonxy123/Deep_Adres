@@ -94,13 +94,7 @@ async function guardarFormularioDB(datosFormulario, userId) {
 
 
 async function registrar_usuario(nombre, correo, cedula) {
-  /* Validación de contraseñas
-  if (contrasena !== comprobar_contrasena) {
-    throw new Error('Las contraseñas no coinciden');
-  }*/
-
-  // Verificar correo existente
-
+  
   const usuarioExistente = await findByEmail(correo);
   if (usuarioExistente) {
     throw new Error('El correo electronico ya esta registrado');

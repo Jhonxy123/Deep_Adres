@@ -31,6 +31,24 @@ async function encontrarForm(userId) {
     }
 }
 
-module.exports = { encontrarIndemnizaciones, encontrarForm};
+
+
+async function traerDepartamentos() {
+    
+    try{
+        const { rows } = await db.query(
+            `select id, departamento from departamento`
+        );
+        return rows[1] || null;
+    }catch(error){
+        console.error('Error al buscar departamentos: ', error)
+        throw error;
+    }
+
+}
+
+
+
+module.exports = { encontrarIndemnizaciones, encontrarForm,traerDepartamentos};
 
 

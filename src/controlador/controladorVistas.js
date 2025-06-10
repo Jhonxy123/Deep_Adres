@@ -1,6 +1,6 @@
 import path from 'path';
 import usuarioDAO from '../modelo/DAO_Usuario.js';
-import indemnizacionDAO from '../modelo/DAO_indemnizacion.js'
+import indemnizacionDAO from '../modelo/DAO_indemnizacion.js';
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import { fileURLToPath } from 'url';

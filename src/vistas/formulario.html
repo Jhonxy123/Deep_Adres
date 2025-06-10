@@ -46,7 +46,9 @@
 
       <div class="fila">
         <label>Departamento:</label>
-        <input type="text" name="beneficiario.departamento">
+        <select id="beneficiario.departamento" name="beneficiario.departamento">
+          <option value="">-- Cargando... --</option>
+        </select>
 
         <label>Teléfono:</label>
         <input type="text" name="beneficiario.telefono">
@@ -420,54 +422,30 @@
   </form>
 </main>
  <script src="componentes_html/cargarcomponentes.js"></script>
+<script type="module">
 
-  <script>
-    cargarComponente("#layout", "componentes_html/layout_user.html");
-  </script>
-</body>
-</html>
+  import indemnizacionDAO from '../modelo/DAO_indemnizacion.js';
 
-<!--<script>
-  
-document.getElementById('miFormulario').addEventListener('submit', async (e) => {
-  e.preventDefault();
-  
-  const formData = new FormData(e.target);
-  const jsonData = {};
-  
-  // Convertir FormData a objeto plano (similar a tu función original)
-  for (const [key, value] of formData.entries()) {
-    const keys = key.split('.');
-    let currentLevel = jsonData;
-    
-    for (let i = 0; i < keys.length - 1; i++) {
-      const currentKey = keys[i];
-      if (!currentLevel[currentKey]) {
-        currentLevel[currentKey] = {};
-      }
-      currentLevel = currentLevel[currentKey];
+
+  document.addEventListener('DOMContentLoaded', async () => {
+    const select = document.getElementById('beneficiario.departamento');
+
+    try {
+      const departamentos = await indemnizacionDAO.traerDepartamentos();
+      select.innerHTML = '<option value="">-- Selecciona --</option>';
+
+      departamentos.forEach(element => {
+        const option = document.createElement('option');
+        option.value = element.id;
+        option.textContent = element.departamento;
+        select.appendChild(option);
+      });
+    } catch (error) {
+      console.error('Error al cargar departamentos:', error);
+      select.innerHTML = '<option value="">Error al cargar datos</option>';
     }
-    
-    const lastKey = keys[keys.length - 1];
-    currentLevel[lastKey] = value;
-  }
-
-  try {
-    const response = await fetch('/formulario', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(jsonData)
-    });
-    
-    if (response.ok) {
-      window.location.href = '/paginaMenuUser';
-    }
-  } catch (error) {
-    console.error('Error:', error);
-  }
-});
+  });
 </script>
 
--->
+</body>
+</html>
