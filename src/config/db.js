@@ -15,6 +15,7 @@ const pool = new Pool({
 pool.query('SELECT NOW()', (err, res) => {
   if (err) console.error('Error al conectar a PostgreSQL:', err);
   else console.log('✅ PostgreSQL conectado:', res.rows[0].now);
+  console.log("CLAVE API:"+process.env.KEY);
 });
 
 module.exports = pool;
