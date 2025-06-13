@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 dotenv.config();
 import indemnizacionDAO from '../src/modelo/DAO_indemnizacion.js'
 
-const userId = "2jhon45213";
+const userId = "2jhonG23456";
 const resultado = await indemnizacionDAO.encontrarForm(userId);
 const incidentDataString = JSON.stringify(resultado);
 console.log(incidentDataString);
