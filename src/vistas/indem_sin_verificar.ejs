@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Indemnizaciones IA</title>
+  <link rel="stylesheet" href="/css/indem_sin_verificar.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Indemnizaciones analizadas por IA</h1>
+
+    <button class="volver-btn">← Volver</button>
+
+    <label for="informe" class="label">INFORME DE AUDITORÍA DE RECLAMACIÓN - ADRES</label>
+    <textarea id="informe" class="informe-textarea">
+INFORME DE AUDITORÍA DE RECLAMACIÓN - ADRES
+Número de Radicado: IND-1749266518512
+Fecha del Informe: 6 de junio de 2025
+Auditor: Gemini (Asistente de IA)
+
+1. ANÁLISIS DE VIABILIDAD DE LA INDEMNIZACIÓN
+• Decisión: NO PROCEDENTE (GLOSADA)
+• Justificación: El análisis de la información del formulario revela una causal de rechazo directa e insubsanable. La reclamación no es competencia de la Administradora de los Recursos del Sistema General de Seguridad Social en Salud (ADRES) por los siguientes motivos:
+  a. Cobertura Principal Existente...
+  b. Vigencia de la Póliza...
+  c. Competencia Normativa...
+
+• Motivo de Glosa: La reclamación es rechazada ya que la responsabilidad del cubrimiento...
+
+2. TIPO DE COBERTURA RECLAMADA
+• Descripción: El concepto de la reclamación es por "Gastos Médicos"...
+
+3. ESTIMACIÓN DEL VALOR DE LA INDEMNIZACIÓN
+• Valor Total Estimado: NO APLICA
+• Justificación: Dado que la reclamación ha sido declarada NO PROCEDENTE...
+    </textarea>
+
+    <div class="form-group">
+      <label for="valor-indemnizacion">Valor final destinado a la indemnización:</label>
+      <input type="text" id="valor-indemnizacion" placeholder="$">
+    </div>
+
+    <div class="form-group">
+      <label for="calificacion">Usted califica el análisis brindado por la IA como:</label>
+      <select id="calificacion">
+        <option value="Eficiente">Eficiente</option>
+        <option value="Regular">Regular</option>
+        <option value="Deficiente">Deficiente</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="observaciones">Observaciones:</label>
+      <textarea id="observaciones" class="observaciones_textarea" rows="4"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>
+        <input type="checkbox"> Usted verifica y aprueba el resultado dado de a la presente indemnización.
+      </label>
+    </div>
+
+    <div class="buttons">
+      <button class="guardar-btn">Guardar Cambios</button>
+      <button class="eliminar-btn">Eliminar Reporte</button>
+    </div>
+  </div>
+  <script src="componentes_html/cargarcomponentes.js"></script>
+  <script>
+    cargarComponente("#layout", "componentes_html/layout_admin.html");
+  </script>
+</body>
+</html>

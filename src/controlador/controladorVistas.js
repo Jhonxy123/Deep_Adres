@@ -6,6 +6,7 @@ import dotenv from "dotenv";
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import { enviarEmail } from '../../services/mail.services.js';
+import { generarFormGemini } from '../../services/ia.service.js';
 
 // Configuración de variables de entorno y __dirname
 dotenv.config();
@@ -30,9 +31,7 @@ export const historal_usuario = async (req,res) => {
    res.sendFile(path.join(__dirname, '..', 'vistas', 'historial.ejs'));
 };
 
-export const indem_por_ver = async (req,res) => {
-   res.render(path.join(__dirname, '..', 'vistas', 'historial_sinverificar.ejs'));
-};
+
 
 export const guardarFormulario = async (req, res) => {
   try {
@@ -49,7 +48,12 @@ export const guardarFormulario = async (req, res) => {
       userId: req.user?.id
     };
 
-    const resultado = await usuarioDAO.guardarFormularioDB(datosParaGuardar, userId);
+
+    //Generar respuesta de Gemini
+    const generarForm = await generarFormGemini(datosParaGuardar);
+    //
+    const resultado = await usuarioDAO.guardarFormularioDB(generarForm,datosParaGuardar, userId);
+    
     console.log('Formulario guardado con radicado:', resultado.no_radicado);
     
     res.redirect('/paginaMenuUser');
@@ -73,8 +77,29 @@ export const traerHistorial = async (req,res) => {
   }
 };
 
+export const indem_por_ver = async (req,res) => {
+   try{
 
+    const resultado = await indemnizacionDAO.encontrarIndemnizacionesSinVerificar();
 
+    res.render('historial_sinverificar',{resultado});
+
+  }catch(error){
+    console.error('Error al traer la información: '.error);
+    res.status(500).send('Error interno');
+  }
+};
+
+export const observarIndemSin = async (req,res) => {
+   try{
+    
+    res.render('indem_sin_verificar');
+
+  }catch(error){
+    console.error('Error al traer la información: '.error);
+    res.status(500).send('Error interno');
+  }
+};
 
 export const registrarUsuario = async (req, res) => {
   const { nombre, correo, cedula} = req.body;

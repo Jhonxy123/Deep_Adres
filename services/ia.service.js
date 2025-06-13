@@ -1,12 +1,7 @@
 import { GoogleGenAI } from "@google/genai";
 import dotenv from "dotenv";
 dotenv.config();
-import indemnizacionDAO from '../src/modelo/DAO_indemnizacion.js'
-
-const userId = "2SantiagoA03805";
-const resultado = await indemnizacionDAO.encontrarForm(userId);
-const incidentDataString = JSON.stringify(resultado);
-console.log(incidentDataString);
+import indemnizacionDAO from '../src/modelo/DAO_indemnizacion.js';
 
 const prompt = `¿Conoces la empresa ADRES? de Colombia
 
@@ -28,15 +23,25 @@ Ahora, tengo un proyecto donde se digitalizó dicho formulario que mencione con 
 `;
 
 
+export async function generarFormGemini(form) {
 
-const ai = new GoogleGenAI({ apiKey: process.env.KEY });
+  
+  const incidentDataString = JSON.stringify(form);
+  console.log(incidentDataString);
+  const ai = new GoogleGenAI({ apiKey: process.env.KEY });
 
-async function main() {
-  const response = await ai.models.generateContent({
-    model: "gemini-2.0-flash",
-    contents: prompt+incidentDataString,
-  });
+  try{
+    const response = await ai.models.generateContent({
+      model: "gemini-2.0-flash",
+      contents: prompt+incidentDataString,
+    });
   console.log(response.text);
-}
+  return response.text;
+  }catch{
+     console.error('Error al generar la respuesta de Gemini:', error);
+    return null;
+  }
 
-main();
+  
+
+}
