@@ -1,0 +1,141 @@
+/* Reset ligero */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #EBEDEF;
+  color: #333;
+  line-height: 1.4;
+}
+
+/* Botón menú */
+.btn-menu {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.25rem;
+  cursor: pointer;
+}
+
+/* Título centrado en header */
+.header-title {
+  color: #1C3974;
+  font-size: 1.25rem;
+  text-align: center;
+  flex: 1;
+  /* Para centrar, asegurar que haya espacio en lados */
+}
+
+/* Contenedor del usuario (ícono/detalle) */
+.header-right .btn-user {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+/* Main container centrado */
+.main-container {
+  max-width: 900px;
+  margin: 1.5rem auto;
+  padding: 0 1rem;
+}
+
+/* Botón Volver */
+.volver-container {
+  margin-bottom: 1rem;
+}
+.btn-volver {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+.btn-volver:hover {
+  background-color: #333;
+}
+
+/* Sección informe */
+.seccion-informe {
+  margin-bottom: 1.5rem;
+}
+.textarea-informe {
+  width: 100%;
+  height: 320px; /* ajusta altura según convenga */
+  padding: 1rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 12px;
+  background-color: #ffff;
+  font-family: monospace;
+  font-size: 0.95rem;
+  resize: none; /* no permitir cambiar tamaño */
+  color: #333;
+  overflow-y: auto;
+}
+
+/* Sección observaciones */
+.seccion-observaciones {
+  margin-bottom: 1.5rem;
+}
+.label-observaciones {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #003366;
+}
+.textarea-observaciones {
+  width: 100%;
+  height: 180px; /* ajusta según convenga */
+  padding: 0.75rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 12px;
+  background-color: #fdfdfd;
+  font-size: 0.95rem;
+  resize: none;
+  color: #333;
+  overflow-y: auto;
+}
+
+/* Botón eliminar centrado */
+.boton-eliminar-container {
+  text-align: center;
+  margin: 2rem 0;
+}
+.btn-eliminar {
+  background-color: #e53935;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 0.8rem 1.6rem;
+  font-size: 1rem;
+  cursor: pointer;
+  min-width: 160px;
+}
+.btn-eliminar:hover {
+  background-color: #c62828;
+}
+
+
+/* Responsive: ajustar en pantallas pequeñas */
+@media (max-width: 600px) {
+  .header-title {
+    font-size: 1rem;
+  }
+  .textarea-informe {
+    height: 240px;
+  }
+  .textarea-observaciones {
+    height: 140px;
+  }
+  .btn-eliminar {
+    width: 100%;
+    max-width: 300px;
+  }
+}

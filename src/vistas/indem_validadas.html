@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Indemnizaciones Verificadas</title>
+  <link rel="stylesheet" href="css/indem_validadas.css">
+</head>
+<body>
+  <h1 class="header-title">Indemnizaciones Verificadas</h1>
+  <main class="main-container">
+    <!-- Botón Volver -->
+    <div class="volver-container">
+      <button type="button" class="btn-volver">← Volver</button>
+    </div>
+
+    <!-- Sección de informe: textarea readonly -->
+    <section class="seccion-informe">
+      <textarea class="textarea-informe" readonly>
+INFORME DE AUDITORÍA DE RECLAMACIÓN - ADRES
+Número de Radicado: IND-1749266518512
+Fecha del Informe: 6 de junio de 2025
+Auditor: Gemini (Asistente de IA)
+1. ANÁLISIS DE VIABILIDAD DE LA INDEMNIZACIÓN
+• Decisión: NO PROCEDENTE (GLOSADA)
+• Justificación: El análisis de la información del formulario revela una causal de rechazo directa e insubsanable. La reclamación no es competencia de la Administradora de los Recursos del Sistema General de Seguridad Social en Salud (ADRES) por los siguientes razones:
+  a. Cobertura Principal Existente: El formulario indica de manera explícita que el vehículo involucrado en el accidente de tránsito (placa ABC123) se encuentra asegurado (vehiculo.aseguramiento: "asegurado").
+  Se detalla una póliza SOAT (vehiculo.numero_poliza: "POL123456789") emitida por Seguros Bolívar.
+  b. Vigencia de la Póliza: La vigencia de dicha póliza (2024-01-01 al 2025-01-01) cubre plenamente la fecha del siniestro (evento.fecha: "2024-05-15").
+  c. Competencia Normativa: Conforme al Decreto 780 de 2016 y la normatividad que rige la Subcuenta ECAT, la ADRES actúa como un pagador de última instancia. Su competencia se activa únicamente en casos de accidentes de tránsito que involucren vehículos no asegurados, no identificados (fantasma), con póliza falsa, o cuando los gastos médicos superan el tope de cobertura del SOAT. Ninguna de estas condiciones se cumple en el presente caso.
+• Motivo de Glosa: La reclamación es rechazada ya que la responsabilidad del cubrimiento de los servicios de salud y/o el pago de indemnizaciones recae directamente sobre la compañía aseguradora que emitió el SOAT vigente al momento del accidente. El reclamante debe dirigir su solicitud a Seguros Bolívar.
+
+2. TIPO DE COBERTURA RECLAMADA
+• Descripción: El concepto de la reclamación es por "Gastos Médicos" (reclamacion.concepto: "gastos_medicos"). Es importante aclarar que esto corresponde a los servicios de salud (gastos médicos, quirúrgicos, farmacéuticos y hospitalarios) y no a una indemnización por incapacidad permanente o por muerte, las cuales tienen un tratamiento y requisitos diferentes.
+
+3. ESTIMACIÓN DEL VALOR DE LA INDEMNIZACIÓN
+• Valor Total Estimado: NO APLICA
+• Justificación: Dado que la reclamación ha sido declarada NO PROCEDENTE por falta de competencia de la ADRES, no se realiza ninguna liquidación o estimación de valor a pagar. La responsabilidad de reconocer y pagar los gastos reclamados es de la aseguradora privada correspondiente.
+      </textarea>
+    </section>
+
+    <!-- Sección de observaciones realizadas -->
+    <section class="seccion-observaciones">
+      <label for="obs-text" class="label-observaciones">Observaciones realizadas:</label>
+      <textarea id="obs-text" class="textarea-observaciones" readonly>
+Lorem ipsum dolor sit amet consectetur adipiscing elit semper turpis conubia, convallis feugiat cras quam lacinia odio dis nostra dui fringilla cubilia, quis cum torquent ut at libero morbi risus venenatis. Orci nascetur pellentesque vitae imperdiet inceptos fermentum etiam metus, convallis per non magna duis lobortis odio lacus, habitasse dapibus nibh magnis dictumst consequat montes. Scelerisque neque mattis ut nullam nulla habitant dui augue, nisi congue interdum magna id orci ultrices laoreet volutpat, conubia malesuada mauris condimentum platea aptent imperdiet. Morbi libero natoque augue leo sociis dictumst nostra lacus, molestie himenaeos sapien penatibus massa facilisi eros scelerisque ultricies, ante curae torquent bibendum eu proin lobortis. Nunc.
+      </textarea>
+    </section>
+
+    <!-- Botón eliminar centrado -->
+    <div class="boton-eliminar-container">
+      <button type="button" class="btn-eliminar">Eliminar Reporte</button>
+    </div>
+  </main>
+
+</body>
+</html>
