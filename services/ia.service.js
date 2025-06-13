@@ -1,10 +1,14 @@
 import { GoogleGenAI } from "@google/genai";
 import dotenv from "dotenv";
 dotenv.config();
-import indemnizacionDAO from '../src/modelo/DAO_indemnizacion.js'
+import indemnizacionDAO from '../src/modelo/DAO_indemnizacion.js';
 
-const userId = "2jhon45213";
+
+
+/*
+const userId = "2SantiagoA03805";
 const resultado = await indemnizacionDAO.encontrarForm(userId);
+
 const incidentDataString = JSON.stringify(resultado);
 console.log(incidentDataString);
 
@@ -18,4 +22,4 @@ async function main() {
   console.log(response.text);
 }
 
-main();
+main();*/
