@@ -30,6 +30,9 @@ export const historal_usuario = async (req,res) => {
    res.sendFile(path.join(__dirname, '..', 'vistas', 'historial.ejs'));
 };
 
+export const indem_por_ver = async (req,res) => {
+   res.render(path.join(__dirname, '..', 'vistas', 'historial_sinverificar.ejs'));
+};
 
 export const guardarFormulario = async (req, res) => {
   try {

@@ -42,6 +42,12 @@ CREATE TABLE Indemnizacion
     ID_Usuario VARCHAR(15),
     Form_ingresado JSONB NOT NULL,
     Form_generado TEXT,
+    Form_verificado TEXT,
+    Valor_indemnización float,
+    Fecha_verificación DATE,
+    Descripción TEXT,
+    Auditor VARCHAR(50),
+    Calificacion_reporteIA VARCHAR(30),
     PRIMARY KEY(No_radicado)
 );
 
@@ -183,4 +189,3 @@ INSERT INTO departamento (id, departamento) VALUES
 INSERT INTO  conc_reclamado (id,conc_reclamado) VALUES
 (1,'indemnización por muerte y gastos funerarios'),
 (2,'incapacidad permanente');
-

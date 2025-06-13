@@ -31,5 +31,8 @@ router.post('/recuperar_cont', controladorUsuario.cambiarContrasena);
 //Ruta para el historial del usuario
 router.get('/historialusuario',controladorVistas.traerHistorial);
 
+//Ruta para el historial del usuario
+router.get('/indemnizacion_por_verificar',controladorVistas.indem_por_ver);
+
 
 module.exports = router;
