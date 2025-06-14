@@ -36,11 +36,11 @@
               <td><%= indem.no_radicado %></td>
               <td><%= new Date(indem.fecha_radicacion).toLocaleDateString('es-CO', { year: 'numeric', month: 'long', day: 'numeric' }) %></td>
               <td>
-                <button class="action-button" onclick="verDetalle('<%= indem.no_radicado %>')"> <!--Toca cambiar esta a futuro-->
+                <button class="action-button" onclick="window.location.href='/formulario_guardado.html'"> <!--Toca cambiar esta a futuro-->
                    <img src="/img/icon_form.svg" alt="Icono" style="width: 1.2em; height: 1.2em; vertical-align: middle;">
                     Formulario 
                 </button>
-                  <button class="action-button" onclick="verDetalle('<%= indem.no_radicado %>')">
+                  <button class="action-button" onclick="window.location.href='/resultado.html'">
                   <img src="/img/resultado_indem.svg" alt="Icono" style="width: 1.2em; height: 1.2em; vertical-align: middle;">
   Resultado
                 </button>
