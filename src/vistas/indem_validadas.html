@@ -5,17 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Indemnizaciones Verificadas</title>
   <link rel="stylesheet" href="css/indem_validadas.css">
+    <link rel="stylesheet" href="css/style.css">
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+  
 </head>
 <body>
-  <h1 class="header-title">Indemnizaciones Verificadas</h1>
+   
+ <div id="layout"></div>
   <main class="main-container">
-    <!-- Botón Volver -->
-    <div class="volver-container">
-      <button type="button" class="btn-volver">← Volver</button>
-    </div>
+<div class="header-container">
+  <h1 class="titulo-centrado">Indemnizaciones Verificadas</h1>
+  <div class="btn-volver-container">
+    <button type="button" class="btn-volver" onclick="window.history.back()">
+      <i class="bi bi-arrow-left"></i> Volver
+    </button>
+  </div>
+</div>
 
     <!-- Sección de informe: textarea readonly -->
-    <section class="seccion-informe">
+ <div class="form-group">
       <textarea class="textarea-informe" readonly>
 INFORME DE AUDITORÍA DE RECLAMACIÓN - ADRES
 Número de Radicado: IND-1749266518512
@@ -37,15 +45,15 @@ Auditor: Gemini (Asistente de IA)
 • Valor Total Estimado: NO APLICA
 • Justificación: Dado que la reclamación ha sido declarada NO PROCEDENTE por falta de competencia de la ADRES, no se realiza ninguna liquidación o estimación de valor a pagar. La responsabilidad de reconocer y pagar los gastos reclamados es de la aseguradora privada correspondiente.
       </textarea>
-    </section>
+</div>
 
     <!-- Sección de observaciones realizadas -->
-    <section class="seccion-observaciones">
+ <div class="form-group">
       <label for="obs-text" class="label-observaciones">Observaciones realizadas:</label>
       <textarea id="obs-text" class="textarea-observaciones" readonly>
 Lorem ipsum dolor sit amet consectetur adipiscing elit semper turpis conubia, convallis feugiat cras quam lacinia odio dis nostra dui fringilla cubilia, quis cum torquent ut at libero morbi risus venenatis. Orci nascetur pellentesque vitae imperdiet inceptos fermentum etiam metus, convallis per non magna duis lobortis odio lacus, habitasse dapibus nibh magnis dictumst consequat montes. Scelerisque neque mattis ut nullam nulla habitant dui augue, nisi congue interdum magna id orci ultrices laoreet volutpat, conubia malesuada mauris condimentum platea aptent imperdiet. Morbi libero natoque augue leo sociis dictumst nostra lacus, molestie himenaeos sapien penatibus massa facilisi eros scelerisque ultricies, ante curae torquent bibendum eu proin lobortis. Nunc.
       </textarea>
-    </section>
+</div>
 
     <!-- Botón eliminar centrado -->
     <div class="boton-eliminar-container">
@@ -53,5 +61,9 @@ Lorem ipsum dolor sit amet consectetur adipiscing elit semper turpis conubia, co
     </div>
   </main>
 
+  <script src="componentes_html/cargarcomponentes.js"></script>
+  <script>
+    cargarComponente("#layout", "componentes_html/layout_admin.html");
+  </script>
 </body>
 </html>
