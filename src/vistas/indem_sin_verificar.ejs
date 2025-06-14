@@ -1,53 +1,64 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Indemnizaciones IA</title>
-  <link rel="stylesheet" href="/css/indem_sin_verificar.css">
+  <link rel="stylesheet" href="css/indem_sin_verificar.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+  <!-- Añade esto si usas variables CSS -->
 </head>
+
 <body>
-  <div class="container">
-    <h1>Indemnizaciones analizadas por IA</h1>
-
-    <button class="volver-btn">← Volver</button>
-
-    <label for="informe" class="label">INFORME DE AUDITORÍA DE RECLAMACIÓN - ADRES</label>
-    <textarea id="informe" class="informe-textarea"><%- formulario.form_generado %></textarea>
-
-    <div class="form-group">
-      <label for="valor-indemnizacion">Valor final destinado a la indemnización:</label>
-      <input type="text" id="valor-indemnizacion" placeholder="$">
-    </div>
-
-    <div class="form-group">
-      <label for="calificacion">Usted califica el análisis brindado por la IA como:</label>
-      <select id="calificacion">
-        <option value="Eficiente">Eficiente</option>
-        <option value="Regular">Regular</option>
-        <option value="Deficiente">Deficiente</option>
-      </select>
-    </div>
-
-    <div class="form-group">
-      <label for="observaciones">Observaciones:</label>
-      <textarea id="observaciones" class="observaciones_textarea" rows="4"></textarea>
-    </div>
-
-    <div class="form-group">
-      <label>
-        <input type="checkbox"> Usted verifica y aprueba el resultado dado de a la presente indemnización.
-      </label>
-    </div>
-
-    <div class="buttons">
-      <button class="guardar-btn">Guardar Cambios</button>
-      <button class="eliminar-btn">Eliminar Reporte</button>
-    </div>
+  <div id="layout"></div>
+  <main>
+<div class="header-container">
+  <h1 class="titulo-centrado">Indemnizaciones analizadas por IA</h1>
+  <div class="btn-volver-container">
+    <button type="button" class="btn-volver" onclick="window.history.back()">
+      <i class="bi bi-arrow-left"></i> Volver
+    </button>
   </div>
+</div>
+<label for="informe" class="label">INFORME DE AUDITORÍA DE RECLAMACIÓN - ADRES</label>
+<textarea id="informe" class="informe-textarea"><%- formulario.form_generado %></textarea>
+      <div class="form-group">
+        <label for="valor-indemnizacion">Valor final destinado a la indemnización:</label>
+        <input type="text" id="valor-indemnizacion" class="form-input" placeholder="$">
+      </div>
+
+      <div class="form-group">
+        <label for="calificacion">Usted califica el análisis brindado por la IA como:</label>
+        <select id="calificacion" class="form-select">
+          <option value="Eficiente">Eficiente</option>
+          <option value="Regular">Regular</option>
+          <option value="Deficiente">Deficiente</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label  class="label-observaciones" for="observaciones">Observaciones: </label>
+        <textarea id="observaciones" class="form-textarea" rows="4"></textarea>
+      </div>
+
+      <div class="form-group checkbox-group">
+        <label for="verificacion">Usted verifica y aprueba el resultado dado a la presente indemnización</label>
+        <input type="checkbox" id="verificacion" class="form-checkbox">
+      </div>
+
+      <div class="actions">
+        <button class="btn btn-primary">Guardar Cambios</button>
+        <button class="btn btn-secondary">Eliminar Reporte</button>
+      </div>
+    </div>
+  </main>
+
   <script src="componentes_html/cargarcomponentes.js"></script>
   <script>
     cargarComponente("#layout", "componentes_html/layout_admin.html");
   </script>
 </body>
+
 </html>
