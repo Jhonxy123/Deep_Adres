@@ -51,7 +51,7 @@ export const guardarFormulario = async (req, res) => {
 
     //Generar respuesta de Gemini
     const generarForm = await generarFormGemini(datosParaGuardar);
-    //
+    //guardar el formulario junto a la repsuesta de gemini
     const resultado = await usuarioDAO.guardarFormularioDB(generarForm,datosParaGuardar, userId);
     
     console.log('Formulario guardado con radicado:', resultado.no_radicado);
@@ -91,12 +91,20 @@ export const indem_por_ver = async (req,res) => {
 };
 
 export const observarIndemSin = async (req,res) => {
+
+  const noRadicado = req.params.radicado;
+  
    try{
-    
-    res.render('indem_sin_verificar');
+
+    const formulario = await indemnizacionDAO.buscarPorNoRadicado(noRadicado);
+    if(!formulario){
+      return res.status(404).send("Formulario no encontrado");
+    }
+
+    res.render('indem_sin_verificar',{formulario});
 
   }catch(error){
-    console.error('Error al traer la información: '.error);
+    console.error('Error al mostrar formulario: ', error);
     res.status(500).send('Error interno');
   }
 };

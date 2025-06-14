@@ -35,7 +35,7 @@ router.get('/historialusuario',controladorVistas.traerHistorial);
 router.get('/indemnizacion_por_verificar',controladorVistas.indem_por_ver);
 
 //Ruta para ver el texto de la indemnización sin verificar
-router.get('/indemnizacion_por_verificar/observar_form',controladorVistas.observarIndemSin);
+router.get('/indemnizacion_por_verificar/observar_form/:radicado',controladorVistas.observarIndemSin);
 
 
 module.exports = router;

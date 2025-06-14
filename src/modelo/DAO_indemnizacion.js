@@ -32,6 +32,23 @@ async function encontrarIndemnizacionesSinVerificar() {
     }
 }
 
+async function buscarPorNoRadicado(idFormulario) {
+
+    try {
+        const { rows } = await db.query(
+            `SELECT *
+             FROM indemnizacion
+             WHERE no_radicado = $1`,
+             [idFormulario]
+        );
+        return rows[0] || null;
+    } catch (error) {
+        console.error('Error al buscar indemnizaciones:', error);
+        throw error; // O manejar el error como prefieras
+    }
+    
+}
+
 
 async function encontrarForm(userId) {
     try {
@@ -64,6 +81,6 @@ async function traerDepartamentos() {
 
 
 
-module.exports = { encontrarIndemnizaciones, encontrarForm,traerDepartamentos,encontrarIndemnizacionesSinVerificar};
+module.exports = { encontrarIndemnizaciones, encontrarForm,traerDepartamentos,encontrarIndemnizacionesSinVerificar,buscarPorNoRadicado};
 
 

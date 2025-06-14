@@ -36,7 +36,7 @@
               <td><%= indem.no_radicado %></td>
               <td><%= new Date(indem.fecha_radicacion).toLocaleDateString('es-CO', { year: 'numeric', month: 'long', day: 'numeric' }) %></td>
               <td>
-                <a href="/indemnizacion_por_verificar/observar_form" class="action-button" onclick="verDetalle('<%= indem.no_radicado %>')">
+                <a href="/indemnizacion_por_verificar/observar_form/<%= indem.no_radicado %>" class="action-button">
                   <i class="bi bi-eye-fill"></i> Ver
                 </a>
               </td>
@@ -50,12 +50,6 @@
   <script src="componentes_html/cargarcomponentes.js"></script>
   <script>
     cargarComponente("#layout", "componentes_html/layout_user.html");
-    
-    function verDetalle(radicado) {
-      // Aquí puedes implementar la lógica para ver el detalle
-      console.log("Ver detalle de:", radicado);
-      // window.location.href = `/detalle?id=${radicado}`;
-    }
   </script>
 </body>
 </html>
