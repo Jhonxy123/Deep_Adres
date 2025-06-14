@@ -5,8 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Indemnizaciones IA</title>
-  <link rel="stylesheet" href="css/indem_sin_verificar.css">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="/css/indem_sin_verificar.css">
+  <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
   <!-- Añade esto si usas variables CSS -->
 </head>
@@ -23,7 +23,7 @@
   </div>
 </div>
 <label for="informe" class="label">INFORME DE AUDITORÍA DE RECLAMACIÓN - ADRES</label>
-<textarea id="informe" class="informe-textarea"><%- formulario.form_generado %></textarea>
+<textarea id="informe" class="form-textarea"><%- formulario.form_generado %></textarea>
       <div class="form-group">
         <label for="valor-indemnizacion">Valor final destinado a la indemnización:</label>
         <input type="text" id="valor-indemnizacion" class="form-input" placeholder="$">
@@ -55,9 +55,9 @@
     </div>
   </main>
 
-  <script src="componentes_html/cargarcomponentes.js"></script>
+  <script src="/componentes_html/cargarcomponentes.js"></script>
   <script>
-    cargarComponente("#layout", "componentes_html/layout_admin.html");
+    cargarComponente("#layout", "/componentes_html/layout_admin.html");
   </script>
 </body>
 
