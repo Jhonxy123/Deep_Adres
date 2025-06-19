@@ -64,5 +64,67 @@
   <script>
     cargarComponente("#layout", "/componentes_html/layout_admin.html");
   </script>
+<script>
+document.querySelector('.btn-primary').addEventListener('click', async () => {
+  // Obtener valores del formulario
+  const valorIndemnizacion = document.getElementById('valor-indemnizacion').value;
+  const calificacion = document.getElementById('calificacion').value;
+  const observaciones = document.getElementById('observaciones').value;
+  const verificacion = document.getElementById('verificacion').checked;
+  const informe = document.getElementById('informe').value;
+  
+  // Obtener número de radicado de la URL
+  const urlParts = window.location.pathname.split('/');
+  const noRadicado = urlParts[urlParts.length - 1]; // Cambiado a noRadicado para coincidir con el backend
+
+  // Validaciones básicas
+  if (!valorIndemnizacion || isNaN(valorIndemnizacion)) {
+    alert('Por favor ingrese un valor válido para la indemnización');
+    return;
+  }
+
+  if (!noRadicado) {
+    alert('No se pudo obtener el número de radicado');
+    return;
+  }
+
+  // Preparar datos para enviar
+  const data = {
+    noRadicado: noRadicado, // Cambiado a noRadicado para coincidir con el backend
+    valor_indemnizacion: parseFloat(valorIndemnizacion),
+    calificacion: calificacion,
+    observaciones: observaciones,
+    verificacion: verificacion,
+    informe: informe
+  };
+
+  try {
+    // Corregida la ruta POST (eliminado :radicado)
+    const response = await fetch(`/indemnizacion_por_verificar/observar_form/${noRadicado}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data)
+    });
+
+    const result = await response.json();
+    
+    if (response.ok) {
+      alert('Indemnización guardada correctamente');
+      // Redirigir o actualizar la UI
+      window.location.href = '/pagina-de-exito';
+    } else {
+      throw new Error(result.error || 'Error al guardar');
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    alert(`Error al guardar: ${error.message}`);
+  }
+});
+</script>
+
+
+
 </body>
 </html>

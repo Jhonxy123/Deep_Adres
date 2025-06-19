@@ -63,6 +63,35 @@ export const guardarFormulario = async (req, res) => {
   }
 };
 
+export const guardarIndemnizacionVerificada = async (req, res) => {
+  try {
+    // Corregido: req.body en lugar de req.bod
+    const { noRadicado, valor_indemnizacion, calificacion, observaciones, verificacion, informe } = req.body;
+    const userId = req.session.user.id;
+    const fechaVerificacion = new Date();
+
+    if (!valor_indemnizacion || isNaN(valor_indemnizacion)) {
+      return res.status(400).json({ error: "El valor de indemnización no es válido." });
+    }
+
+    const guardarVerificacion = await indemnizacionDAO.guardarIndemnizacionVerificada(
+      noRadicado,
+      informe,
+      valor_indemnizacion,
+      fechaVerificacion,
+      observaciones,
+      userId,
+      calificacion
+    );
+
+    console.log('Verificación guardada');
+    res.status(200).json({ success: true, data: guardarVerificacion });
+
+  } catch (error) {
+    console.error('Error al guardar verificación:', error);
+    res.status(500).json({ error: "Error interno del servidor", details: error.message });
+  }
+};
 export const traerHistorial = async (req,res) => {
   try{
     const userId = req.session.user.id;
@@ -83,6 +112,19 @@ export const indem_por_ver = async (req,res) => {
     const resultado = await indemnizacionDAO.encontrarIndemnizacionesSinVerificar();
 
     res.render('historial_sinverificar',{resultado});
+
+  }catch(error){
+    console.error('Error al traer la información: '.error);
+    res.status(500).send('Error interno');
+  }
+};
+
+export const indem_verificada = async (req,res) => {
+   try{
+
+    const resultado = await indemnizacionDAO.encontrarIndemnizacionesVerificadas();
+
+    res.render('historial_verificado',{resultado});
 
   }catch(error){
     console.error('Error al traer la información: '.error);

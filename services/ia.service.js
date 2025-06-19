@@ -29,7 +29,6 @@ export async function generarFormGemini(form) {
 
   
   const incidentDataString = JSON.stringify(form);
-  console.log(incidentDataString);
   const ai = new GoogleGenAI({ apiKey: process.env.KEY });
 
   try{
@@ -37,7 +36,6 @@ export async function generarFormGemini(form) {
       model: "gemini-2.0-flash",
       contents: prompt+incidentDataString,
     });
-  console.log(response.text);
   return response.text;
   }catch{
      console.error('Error al generar la respuesta de Gemini:', error);
