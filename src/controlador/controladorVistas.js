@@ -7,6 +7,7 @@ import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import { enviarEmail } from '../../services/mail.services.js';
 import { generarFormGemini } from '../../services/ia.service.js';
+import { Console } from 'console';
 
 // Configuración de variables de entorno y __dirname
 dotenv.config();
@@ -70,10 +71,6 @@ export const guardarIndemnizacionVerificada = async (req, res) => {
     const userId = req.session.user.id;
     const fechaVerificacion = new Date();
 
-    if (!valor_indemnizacion || isNaN(valor_indemnizacion)) {
-      return res.status(400).json({ error: "El valor de indemnización no es válido." });
-    }
-
     const guardarVerificacion = await indemnizacionDAO.guardarIndemnizacionVerificada(
       noRadicado,
       informe,
@@ -92,6 +89,8 @@ export const guardarIndemnizacionVerificada = async (req, res) => {
     res.status(500).json({ error: "Error interno del servidor", details: error.message });
   }
 };
+
+
 export const traerHistorial = async (req,res) => {
   try{
     const userId = req.session.user.id;
@@ -118,6 +117,10 @@ export const indem_por_ver = async (req,res) => {
     res.status(500).send('Error interno');
   }
 };
+
+
+
+
 
 export const indem_verificada = async (req,res) => {
    try{
@@ -150,6 +153,29 @@ export const observarIndemSin = async (req,res) => {
     res.status(500).send('Error interno');
   }
 };
+
+
+export const observarIndemVerificada = async (req,res) => {
+
+  const noRadicado = req.params.radicado;
+  
+   try{
+
+    const formulario = await indemnizacionDAO.buscarPorNoRadicado(noRadicado);
+    if(!formulario){
+      return res.status(404).send("Formulario no encontrado");
+    }
+
+    console.log(formulario);
+
+    res.render('indem_validadas',{formulario});
+
+  }catch(error){
+    console.error('Error al mostrar formulario: ', error);
+    res.status(500).send('Error interno');
+  }
+};
+
 
 export const registrarUsuario = async (req, res) => {
   const { nombre, correo, cedula} = req.body;

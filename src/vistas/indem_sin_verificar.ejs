@@ -99,7 +99,6 @@ document.querySelector('.btn-primary').addEventListener('click', async () => {
   };
 
   try {
-    // Corregida la ruta POST (eliminado :radicado)
     const response = await fetch(`/indemnizacion_por_verificar/observar_form/${noRadicado}`, {
       method: 'POST',
       headers: {
@@ -113,7 +112,7 @@ document.querySelector('.btn-primary').addEventListener('click', async () => {
     if (response.ok) {
       alert('Indemnización guardada correctamente');
       // Redirigir o actualizar la UI
-      window.location.href = '/pagina-de-exito';
+      window.location.href = '/indemnizacion_por_verificar';
     } else {
       throw new Error(result.error || 'Error al guardar');
     }

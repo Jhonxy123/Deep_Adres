@@ -35,6 +35,7 @@ router.get('/historialusuario',controladorVistas.traerHistorial);
 router.get('/indemnizacion_por_verificar',controladorVistas.indem_por_ver);
 
 router.get('/historial_indem_verificado',controladorVistas.indem_verificada);
+router.get('/historial_indem_verificado/indem_validadas/:radicado',controladorVistas.observarIndemVerificada);
 
 //Ruta para ver el texto de la indemnización sin verificar
 router.get('/indemnizacion_por_verificar/observar_form/:radicado',controladorVistas.observarIndemSin);

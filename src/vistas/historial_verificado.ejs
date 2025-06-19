@@ -36,9 +36,9 @@
               <td><%= indem.no_radicado %></td>
               <td><%= new Date(indem.fecha_radicacion).toLocaleDateString('es-CO', { year: 'numeric', month: 'long', day: 'numeric' }) %></td>
               <td>
-                <button class="action-button" onclick="verDetalle('<%= indem.no_radicado %>')">
+                <a href="/historial_indem_verificado/indem_validadas/<%= indem.no_radicado %>" class="action-button">
                   <i class="bi bi-eye-fill"></i> Ver
-                </button>
+                </a>
               </td>
             </tr>
           <% }); %>
