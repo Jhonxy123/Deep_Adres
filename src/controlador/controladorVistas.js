@@ -118,7 +118,42 @@ export const indem_por_ver = async (req,res) => {
   }
 };
 
+export const eliminarIndemnizacion = async (req, res) => {
+  try {
+    const { radicado } = req.params;
+    const userId = req.session.user.id; // Asumiendo que usas sesiones
 
+    // Validación básica
+    if (!radicado) {
+      return res.status(400).json({ 
+        error: "Número de radicado requerido" 
+      });
+    }
+
+    // Llamar al DAO para limpiar los campos
+    const resultado = await indemnizacionDAO.limpiarCamposIndemnizacion(radicado);
+
+    if (!resultado) {
+      return res.status(404).json({ 
+        error: "No se encontró el reporte con el radicado proporcionado" 
+      });
+    }
+
+    console.log(`Usuario ${userId} eliminó datos de indemnización ${radicado}`);
+
+  } catch (error) {
+    console.error('Error en eliminarIndemnizacion:', error);
+    
+    // Enviar mensaje de error detallado en desarrollo
+    const errorMessage = process.env.NODE_ENV === 'development' 
+      ? error.message 
+      : "Error interno al procesar la solicitud";
+    
+    res.status(500).json({ 
+      error: errorMessage 
+    });
+  }
+};
 
 
 
