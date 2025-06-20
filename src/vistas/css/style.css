@@ -32,6 +32,7 @@ footer {
     padding: 0.75rem 0;
     color: var(--color-blanco);
     font-size: 0.875rem;
+     z-index: 1;
   }
 
 

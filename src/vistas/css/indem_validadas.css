@@ -1,0 +1,316 @@
+/* Reset ligero */
+:root{
+    --color-blanco: #ffff;
+    --color-negro: #000000;   
+    --color-fondo: #EBEDEF;
+    --color-gris: #445151;
+    --color-azul_claro: #356CDA;
+    --color-azul_oscuro: #1C3974;
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: var(--color-fondo);
+  color: #333;
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Estructura principal */
+#layout {
+  flex-shrink: 0;
+}
+
+main {
+  flex: 1;
+  padding: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Header */
+.header-container {
+   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.titulo-centrado {
+   flex-grow: 1;
+  text-align: center;
+  color: var(--color-azul_oscuro);
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 0 auto;
+}
+
+.btn-volver-container {
+ order: 2;
+}
+
+.btn-volver {
+  padding: 0.75rem 2rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--color-blanco);
+    border: none;
+    border-radius: 9999px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(to right, var(--color-gris), var(--color-negro));
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-volver:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.bi-arrow-left {
+  font-size: 0.9rem;
+}
+
+/* Grupos de formulario */
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+/* Textareas */
+.textarea-informe,
+.textarea-observaciones {
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid var(--color-azul_claro);
+  border-radius: 12px;
+  background-color: #f1f5f9;
+  font-family: 'Courier New', monospace;
+  font-size: 0.95rem;
+  resize: none;
+  overflow-y: scroll; /* Cambiado de 'auto' a 'scroll' para asegurar que siempre tenga espacio para scroll */
+  
+  /* Ocultar scrollbar pero mantener funcionalidad */
+  scrollbar-width: none; /* Para Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+  /* Oculta la barra en todos los navegadores */
+}
+
+.textarea-informe {
+  height: 400px;
+}
+
+.textarea-observaciones {
+  height: 180px;
+}
+.textarea-informe::-webkit-scrollbar,
+.textarea-observaciones::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+.textarea-informe:focus,
+.textarea-observaciones:focus {
+  outline: none;
+  border-color: var(--color-azul_oscuro);
+  box-shadow: 0 0 0 3px rgba(53, 108, 218, 0.2);
+}
+
+/* Labels */
+.label-observaciones {
+  display: block;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 20px;
+  font-size: 1rem;
+}
+
+/* Botón eliminar */
+.boton-eliminar-container {
+  text-align: center;
+  margin: 2.5rem 0 1rem;
+}
+
+.btn-eliminar {
+ background: linear-gradient(to right, #FF0000, #560606);
+ color: white; 
+ border: none;
+  border-radius: 25px;
+  padding: 0.8rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  min-width: 200px;
+  transition: all 0.3s ease;
+  box-shadow: var(--box-shadow);
+}
+
+.btn-eliminar:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(229, 57, 53, 0.3);
+}
+
+
+.textarea-informe::-webkit-scrollbar-track,
+.textarea-observaciones::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 4px;
+}
+
+.textarea-informe::-webkit-scrollbar-thumb,
+.textarea-observaciones::-webkit-scrollbar-thumb {
+  background: var(--color-azul_claro);
+  border-radius: 4px;
+}
+
+.textarea-informe::-webkit-scrollbar-thumb:hover,
+.textarea-observaciones::-webkit-scrollbar-thumb:hover {
+  background: var(--color-azul_oscuro);
+}
+
+/* Para Firefox (solo textareas) */
+.textarea-informe,
+.textarea-observaciones {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-azul_claro) #f1f5f9;
+}
+
+.menu-toggle {
+  display: none; /* Oculta el checkbox */
+}
+
+.menu-icon-container {
+  cursor: pointer;
+  display: inline-block;
+}
+
+/* Menú desplegable - inicialmente oculto */
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 60px;
+  left: 20px;
+  background-color: white;
+  min-width: 200px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  border-radius: 5px;
+  padding: 10px 0;
+}
+
+/* Cuando el checkbox está checked, mostramos el menú */
+.menu-toggle:checked ~ .dropdown-menu {
+  display: block;
+}
+
+.dropdown-item {
+  display: block;
+  padding: 10px 20px;
+  text-decoration: none;
+  color: #333;
+  transition: background-color 0.3s;
+}
+
+.dropdown-item:hover {
+  background-color: #f1f1f1;
+}
+
+.navbar {
+    background: linear-gradient(to right, #356CDA, #1C3974);
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+  }
+  .navbar .menu-icon,
+  .navbar .user-icon {
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+  }
+  .navbar .user-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-blanco);
+    font-size: 1rem;
+  }
+
+.header-container h1 {
+  color: var(--color-azul_oscuro);
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  position: center;
+}
+
+.titulo-centrado {
+  text-align: center;
+  width: 80%; /* Asegura que ocupe todo el ancho disponible */
+}
+/* Responsive */
+@media (max-width: 768px) {
+  .header-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .titulo-centrado {
+    width: 100%;
+    text-align: left;
+    font-size: 1.5rem;
+  }
+  
+  .btn-volver-container {
+    position: static;
+    transform: none;
+    align-self: flex-end;
+  }
+  
+  .btn-volver {
+    transform: none;
+  }
+  
+  .btn-volver:hover {
+    transform: translateY(-2px);
+  }
+  
+  .textarea-informe {
+    height: 300px;
+  }
+  
+  .textarea-observaciones {
+    height: 150px;
+  }
+}
+
+@media (max-width: 480px) {
+  main {
+    padding: 1.5rem;
+  }
+  
+  .btn-volver,
+  .btn-eliminar {
+    width: 100%;
+    padding: 0.75rem;
+  }
+  
+  .btn-volver-container {
+    width: 100%;
+  }
+}

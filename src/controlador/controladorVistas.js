@@ -1,11 +1,13 @@
 import path from 'path';
 import usuarioDAO from '../modelo/DAO_Usuario.js';
-import indemnizacionDAO from '../modelo/DAO_indemnizacion.js'
+import indemnizacionDAO from '../modelo/DAO_indemnizacion.js';
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import { enviarEmail } from '../../services/mail.services.js';
+import { generarFormGemini } from '../../services/ia.service.js';
+import { Console } from 'console';
 
 // Configuración de variables de entorno y __dirname
 dotenv.config();
@@ -31,6 +33,7 @@ export const historal_usuario = async (req,res) => {
 };
 
 
+
 export const guardarFormulario = async (req, res) => {
   try {
     const jsonData = req.body;
@@ -46,7 +49,12 @@ export const guardarFormulario = async (req, res) => {
       userId: req.user?.id
     };
 
-    const resultado = await usuarioDAO.guardarFormularioDB(datosParaGuardar, userId);
+
+    //Generar respuesta de Gemini
+    const generarForm = await generarFormGemini(datosParaGuardar);
+    //guardar el formulario junto a la repsuesta de gemini
+    const resultado = await usuarioDAO.guardarFormularioDB(generarForm,datosParaGuardar, userId);
+    
     console.log('Formulario guardado con radicado:', resultado.no_radicado);
     
     res.redirect('/paginaMenuUser');
@@ -55,6 +63,33 @@ export const guardarFormulario = async (req, res) => {
     res.status(500).send('Error interno');
   }
 };
+
+export const guardarIndemnizacionVerificada = async (req, res) => {
+  try {
+    // Corregido: req.body en lugar de req.bod
+    const { noRadicado, valor_indemnizacion, calificacion, observaciones, verificacion, informe } = req.body;
+    const userId = req.session.user.id;
+    const fechaVerificacion = new Date();
+
+    const guardarVerificacion = await indemnizacionDAO.guardarIndemnizacionVerificada(
+      noRadicado,
+      informe,
+      valor_indemnizacion,
+      fechaVerificacion,
+      observaciones,
+      userId,
+      calificacion
+    );
+
+    console.log('Verificación guardada');
+    res.status(200).json({ success: true, data: guardarVerificacion });
+
+  } catch (error) {
+    console.error('Error al guardar verificación:', error);
+    res.status(500).json({ error: "Error interno del servidor", details: error.message });
+  }
+};
+
 
 export const traerHistorial = async (req,res) => {
   try{
@@ -70,7 +105,111 @@ export const traerHistorial = async (req,res) => {
   }
 };
 
+export const indem_por_ver = async (req,res) => {
+   try{
 
+    const resultado = await indemnizacionDAO.encontrarIndemnizacionesSinVerificar();
+
+    res.render('historial_sinverificar',{resultado});
+
+  }catch(error){
+    console.error('Error al traer la información: '.error);
+    res.status(500).send('Error interno');
+  }
+};
+
+export const eliminarIndemnizacion = async (req, res) => {
+  try {
+    const { radicado } = req.params;
+    const userId = req.session.user.id; // Asumiendo que usas sesiones
+
+    // Validación básica
+    if (!radicado) {
+      return res.status(400).json({ 
+        error: "Número de radicado requerido" 
+      });
+    }
+
+    // Llamar al DAO para limpiar los campos
+    const resultado = await indemnizacionDAO.limpiarCamposIndemnizacion(radicado);
+
+    if (!resultado) {
+      return res.status(404).json({ 
+        error: "No se encontró el reporte con el radicado proporcionado" 
+      });
+    }
+
+    console.log(`Usuario ${userId} eliminó datos de indemnización ${radicado}`);
+
+  } catch (error) {
+    console.error('Error en eliminarIndemnizacion:', error);
+    
+    // Enviar mensaje de error detallado en desarrollo
+    const errorMessage = process.env.NODE_ENV === 'development' 
+      ? error.message 
+      : "Error interno al procesar la solicitud";
+    
+    res.status(500).json({ 
+      error: errorMessage 
+    });
+  }
+};
+
+
+
+export const indem_verificada = async (req,res) => {
+   try{
+
+    const resultado = await indemnizacionDAO.encontrarIndemnizacionesVerificadas();
+
+    res.render('historial_verificado',{resultado});
+
+  }catch(error){
+    console.error('Error al traer la información: '.error);
+    res.status(500).send('Error interno');
+  }
+};
+
+export const observarIndemSin = async (req,res) => {
+
+  const noRadicado = req.params.radicado;
+  
+   try{
+
+    const formulario = await indemnizacionDAO.buscarPorNoRadicado(noRadicado);
+    if(!formulario){
+      return res.status(404).send("Formulario no encontrado");
+    }
+
+    res.render('indem_sin_verificar',{formulario});
+
+  }catch(error){
+    console.error('Error al mostrar formulario: ', error);
+    res.status(500).send('Error interno');
+  }
+};
+
+
+export const observarIndemVerificada = async (req,res) => {
+
+  const noRadicado = req.params.radicado;
+  
+   try{
+
+    const formulario = await indemnizacionDAO.buscarPorNoRadicado(noRadicado);
+    if(!formulario){
+      return res.status(404).send("Formulario no encontrado");
+    }
+
+    console.log(formulario);
+
+    res.render('indem_validadas',{formulario});
+
+  }catch(error){
+    console.error('Error al mostrar formulario: ', error);
+    res.status(500).send('Error interno');
+  }
+};
 
 
 export const registrarUsuario = async (req, res) => {

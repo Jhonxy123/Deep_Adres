@@ -22,6 +22,17 @@ app.use(session({
     saveUninitialized: false,
     cookie: { maxAge: 1000 * 60 * 30 } 
   }));
+//historial_sinverificar y historial_verificado son rutas de prueba mientras se implementa en el controlador
+app.get('/historial_sinverificar', (req, res) => {
+  const resultado = []; // o datos reales desde la base de datos
+  res.render('historial_sinverificar', { resultado });
+});
+
+app.get('/historial_verificado', (req, res) => {
+  const resultado = []; // o datos reales desde la base de datos
+  res.render('historial_verificado', { resultado });
+});
+
 
 //Middleware para servir archivos estáticos (CSS, imágenes, etc.)
 app.use(express.static(path.join(__dirname, 'public')));
@@ -40,3 +51,6 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Servidor escuchando en http://localhost:${PORT}`);
 });
+
+
+

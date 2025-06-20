@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard - Sistema de Indemnizaciones</title>
   <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/menu_user.css">
+  <link rel="stylesheet" href="css/menu_admin.css">
 </head>
 
 <body>
@@ -16,25 +16,33 @@
     <header class="main-header">
 
       <h1>Bienvenido</h1>
-      <p>Sistema de indemnizaciones</p>
-
+  <p class="subtitle">Gestor de informes de indemnizaciones</p>
+  <p class="instruction">Seleccione lo que desea gestionar</p>
     </header>
 
     <section class="cards">
 
 
-      <a href="/gestion.html" style="text-decoration: none; color: inherit;">
-      <div class="card">
-        <img src="/img/calculadora.png" alt="Gestion de Indemnizaciones" />
-        <div class="card-text">Gestion de<br>Indemnizaciones</div>
-      </div>
+      <a href="/indemnizacion_por_verificar" style="text-decoration: none; color: inherit;">
+        <div class="card card-por-verificar">
+          <img src="/img/papeles.png" alt="Gestion de Indemnizaciones" />
+          <div class="card-text">Indemnizaciones<br>por verificar</div>
+        </div>
       </a>
 
+      <a href="/historial_indem_verificado" style="text-decoration: none; color: inherit;">
+        <div class="card card-verificadas">
+          <img src="/img/firmando.png" alt="Reportes de Indemnizaciones" />
+          <div class="card-text">Indemnizaciones<br>verificadas</div>
+        </div>
+      </a>
+
+
       <a href="/reportes.html" style="text-decoration: none; color: inherit;">
-      <div class="card">
-        <img src="/img/computador.png" alt="Reportes de Indemnizaciones" />
-        <div class="card-text">Reportes de<br>Indemnizaciones</div>
-      </div>
+        <div class="card card-reporte">
+          <img src="/img/computador.png" alt="Reportes de Indemnizaciones" />
+          <div class="card-text">Reporte Grafico</div>
+        </div>
       </a>
 
     </section>

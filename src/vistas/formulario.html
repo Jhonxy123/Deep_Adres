@@ -27,8 +27,11 @@
       <div class="fila">
         <select name="beneficiario.tipo_documento">
           <option value="">Tipo de documento</option>
-          <option value="Cédula">Cédula</option>
+          <option value="Cedula">Cédula</option>
+          <option value="Cedula de Extranjeria">Cédula de Extranjeria</option>
           <option value="Pasaporte">Pasaporte</option>
+          <option value="Permiso Especial de Permanencia">Permiso Especial de Permanencia</option>
+          <option value="Permiso por Protección Temporal">Permiso por Protección Temporal</option>
         </select>
       
         <input type="text" name="beneficiario.numero_documento" placeholder="No. de documento">
@@ -46,7 +49,42 @@
 
       <div class="fila">
         <label>Departamento:</label>
-        <input type="text" name="beneficiario.departamento">
+        <select id="beneficiario.departamento" name="beneficiario.departamento">
+          <option value="">Derpartamento</option>
+          <option value="1">Amazonas</option>
+          <option value="2">Antioquia</option>
+          <option value="3">Arauca</option>
+          <option value="4">Atlántico</option>
+          <option value="5">Bolívar</option>
+          <option value="6">Boyacá</option>
+          <option value="7">Caldas</option>
+          <option value="8">Caquetá</option>
+          <option value="9">Casanare</option>
+          <option value="10">Cauca</option>
+          <option value="11">Cesar</option>
+          <option value="12">Chocó</option>
+          <option value="13">Córdoba</option>
+          <option value="14">Cundinamarca</option>
+          <option value="15">Guainía</option>
+          <option value="16">Guaviare</option>
+          <option value="17">Huila</option>
+          <option value="18">La Guajira</option>
+          <option value="19">Magdalena</option>
+          <option value="20">Meta</option>
+          <option value="21">Nariño</option>
+          <option value="22">Norte de Santander</option>
+          <option value="23">Putumayo</option>
+          <option value="24">Quindío</option>
+          <option value="25">Risaralda</option>
+          <option value="26">San Andrés y Providencia</option>
+          <option value="27">Santander</option>
+          <option value="28">Sucre</option>
+          <option value="29">Tolima</option>
+          <option value="30">Valle del Cauca</option>
+          <option value="31">Vaupés</option>
+          <option value="32">Vichada</option>
+          <option value="33">Bogotá D.C.</option>
+        </select>
 
         <label>Teléfono:</label>
         <input type="text" name="beneficiario.telefono">
@@ -78,13 +116,13 @@
       <div class="fila">
         <label>parentesco con la victima:</label>
         <select name="parentesco.tipo_victima">
-            <option value="Madre">Madre</option>
-            <option value="Padre">Padre</option>
-            <option value="Hermano">Hermano</option>
-            <option value="Tio">Tio</option>
-             <option value="Conyugue">Conyugue</option>
-              <option value="Hijo">Hijo</option>
-              <option value="Machete">Machete</option>
+            <option value="">Parentesco con la victima</option>
+            <option value="Padres">Padres</option>
+            <option value="Hermanos">Hermanos</option>
+            <option value="Hijos">Hijos</option>
+            <option value="Conyugue">Cónyugue</option>
+            <option value="Compañero (a) permanente">Compañero (a) permanente</option>
+            <option value="Representante Legal">Representante Legal</option>
         </select>
     </div>
 
@@ -105,8 +143,8 @@
     <div class="fila">
         <select name="apoderado.tipo_documento">
             <option value="">Tipo de documento</option>
-            <option value="Cédula">Cédula</option>
-            <option value="Pasaporte">Pasaporte</option>
+            <option value="Cedula">Cédula</option>
+            <option value="Cedula de extrajeria">Cédula de Extranjería</option>
         </select>
         <input type="text" name="apoderado.numero_documento" placeholder="No. de documento">
     </div>
@@ -151,8 +189,17 @@
     <div class="fila">
         <select name="victima.tipo_documento">
             <option value="">Tipo de documento</option>
-            <option value="Cédula">Cédula</option>
-            <option value="Pasaporte">Pasaporte</option>
+            <option value="Cédula de Ciudadanía">Cédula de Ciudadanía (CC)</option>
+            <option value="Cédula de Extranjería">Cédula de Extranjería (CE)</option>
+            <option value="Tarjeta de Identidad">Tarjeta de Identidad (TI)</option>
+            <option value="Pasaporte">Pasaporte (PA)</option>
+            <option value="Registro Civil">Registro Civil (RC)</option>
+            <option value="Permiso Especial de Permanencia">Permiso Especial de Permanencia (PE)</option>
+            <option value="Permiso por Protección Temporal">Permiso por Protección Temporal (PT)</option>
+            <option value="Salvoconducto">Salvoconducto (SC)</option>
+            <option value="Carné Diplomático">Carné Diplomático (CD)</option>
+            <option value="Documento Extranjero">Documento Extranjero (DE)</option>
+            <option value="Certificado de Nacimiento">Certificado de Nacimiento (CN)</option>
         </select>
         <input type="text" name="victima.numero_documento" placeholder="No. de documento">
     </div>
@@ -184,14 +231,16 @@
     <div class="fila">
         <label>Zona:</label>
         <select name="victima.zona">
+            <option value="">Seleccione</option>
             <option value="Urbana">Urbana</option>
             <option value="Rural">Rural</option>
         </select>
         <label>Condición del accidentado:</label>
         <select name="victima.condicion">
             <option value="">Seleccione</option>
-            <option value="Lesionado">Lesionado</option>
-            <option value="Fallecido">Fallecido</option>
+            <option value="Conductor">Conductor</option>
+            <option value="Peatón">Peatón</option>
+            <option value="Ocupante">Ocupante</option>
         </select>
     </div>
 
@@ -208,26 +257,37 @@
     <p><strong>Naturaleza del evento</strong></p>
 
     <div class="fila">
+        <label>Accidente de tránsito:</label>
+        <input type="checkbox" name="evento.accidente_transito" value="true">
+
         <label>Naturales:</label>
         <select name="evento.natural">
             <option value="Ninguno">Ninguno</option>
             <option value="Sismo">Sismo</option>
-            <option value="Inundación">Inundación</option>
-            <option value="Deslizamiento">Deslizamiento</option>
+            <option value="Avalancha">Avalancha</option>
+            <option value="Maremoto">Maremoto</option>
+            <option value="Deslizamiento de tierra">Deslizamiento de tierra</option>
+            <option value="Erupciones volcanica">Erupciones volcánica</option>
+            <option value="Incendio natural">Incendio natural</option>
+            <option value="Huracan">Huracan</option>
+            <option value="Rayo">Rayo</option>
+            <option value="Inundacion">Inundación</option>
+            <option value="Vendabal">Ninguno</option
+            <option value="Tornado">Tornado</option>
         </select>
 
         <label>Terroristas:</label>
         <select name="evento.terrorista">
             <option value="Ninguno">Ninguno</option>
-            <option value="Atentado">Atentado</option>
-            <option value="Explosivo">Explosivo</option>
+            <option value="Masacre">Masacre</option>
+            <option value="Mina Antipersona">Mina antipersona</option>
+            <option value="Incendio">Incendio</option>
+            <option value="Ataque a municipio">Ataque a municipio</option>
+            <option value="Combate">Combate</option>
         </select>
     </div>
 
     <div class="fila">
-        <label>Accidente de tránsito:</label>
-        <input type="checkbox" name="evento.accidente_transito" value="true">
-
         <label>Otros:</label>
         <input type="checkbox" name="evento.otro" value="true">
         <label>Cuál:</label>
@@ -268,6 +328,10 @@
         <option value="">Seleccione...</option>
         <option value="asegurado">Asegurado</option>
         <option value="no_asegurado">No asegurado</option>
+        <option value="Vehiculo fantasma">Vehículo fantasma</option>
+        <option value="Poliza falsa">Póliza falsa</option>
+        <option value="No asegurado y sin placa">No asegurado y sin placa</option>
+        <option value="No asegurado - propietario Indeterminado o sin información">No asegurado - propietario Indeterminado o sin información</option>
       </select>
     </div>
 
@@ -283,9 +347,20 @@
       <label>Tipo de servicio:</label>
       <select name="vehiculo.tipo_servicio">
         <option value="">Seleccione...</option>
-        <option value="publico">Público</option>
-        <option value="particular">Particular</option>
-        <option value="oficial">Oficial</option>
+        <option value="Automovil">Automovil</option>
+        <option value="Motocicleta">Motocicleta</option>
+        <option value="Bus">Bus</option>
+        <option value="Buseta">Buseta</option>
+        <option value="Camion">Camión</option>
+        <option value="Camioneta">Camioneta</option>
+        <option value="Campero">Campero</option>
+        <option value="Microbus">Microbus</option>
+        <option value="Tractocamion">Tractocamión</option>
+        <option value="Motocarro">Motocarro</option>
+        <option value="Mototriciclo">Mototriciclo</option>
+        <option value="Cuatrimoto">Cuatrimoto</option>
+        <option value="Moto extranjera">Moto extranjera</option>
+        <option value="Vehiculo extranjero">Vehículo extranjero</option>
       </select>
 
       <label>Intervención de la autoridad:</label>
@@ -330,10 +405,15 @@
     <div class="fila">
       <select name="propietario.tipo_documento">
         <option value="">Tipo de documento</option>
-        <option value="cc">Cédula de ciudadanía</option>
-        <option value="ti">Tarjeta de identidad</option>
-        <option value="ce">Cédula de extranjería</option>
-        <option value="pasaporte">Pasaporte</option>
+        <option value="CC">Cédula de Ciudadanía (CC)</option>
+        <option value="CE">Cédula de Extranjería (CE)</option>
+        <option value="PA">Pasaporte (PA)</option>
+        <option value="NIT">Número de Identificación Tributaria (NIT)</option>
+        <option value="TI">Tarjeta de Identidad (TI)</option>
+        <option value="PE">Permiso Especial de Permanencia (PE)</option>
+        <option value="PT">Permiso por Protección Temporal (PT)</option>
+        <option value="CD">Carné Diplomático (CD)</option>
+        <option value="DE">Documento Extranjero (DE)</option>
       </select>
       <input type="text" name="propietario.numero_documento" placeholder="No. de documento">
     </div>
@@ -372,10 +452,19 @@
     <div class="fila">
       <select name="conductor.tipo_documento">
         <option value="">Tipo de documento</option>
-        <option value="cc">Cédula de ciudadanía</option>
-        <option value="ti">Tarjeta de identidad</option>
-        <option value="ce">Cédula de extranjería</option>
-        <option value="pasaporte">Pasaporte</option>
+        <option value="CC">Cédula de Ciudadanía (CC)</option>
+        <option value="CE">Cédula de Extranjería (CE)</option>
+        <option value="PA">Pasaporte (PA)</option>
+        <option value="RC">Registro Civil (RC)</option>
+        <option value="TI">Tarjeta de Identidad (TI)</option>
+        <option value="PE">Permiso Especial de Permanencia (PE)</option>
+        <option value="PT">Permiso por Protección Temporal (PT)</option>
+        <option value="SC">Salvoconducto (SC)</option>
+        <option value="CD">Carné Diplomático (CD)</option>
+        <option value="DE">Documento Extranjero (DE)</option>
+        <option value="SI">Sin Identificación (SI)</option>
+        <option value="AS">Adulto Sin Identificación (AS)</option>
+        <option value="MS">Menor Sin Identificación (MS)</option>
       </select>
       <input type="text" name="conductor.numero_documento" placeholder="No. de documento">
     </div>
@@ -404,9 +493,8 @@
       <label>Concepto reclamado:</label>
       <select name="reclamacion.concepto">
         <option value="">Seleccione...</option>
-        <option value="indemnizacion">Indemnización por muerte y Gastos funerarios</option>
-        <option value="gastos_medicos">Gastos médicos</option>
-        <option value="rehabilitacion">Rehabilitación</option>
+        <option value="Indemnización por muerte y Gastos Funerarios">Indemnización por muerte y Gastos funerarios</option>
+        <option value="Incapacidad permanente">Incapacidad permanente</option>
       </select>
     </div>
 
@@ -427,50 +515,31 @@
   <script>
     cargarComponente("#layout", "componentes_html/layout_user.html");
   </script>
-</body>
-</html>
 
-<!--<script>
-  
-document.getElementById('miFormulario').addEventListener('submit', async (e) => {
-  e.preventDefault();
-  
-  const formData = new FormData(e.target);
-  const jsonData = {};
-  
-  // Convertir FormData a objeto plano (similar a tu función original)
-  for (const [key, value] of formData.entries()) {
-    const keys = key.split('.');
-    let currentLevel = jsonData;
-    
-    for (let i = 0; i < keys.length - 1; i++) {
-      const currentKey = keys[i];
-      if (!currentLevel[currentKey]) {
-        currentLevel[currentKey] = {};
-      }
-      currentLevel = currentLevel[currentKey];
-    }
-    
-    const lastKey = keys[keys.length - 1];
-    currentLevel[lastKey] = value;
-  }
+<script type="module">
 
-  try {
-    const response = await fetch('/formulario', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(jsonData)
-    });
-    
-    if (response.ok) {
-      window.location.href = '/paginaMenuUser';
+  import indemnizacionDAO from '../modelo/DAO_indemnizacion.js';
+
+
+  document.addEventListener('DOMContentLoaded', async () => {
+    const select = document.getElementById('beneficiario.departamento');
+
+    try {
+      const departamentos = await indemnizacionDAO.traerDepartamentos();
+      select.innerHTML = '<option value="">-- Selecciona --</option>';
+
+      departamentos.forEach(element => {
+        const option = document.createElement('option');
+        option.value = element.id;
+        option.textContent = element.departamento;
+        select.appendChild(option);
+      });
+    } catch (error) {
+      console.error('Error al cargar departamentos:', error);
+      select.innerHTML = '<option value="">Error al cargar datos</option>';
     }
-  } catch (error) {
-    console.error('Error:', error);
-  }
-});
+  });
 </script>
 
--->
+</body>
+</html>

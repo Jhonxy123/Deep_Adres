@@ -1,0 +1,163 @@
+:root{
+    --color-blanco: #ffff;
+    --color-negro: #000000;   
+    --color-fondo: #EBEDEF;
+    --color-gris: #445151;
+    --color-azul_claro: #356CDA;
+    --color-azul_oscuro: #1C3974;
+}
+
+body{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.menu-toggle {
+  display: none; /* Oculta el checkbox */
+}
+
+.menu-icon-container {
+  cursor: pointer;
+  display: inline-block;
+}
+
+/* Menú desplegable - inicialmente oculto */
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 60px;
+  left: 20px;
+  background-color: white;
+  min-width: 200px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  border-radius: 5px;
+  padding: 10px 0;
+}
+
+/* Cuando el checkbox está checked, mostramos el menú */
+.menu-toggle:checked ~ .dropdown-menu {
+  display: block;
+}
+
+.dropdown-item {
+  display: block;
+  padding: 10px 20px;
+  text-decoration: none;
+  color: #333;
+  transition: background-color 0.3s;
+}
+
+.dropdown-item:hover {
+  background-color: #f1f1f1;
+}
+
+.navbar {
+    background: linear-gradient(to right, #356CDA, #1C3974);
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+  }
+  .navbar .menu-icon,
+  .navbar .user-icon {
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+  }
+  .navbar .user-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-blanco);
+    font-size: 1rem;
+  }
+  /* Main Header */
+  .main-header {
+    text-align: center;
+    margin: 2rem 1rem;
+  }
+  .main-header h1 {
+    font-size: 2.5rem;
+    color: var(--color-azul_claro);
+    margin-bottom: 0.5rem;
+  }
+.subtitle {
+  font-size: 1.5rem; /* Más grande que el original (1.25rem) */
+  color: var(--color-negro);
+  font-weight: normal; /* Quita la negrilla */
+  margin-bottom: 0.5rem;
+}
+
+.instruction {
+  font-size: 1.1rem; /* Más pequeño que el subtítulo */
+  color: var(--color-negro);
+  margin-top: 0.5rem;
+}
+  /* Cards Grid */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(3, 285px); /* 3 columnas de 285px cada una */
+    gap: 5rem;
+    padding: 0 1rem 2rem;
+    justify-content: center; /* Centrar el grupo de cards */
+    margin: 0 auto;
+    overflow-x: auto; /* Para pantallas pequeñas permite scroll horizontal */
+    max-width: 100%; /* Asegura que no exceda el ancho de pantalla */
+}
+
+.card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    width: 285px;
+    height: 285px;
+    flex-shrink: 0; /* Evita que las cards se encojan */
+}
+
+.card img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.6);
+    transition: transform 0.3s;
+    opacity: 0.5;
+}
+
+.card:hover img {
+    transform: scale(1.05);
+}
+
+.card .card-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--color-blanco);
+    text-align: center;
+    font-size: 1.4rem; /* Tamaño intermedio */
+    font-style: italic;
+    line-height: 1.3;
+    padding: 0 0.6rem;
+    width: 90%;
+}
+.card-por-verificar { 
+    background-color: #570F0F;
+opacity: 0.9;
+}
+
+.card-verificadas {
+    
+    background-color: #004708; 
+   
+}
+.card-reporte { 
+    
+    background-color: #076A53; 
+}
+

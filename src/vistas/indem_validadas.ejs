@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Indemnizaciones Verificadas</title>
+  <link rel="stylesheet" href="/css/indem_validadas.css">
+    <link rel="stylesheet" href="/css/style.css">
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+  
+</head>
+<body>
+   
+ <div id="layout"></div>
+  <main class="main-container">
+<div class="header-container">
+  <h1 class="titulo-centrado">Indemnizaciones Verificadas</h1>
+  <div class="btn-volver-container">
+    <button type="button" class="btn-volver" onclick="window.history.back()">
+      <i class="bi bi-arrow-left"></i> Volver
+    </button>
+  </div>
+</div>
+
+    <!-- Sección de informe: textarea readonly -->
+ <div class="form-group">
+      <textarea class="textarea-informe" readonly><%- formulario.form_verificado %></textarea>
+</div>
+
+    <!-- Sección de observaciones realizadas -->
+ <div class="form-group">
+      <label for="obs-text" class="label-observaciones">Observaciones realizadas:</label>
+      <textarea id="obs-text" class="textarea-observaciones" readonly><%- formulario.descripcion %></textarea>
+</div>
+
+    <!-- Botón eliminar centrado -->
+    <div class="boton-eliminar-container">
+     <button type="button" class="btn-eliminar" id="btnEliminarReporte">Eliminar Reporte</button>
+    </div>
+  </main>
+
+  <script src="/componentes_html/cargarcomponentes.js"></script>
+  <script>
+    cargarComponente("#layout", "/componentes_html/layout_admin.html");
+  </script>
+  <script>
+  document.getElementById('btnEliminarReporte').addEventListener('click', async () => {
+  const urlParts = window.location.pathname.split('/');
+  const radicado = urlParts[urlParts.length - 1];
+
+  if (!confirm('¿Está seguro que desea eliminar este reporte permanentemente?')) {
+    return;
+  }
+
+  try {
+    const response = await fetch(`/indemnizacion_por_verificar/eliminar/${radicado}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    });
+
+    const result = await response.json();
+
+    if (response.ok) {
+      alert(result.message || 'Reporte eliminado correctamente');
+      window.location.href = '/historial_indem_verificado'; // Redirige a donde necesites
+    } else {
+      throw new Error(result.error || 'Error al eliminar');
+    }
+  } catch(error) {
+    console.error('Error:', error);
+    alert(`Error al eliminar: ${error.message}`);
+  }
+});
+  </script>
+</body>
+</html>

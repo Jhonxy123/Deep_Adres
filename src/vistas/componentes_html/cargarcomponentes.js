@@ -1,5 +1,4 @@
 
-
 async function cargarComponente(selector, ruta) {
   try {
     const respuesta = await fetch(ruta);

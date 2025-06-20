@@ -16,7 +16,7 @@
     
     <div class="historial-container">
       <div class="historial-header">
-        <h1 class="historial-title">Historial de Indemnizaciones</h1>
+        <h1 class="historial-title">Indemnizaciones Verificadas</h1>
         <a href="javascript:history.back()" class="back-button">
           <i class="bi bi-arrow-left"></i> Volver
         </a>
@@ -36,14 +36,9 @@
               <td><%= indem.no_radicado %></td>
               <td><%= new Date(indem.fecha_radicacion).toLocaleDateString('es-CO', { year: 'numeric', month: 'long', day: 'numeric' }) %></td>
               <td>
-                <button class="action-button" onclick="window.location.href='/formulario_guardado.html'"> <!--Toca cambiar esta a futuro-->
-                   <img src="/img/icon_form.svg" alt="Icono" style="width: 1.2em; height: 1.2em; vertical-align: middle;">
-                    Formulario 
-                </button>
-                  <button class="action-button" onclick="window.location.href='/resultado.html'">
-                  <img src="/img/resultado_indem.svg" alt="Icono" style="width: 1.2em; height: 1.2em; vertical-align: middle;">
-  Resultado
-                </button>
+                <a href="/historial_indem_verificado/indem_validadas/<%= indem.no_radicado %>" class="action-button">
+                  <i class="bi bi-eye-fill"></i> Ver
+                </a>
               </td>
             </tr>
           <% }); %>

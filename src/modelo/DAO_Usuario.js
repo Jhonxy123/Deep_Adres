@@ -71,13 +71,13 @@ async function findByCedula(cedula) {
 }
 
 
-async function guardarFormularioDB(datosFormulario, userId) {
+async function guardarFormularioDB(form,datosFormulario, userId) {
   const noRadicado = `IND-${Date.now()}`;
   
   const result = await db.query(
     `INSERT INTO Indemnizacion 
-     (No_radicado, Fecha_radicacion, ID_Departamento, ID_Conc_reclamado, ID_Usuario, Form_ingresado) 
-     VALUES ($1, $2, $3, $4, $5, $6) 
+     (No_radicado, Fecha_radicacion, ID_Departamento, ID_Conc_reclamado, ID_Usuario, Form_ingresado, Form_generado) 
+     VALUES ($1, $2, $3, $4, $5, $6, $7) 
      RETURNING No_radicado`,
     [
       noRadicado,
@@ -85,7 +85,8 @@ async function guardarFormularioDB(datosFormulario, userId) {
       datosFormulario.departamento?.id,
       datosFormulario.reclamacion?.concepto,
       userId,
-      datosFormulario
+      datosFormulario,
+      form
     ]
   );
 
@@ -94,13 +95,7 @@ async function guardarFormularioDB(datosFormulario, userId) {
 
 
 async function registrar_usuario(nombre, correo, cedula) {
-  /* Validación de contraseñas
-  if (contrasena !== comprobar_contrasena) {
-    throw new Error('Las contraseñas no coinciden');
-  }*/
-
-  // Verificar correo existente
-
+  
   const usuarioExistente = await findByEmail(correo);
   if (usuarioExistente) {
     throw new Error('El correo electronico ya esta registrado');
