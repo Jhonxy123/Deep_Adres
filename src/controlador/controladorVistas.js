@@ -100,7 +100,6 @@ export const traerHistorial = async (req,res) => {
     const resultado = await indemnizacionDAO.encontrarIndemnizaciones(userId);
 
     res.render('historial_indem',{resultado});
-
   }catch(error){
     console.error('Error al traer la información: '.error);
     res.status(500).send('Error interno');

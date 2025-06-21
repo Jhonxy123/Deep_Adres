@@ -132,8 +132,6 @@ async function encontrarForm(userId) {
 }
 
 
-
-
 async function traerDepartamentos() {
     
     try{
@@ -145,11 +143,34 @@ async function traerDepartamentos() {
         console.error('Error al buscar departamentos: ', error)
         throw error;
     }
-
 }
 
+async function getByRadicado(no_radicado) {
+    try {
+      // Usar nombres de columna en minúsculas y sin comillas
+      const query = `
+        SELECT 
+          no_radicado AS "noRadicado",
+          fecha_radicacion AS "fechaRadicacion",
+          form_ingresado AS "formIngresado"
+        FROM indemnizacion
+        WHERE no_radicado = $1
+      `;
+      
+      const { rows } = await db.query(query, [no_radicado]);
+      
+      console.log('Resultado de la consulta:', rows[0]);
+      
+      return rows[0] || null;
+    } catch (error) {
+      console.error('Error en la consulta a la base de datos:', error);
+      throw error;
+    }
+  }
 
 
-module.exports = { encontrarIndemnizaciones,limpiarCamposIndemnizacion, encontrarForm,traerDepartamentos,encontrarIndemnizacionesSinVerificar,buscarPorNoRadicado,guardarIndemnizacionVerificada,encontrarIndemnizacionesVerificadas};
+
+
+module.exports = { encontrarIndemnizaciones,limpiarCamposIndemnizacion, encontrarForm,traerDepartamentos,encontrarIndemnizacionesSinVerificar,buscarPorNoRadicado,guardarIndemnizacionVerificada,encontrarIndemnizacionesVerificadas,getByRadicado};
 
 
