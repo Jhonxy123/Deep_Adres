@@ -210,6 +210,11 @@ export const eliminarIndemnizacion = async (req, res) => {
 
     console.log(`Usuario ${userId} eliminó datos de indemnización ${radicado}`);
 
+  return res.status(200).json({ 
+      success: true, 
+      message: "Reporte eliminado correctamente" 
+    });
+
   } catch (error) {
     console.error('Error en eliminarIndemnizacion:', error);
     
@@ -380,4 +385,33 @@ export const paginaMenuAdmin = (req, res) => {
     return res.redirect('/login?error=Acceso%20denegado');
   }
   res.sendFile(path.join(__dirname, '..', 'vistas', 'menu_admin.html'));
+};
+
+export const mostrarGraficas = async (req, res) => {
+    try {
+        const estadisticas = await indemnizacionDAO.obtenerEstadisticasCalificaciones();
+        
+        // Procesar datos para la gráfica
+        const datosGrafica = {
+            eficiente: 0,
+            regular: 0,
+            deficiente: 0
+        };
+
+        estadisticas.forEach(item => {
+            const calificacion = item.calificacion.toLowerCase();
+            if (datosGrafica.hasOwnProperty(calificacion)) {
+                datosGrafica[calificacion] = parseInt(item.cantidad);
+            }
+        });
+
+        res.render('graficos_indem', { 
+            datosGrafica: JSON.stringify(datosGrafica),
+            titulo: 'Distribución de Calificaciones IA'
+        });
+
+    } catch (error) {
+        console.error('Error al cargar gráficas:', error);
+        res.status(500).send('Error interno');
+    }
 };
