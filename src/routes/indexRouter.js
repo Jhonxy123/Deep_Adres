@@ -39,7 +39,7 @@ router.delete('/indemnizacion_por_verificar/eliminar/:radicado', controladorVist
 router.get('/historial_indem_verificado',controladorVistas.indem_verificada);
 router.get('/historial_indem_verificado/indem_validadas/:radicado',controladorVistas.observarIndemVerificada);
 
-
+router.get('/historialusuario/visualizar-pdf/:id', controladorVistas.mostrarVistaPreviaPDF);
 
 //Ruta para ver el texto de la indemnización sin verificar
 router.get('/indemnizacion_por_verificar/observar_form/:radicado',controladorVistas.observarIndemSin);
