@@ -145,7 +145,6 @@ async function traerDepartamentos() {
     }
 }
 
-<<<<<<< HEAD
 async function obtenerEstadisticasCalificaciones() {
     try {
         const { rows } = await db.query(`
@@ -163,9 +162,6 @@ async function obtenerEstadisticasCalificaciones() {
     }
 }
 
-
-module.exports = { encontrarIndemnizaciones,limpiarCamposIndemnizacion, encontrarForm,traerDepartamentos,encontrarIndemnizacionesSinVerificar,buscarPorNoRadicado,guardarIndemnizacionVerificada,encontrarIndemnizacionesVerificadas, obtenerEstadisticasCalificaciones};
-=======
 async function getByRadicado(no_radicado) {
     try {
       // Usar nombres de columna en minúsculas y sin comillas
@@ -189,10 +185,6 @@ async function getByRadicado(no_radicado) {
     }
   }
 
-
-
-
-module.exports = { encontrarIndemnizaciones,limpiarCamposIndemnizacion, encontrarForm,traerDepartamentos,encontrarIndemnizacionesSinVerificar,buscarPorNoRadicado,guardarIndemnizacionVerificada,encontrarIndemnizacionesVerificadas,getByRadicado};
->>>>>>> 6f822e416bfaec68dae21e996ac75c525727be0c
+module.exports = { encontrarIndemnizaciones,limpiarCamposIndemnizacion, encontrarForm,traerDepartamentos,encontrarIndemnizacionesSinVerificar,buscarPorNoRadicado,guardarIndemnizacionVerificada,encontrarIndemnizacionesVerificadas, obtenerEstadisticasCalificaciones, getByRadicado};
 
 
