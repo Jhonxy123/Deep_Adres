@@ -36,14 +36,14 @@
               <td><%= indem.no_radicado %></td>
               <td><%= new Date(indem.fecha_radicacion).toLocaleDateString('es-CO', { year: 'numeric', month: 'long', day: 'numeric' }) %></td>
               <td>
-                <button class="action-button" onclick="window.location.href='/formulario_guardado.html'"> <!--Toca cambiar esta a futuro-->
-                   <img src="/img/icon_form.svg" alt="Icono" style="width: 1.2em; height: 1.2em; vertical-align: middle;">
-                    Formulario 
-                </button>
-                  <button class="action-button" onclick="window.location.href='/resultado.html'">
+                <a href="/formulario_guardado/<%= indem.no_radicado %>" class="action-button form-button">
+                  <img src="/img/icon_form.svg" alt="Icono" style="width: 1.2em; height: 1.2em; vertical-align: middle;">
+                   Formulario
+                </a>
+                <a class="action-button" href="/historialusuario/visualizar-pdf/<%= indem.no_radicado %>">
                   <img src="/img/resultado_indem.svg" alt="Icono" style="width: 1.2em; height: 1.2em; vertical-align: middle;">
   Resultado
-                </button>
+                  </a>
               </td>
             </tr>
           <% }); %>

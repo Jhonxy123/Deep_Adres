@@ -7,6 +7,8 @@ import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import { enviarEmail } from '../../services/mail.services.js';
 import { generarFormGemini } from '../../services/ia.service.js';
+import PDFDocument from 'pdfkit';
+
 import { Console } from 'console';
 
 // Configuración de variables de entorno y __dirname
@@ -31,6 +33,75 @@ export const paginaFormulario = async (req, res) => {
 export const historal_usuario = async (req,res) => {
    res.sendFile(path.join(__dirname, '..', 'vistas', 'historial.ejs'));
 };
+
+export const formulario_guardado = async(req,res) => {
+     res.sendFile(path.join(__dirname, '..', 'vistas', 'formulario_guardado.html'));
+};
+
+export const mostrarVistaPreviaPDF = async (req, res) => {
+  try {
+    const { id } = req.params;
+    
+    const indemnizacion = await indemnizacionDAO.buscarPorNoRadicado(id);
+    
+    if (!indemnizacion) {
+      return res.status(404).render('error', { 
+        mensaje: 'Registro no encontrado' 
+      });
+    }
+    
+    // Generar PDF como base64 (sin cambiar el resto de tu lógica)
+    const pdfBuffer = await new Promise((resolve) => {
+      const doc = new PDFDocument();
+      const buffers = [];
+      
+      doc.on('data', buffers.push.bind(buffers));
+      doc.on('end', () => resolve(Buffer.concat(buffers)));
+      
+      // Contenido del PDF (manteniendo tu formato actual)
+      doc.fontSize(20)
+         .text('Reporte de Indemnización', { align: 'center' })
+         .moveDown();
+      
+      doc.fontSize(12)
+         .text(`Radicado: ${indemnizacion.no_radicado}`)
+         .text(`Valor: $${indemnizacion.valor_indemnizacion}`)
+         .text(`Fecha: ${new Date(indemnizacion.fecha_verificacion).toLocaleDateString()}`)
+         .moveDown();
+      
+      if (indemnizacion.descripcion) {
+        doc.fontSize(14)
+           .text('Descripción:', { underline: true })
+           .fontSize(12)
+           .text(indemnizacion.descripcion)
+           .moveDown()
+           .text('Como análisis de la solicitud recibida, se ha realizado una evaluación detallada conforme a los criterios establecidos para este tipo de trámite:')
+           .moveDown()
+           .fontSize(12)
+           .text(indemnizacion.form_verificado);
+      }
+      
+      doc.end();
+    });
+    
+    const pdfBase64 = pdfBuffer.toString('base64');
+    
+    // Renderizar con los datos correctos
+    res.render('resultado', {
+      titulo: 'Vista Previa del Reporte',
+      pdfData: pdfBase64,  // PDF en base64 para incrustar
+      pdfUrl: `/historialusuario/descargar-pdf/${id}`,  // Ruta para descarga
+      indemnizacion: indemnizacion  // Pasamos los datos por si los necesitas
+    });
+    
+  } catch (error) {
+    console.error('Error al generar vista previa:', error);
+    res.status(500).render('error', { 
+      mensaje: 'Error al cargar la vista previa' 
+    });
+  }
+};
+
 
 
 
@@ -98,7 +169,6 @@ export const traerHistorial = async (req,res) => {
     const resultado = await indemnizacionDAO.encontrarIndemnizaciones(userId);
 
     res.render('historial_indem',{resultado});
-
   }catch(error){
     console.error('Error al traer la información: '.error);
     res.status(500).send('Error interno');

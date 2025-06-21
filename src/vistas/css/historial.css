@@ -97,6 +97,7 @@
     transition: opacity 0.2s;
     background: linear-gradient(to right, var(--color-azul_claro), var(--color-azul_oscuro));
     box-shadow: 4px 4px 8px rgba(53, 108, 218, 0.3);
+    text-decoration: none
 }
 
 .action-button:hover {

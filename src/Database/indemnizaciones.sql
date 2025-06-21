@@ -43,9 +43,9 @@ CREATE TABLE Indemnizacion
     Form_ingresado JSONB NOT NULL,
     Form_generado TEXT,
     Form_verificado TEXT,
-    Valor_indemnización float,
-    Fecha_verificación DATE,
-    Descripción TEXT,
+    Valor_indemnizacion float,
+    Fecha_verificacion DATE,
+    Descripcion TEXT,
     Auditor VARCHAR(50),
     Calificacion_reporteIA VARCHAR(30),
     PRIMARY KEY(No_radicado)
