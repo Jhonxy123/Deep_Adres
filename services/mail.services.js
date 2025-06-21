@@ -105,12 +105,10 @@ function crearEmail(token, id) {
 <body>
     <div class="success-container">
         <div class="success-icon">✓</div>
-        <h1>¡Correo enviado exitosamente!</h1>
-        <p>El mensaje ha sido enviado correctamente al destinatario.</p>
-        <p>Su número de usuario es:</p>
+        <h1>¡Usted ha sido registrado exitosamente!</h1>
+        <p>El usuario que se le ha asignado es el siguiente:</p>
         <div class="user-id">${id}</div>
-        <p>Recibirás una copia en tu bandeja de entrada.</p>
-        <a href="/" class="btn">Volver al inicio</a>
+        <p>Para primer ingreso, será su contraseña de forma provisional ya que debe cambiar su contraseña posteriormente.</p>
     </div>
 </body>
 </html>`;
