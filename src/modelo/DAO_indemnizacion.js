@@ -148,8 +148,24 @@ async function traerDepartamentos() {
 
 }
 
+async function obtenerEstadisticasCalificaciones() {
+    try {
+        const { rows } = await db.query(`
+            SELECT 
+                calificacion_reporteIA as calificacion,
+                COUNT(*) as cantidad
+            FROM indemnizacion
+            WHERE calificacion_reporteIA IS NOT NULL
+            GROUP BY calificacion_reporteIA
+        `);
+        return rows;
+    } catch (error) {
+        console.error('Error al obtener estadísticas de calificaciones:', error);
+        throw error;
+    }
+}
 
 
-module.exports = { encontrarIndemnizaciones,limpiarCamposIndemnizacion, encontrarForm,traerDepartamentos,encontrarIndemnizacionesSinVerificar,buscarPorNoRadicado,guardarIndemnizacionVerificada,encontrarIndemnizacionesVerificadas};
+module.exports = { encontrarIndemnizaciones,limpiarCamposIndemnizacion, encontrarForm,traerDepartamentos,encontrarIndemnizacionesSinVerificar,buscarPorNoRadicado,guardarIndemnizacionVerificada,encontrarIndemnizacionesVerificadas, obtenerEstadisticasCalificaciones};
 
 

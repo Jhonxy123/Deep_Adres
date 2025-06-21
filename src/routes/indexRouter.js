@@ -46,4 +46,6 @@ router.get('/indemnizacion_por_verificar/observar_form/:radicado',controladorVis
 router.post('/indemnizacion_por_verificar/observar_form/:radicado',controladorVistas.guardarIndemnizacionVerificada);
 
 
+router.get('/graficos', controladorVistas.mostrarGraficas);
+
 module.exports = router;
