@@ -30,12 +30,17 @@ router.post('/recuperar_cont', controladorUsuario.cambiarContrasena);
 
 //Ruta para el historial del usuario
 router.get('/historialusuario',controladorVistas.traerHistorial);
+router.get('/form_guardado', controladorVistas.formulario_guardado);
 
 //Ruta para el historial del usuario
 router.get('/indemnizacion_por_verificar',controladorVistas.indem_por_ver);
+router.delete('/indemnizacion_por_verificar/eliminar/:radicado', controladorVistas.eliminarIndemnizacion);
+
 
 router.get('/historial_indem_verificado',controladorVistas.indem_verificada);
 router.get('/historial_indem_verificado/indem_validadas/:radicado',controladorVistas.observarIndemVerificada);
+
+
 
 //Ruta para ver el texto de la indemnización sin verificar
 router.get('/indemnizacion_por_verificar/observar_form/:radicado',controladorVistas.observarIndemSin);
