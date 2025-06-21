@@ -34,7 +34,9 @@ export const historal_usuario = async (req,res) => {
    res.sendFile(path.join(__dirname, '..', 'vistas', 'historial.ejs'));
 };
 
-
+export const formulario_guardado = async(req,res) => {
+     res.sendFile(path.join(__dirname, '..', 'vistas', 'formulario_guardado.html'));
+};
 
 export const mostrarVistaPreviaPDF = async (req, res) => {
   try {
@@ -167,7 +169,6 @@ export const traerHistorial = async (req,res) => {
     const resultado = await indemnizacionDAO.encontrarIndemnizaciones(userId);
 
     res.render('historial_indem',{resultado});
-
   }catch(error){
     console.error('Error al traer la información: '.error);
     res.status(500).send('Error interno');

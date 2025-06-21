@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const controladorVistas = require('../controlador/controladorVistas');
 const controladorUsuario = require('../controlador/controladorUsuario');
+const controladorIndem = require('../controlador/controladorIndem');
 
 // Ruta raíz → index.html
 router.get('/', controladorVistas.paginaIndex);
@@ -30,6 +31,7 @@ router.post('/recuperar_cont', controladorUsuario.cambiarContrasena);
 
 //Ruta para el historial del usuario
 router.get('/historialusuario',controladorVistas.traerHistorial);
+router.get('/formulario_guardado/:radicado', controladorIndem.mostrarDetalle);
 
 //Ruta para el historial del usuario
 router.get('/indemnizacion_por_verificar',controladorVistas.indem_por_ver);
@@ -46,6 +48,10 @@ router.get('/indemnizacion_por_verificar/observar_form/:radicado',controladorVis
 router.post('/indemnizacion_por_verificar/observar_form/:radicado',controladorVistas.guardarIndemnizacionVerificada);
 
 
+<<<<<<< HEAD
 router.get('/graficos', controladorVistas.mostrarGraficas);
 
 module.exports = router;
+=======
+module.exports = router;
+>>>>>>> 6f822e416bfaec68dae21e996ac75c525727be0c
