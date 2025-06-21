@@ -1,3 +1,11 @@
+:root {
+    --color-blanco: #ffff;
+    --color-negro: #000000;
+    --color-fondo: #EBEDEF;
+    --color-azul_claro: #356CDA;
+    --color-azul_oscuro: #1C3974;
+    --color-gris: #445151;
+}
 
 * {
     margin: 0;
@@ -7,7 +15,7 @@
 
 body {
     font-family: 'Roboto', sans-serif;
-    background: linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c);
+    background: linear-gradient(135deg, #356CDA, #000, #1C3974);
     color: #333;
     line-height: 1.6;
     padding: 20px;
@@ -26,7 +34,7 @@ body {
 header {
     text-align: center;
     padding: 25px;
-    background: linear-gradient(to right, #1a2a6c, #b21f1f);
+    background: linear-gradient(to right, #356CDA, #1C3974);
     color: white;
     position: relative;
     overflow: hidden;
@@ -119,7 +127,7 @@ h1 {
     left: 0;
     width: 100%;
     height: 5px;
-    background: linear-gradient(to right, #1a2a6c, #b21f1f);
+    background: linear-gradient(to right, #356CDA, #1C3974);
 }
 
 .section-card:hover {
@@ -136,7 +144,7 @@ h1 {
 }
 
 .section-icon {
-    background: linear-gradient(135deg, #1a2a6c, #b21f1f);
+    background: linear-gradient(135deg, #356CDA, #1C3974);
     color: white;
     width: 50px;
     height: 50px;
