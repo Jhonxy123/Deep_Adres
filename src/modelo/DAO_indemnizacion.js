@@ -176,7 +176,7 @@ async function getByRadicado(no_radicado) {
       
       const { rows } = await db.query(query, [no_radicado]);
       
-      console.log('Resultado de la consulta:', rows[0]);
+      //console.log('Resultado de la consulta:', rows[0]);
       
       return rows[0] || null;
     } catch (error) {
