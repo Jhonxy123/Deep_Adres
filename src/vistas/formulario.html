@@ -538,5 +538,52 @@
   });
 </script>
 
+<script>
+// Variable para controlar el estado del envío
+let isSubmitting = false;
+
+document.querySelector('.formulario').addEventListener('submit', function(e) {
+  const submitBtn = document.getElementById('btn-enviar');
+  
+  // Si ya está enviando, prevenir el envío adicional
+  if (isSubmitting) {
+    e.preventDefault();
+    return;
+  }
+  
+  // Marcar como enviando
+  isSubmitting = true;
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Enviando...';
+  submitBtn.style.opacity = '0.7';
+  submitBtn.style.cursor = 'not-allowed';
+  
+  // Opcional: Agregar un spinner
+  submitBtn.innerHTML = '<span class="spinner"></span> Enviando...';
+  
+  // Si hay un error, puedes resetear el estado
+  window.addEventListener('unload', function() {
+    isSubmitting = false;
+    submitBtn.disabled = false;
+  });
+});
+</script>
+
+<style>
+.spinner {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  border: 2px solid rgba(255,255,255,.3);
+  border-radius: 50%;
+  border-top-color: #fff;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+</style>
+
 </body>
 </html>

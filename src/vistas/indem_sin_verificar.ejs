@@ -19,7 +19,7 @@
 <div class="header-container">
   <h1 class="titulo-centrado">Indemnizaciones analizadas por IA</h1>
   <div class="btn-volver-container">
-    <button type="button" class="btn-volver" onclick="window.history.back()">
+    <button type="button" class="btn-volver" onclick="window.location.href='/menu_admin.html'">
       <i class="bi bi-arrow-left"></i> Volver
     </button>
   </div>
@@ -54,8 +54,8 @@
       </div>
 
       <div class="actions">
-        <button class="btn btn-primary">Guardar Cambios</button>
-        <button class="btn btn-secondary">Eliminar Reporte</button>
+        <button class="btn btn-primary" disabled>Guardar Cambios</button>
+        <button class="btn btn-secondary" disabled >Eliminar Reporte</button>
       </div>
     </div>
   </main>
@@ -65,6 +65,29 @@
     cargarComponente("#layout", "/componentes_html/layout_admin.html");
   </script>
 <script>
+
+  // Validación del checkbox
+    document.addEventListener('DOMContentLoaded', function() {
+      const checkboxVerificacion = document.getElementById('verificacion');
+      const btnGuardar = document.querySelector('.btn-primary');
+      const btnEliminar = document.querySelector('.btn-secondary');
+
+      function actualizarEstadoBotones() {
+        if (checkboxVerificacion.checked) {
+          btnGuardar.disabled = false;
+          btnEliminar.disabled = false;
+        } else {
+          btnGuardar.disabled = true;
+          btnEliminar.disabled = true;
+        }
+      }
+
+      // Inicializar estado
+      actualizarEstadoBotones();
+      
+      // Escuchar cambios en el checkbox
+      checkboxVerificacion.addEventListener('change', actualizarEstadoBotones);
+    });
 document.querySelector('.btn-primary').addEventListener('click', async () => {
   // Obtener valores del formulario
   const valorIndemnizacion = document.getElementById('valor-indemnizacion').value;

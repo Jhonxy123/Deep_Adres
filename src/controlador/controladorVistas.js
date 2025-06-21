@@ -141,6 +141,11 @@ export const eliminarIndemnizacion = async (req, res) => {
 
     console.log(`Usuario ${userId} eliminó datos de indemnización ${radicado}`);
 
+  return res.status(200).json({ 
+      success: true, 
+      message: "Reporte eliminado correctamente" 
+    });
+
   } catch (error) {
     console.error('Error en eliminarIndemnizacion:', error);
     
