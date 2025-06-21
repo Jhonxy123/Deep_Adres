@@ -1,0 +1,423 @@
+/* grafica.css - Estilos unificados para la vista de gráficos incluyendo navegación */
+:root {
+    --color-blanco: #ffffff;
+    --color-negro: #000000;
+    --color-fondo: #EBEDEF;
+    --color-azul_claro: #356CDA;
+    --color-azul_oscuro: #1C3974;
+    --color-gris: #445151;
+    --color-azul_graficas: #0057ff;
+    --color-azul_graficas-hover: #003bb7;
+}
+
+/* Estructura principal */
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-fondo);
+    margin: 0;
+}
+
+main {
+    flex: 1;
+    padding-top: 60px; /* Para dejar espacio al navbar fijo */
+}
+
+/* Barra de navegación */
+.navbar {
+    background: linear-gradient(to right, var(--color-azul_claro), var(--color-azul_oscuro));
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.navbar .menu-icon,
+.navbar .user-icon {
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+
+}
+
+.navbar .user-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-blanco);
+    font-size: 1rem;
+}
+
+/* Menú desplegable */
+.menu-toggle {
+    display: none;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 60px;
+    left: 20px;
+    background-color: var(--color-blanco);
+    min-width: 200px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    border-radius: 5px;
+    padding: 10px 0;
+}
+
+.menu-toggle:checked ~ .dropdown-menu {
+    display: block;
+}
+
+.dropdown-item {
+    display: block;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: var(--color-negro);
+    transition: background-color 0.3s;
+}
+
+.dropdown-item:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Contenedor principal de gráficos */
+.historial-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+/* Cabecera */
+.historial-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.historial-title {
+    font-size: 2rem;
+    color: var(--color-azul_oscuro);
+    margin: 0;
+}
+
+/* Botón Volver */
+.back-button {
+    padding: 0.75rem 2rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--color-blanco);
+    border: none;
+    border-radius: 9999px;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(to right, var(--color-gris), var(--color-negro));
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.back-button:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+/* Selectores de gráficos */
+.chart-selector {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.chart-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--color-azul_graficas);
+    color: var(--color-blanco);
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+
+.chart-btn:hover {
+    background-color: var(--color-azul_graficas-hover);
+}
+
+.chart-btn.active {
+    background-color: var(--color-azul_graficas-hover);
+    box-shadow: 0 0 0 2px var(--color-blanco), 0 0 0 4px var(--color-azul_graficas);
+}
+
+/* Selector de año */
+.year-selector {
+    display: flex;
+    justify-content: center;
+    margin: 15px 0;
+    gap: 10px;
+    align-items: center;
+}
+
+.year-btn {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--color-azul_graficas);
+    color: var(--color-blanco);
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+
+.year-btn:hover {
+    background-color: var(--color-azul_graficas-hover);
+}
+
+.year-btn.active {
+    background-color: var(--color-azul_graficas-hover);
+    box-shadow: 0 0 0 2px var(--color-blanco), 0 0 0 4px var(--color-azul_graficas);
+}
+
+.year-label {
+    font-weight: bold;
+    margin-right: 10px;
+    color: var(--color-gris);
+}
+
+/* Contenedores de gráficos */
+.chart-container {
+    width: 80%;
+    max-width: 600px;
+    margin: 30px auto;
+    background: var(--color-blanco);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.bar-chart-container {
+    width: 90%;
+    max-width: 800px;
+    margin: 30px auto;
+}
+
+.chart-title {
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--color-azul_oscuro);
+}
+
+.chart-stats-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    width: 90%;
+    max-width: 800px;
+    margin: 20px auto;
+}
+
+.stat-card {
+    background: var(--color-blanco);
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.stat-card h3 {
+    color: var(--color-gris);
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.stat-card p {
+    color: var(--color-azul_oscuro);
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0;
+}
+
+.header-container h1 {
+  color: var(--color-azul_oscuro);
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  position: center;
+}
+
+/* Mejoras para gráficos */
+.chart-container canvas, 
+.bar-chart-container canvas {
+    transition: opacity 0.5s ease;
+}
+
+.chart-container:hover, 
+.bar-chart-container:hover {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+
+
+/* Botones de gráficos - Estilo actualizado para coincidir con action-button */
+.chart-btn, .year-btn {
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--color-blanco);
+    border: none;
+    border-radius: 9999px; /* Bordes completamente redondeados */
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: linear-gradient(to right, var(--color-azul_claro), var(--color-azul_oscuro));
+    box-shadow: 4px 4px 8px rgba(53, 108, 218, 0.3);
+    min-width: 120px; /* Ancho mínimo consistente */
+}
+
+.year-btn{
+
+ background: linear-gradient(to right, #6b5cb7, #211d6e);
+
+}
+
+#rechazo{
+     background: linear-gradient(to right, #00AA0E, #004403);
+}
+#fechas{
+     background: linear-gradient(to right, #f7bc05, #ff703f);
+}
+
+.chart-btn:hover, .year-btn:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+    box-shadow: 4px 6px 12px rgba(53, 108, 218, 0.4);
+}
+
+.chart-btn.active, .year-btn.active {
+    opacity: 0.95;
+    transform: translateY(0);
+    box-shadow: 
+        0 0 0 2px var(--color-blanco), 
+        0 0 0 4px var(--color-azul_oscuro),
+        inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Selector de gráficos - ajuste de layout */
+.chart-selector {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    gap: 15px; /* Más espacio entre botones */
+    flex-wrap: wrap;
+}
+
+/* Selector de año - ajuste visual */
+.year-selector {
+    display: flex;
+    justify-content: center;
+    margin: 15px 0 25px;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.year-label {
+    font-weight: 600;
+    margin-right: 5px;
+    color: var(--color-azul_oscuro);
+    width: 100%;
+    text-align: center;
+}
+/* Animaciones */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.chart-container, 
+.bar-chart-container,
+.chart-stats-container {
+    animation: fadeIn 0.6s ease-out forwards;
+}
+
+/* Efecto de carga */
+.chart-loading {
+    position: relative;
+    min-height: 300px;
+}
+
+.chart-loading::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(53, 108, 218, 0.2);
+    border-radius: 50%;
+    border-top-color: var(--color-azul_claro);
+    animation: spin 1s linear infinite;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 0.8rem;
+    }
+    
+    .historial-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    .back-button {
+        align-self: flex-end;
+        padding: 0.6rem 1.5rem;
+        font-size: 0.9rem;
+    }
+    
+    .chart-selector {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .chart-btn, .year-btn {
+        width: 100%;
+        max-width: 250px;
+        text-align: center;
+    }
+    
+    .chart-container, .bar-chart-container {
+        width: 95%;
+        padding: 15px;
+    }
+    
+    .dropdown-menu {
+        top: 50px;
+        left: 10px;
+        min-width: 180px;
+    }
+}

@@ -5,26 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard - Gestión de indemnizaciones</title>
   <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/menu_user.css">
-  <link rel="stylesheet" href="css/historial.css">
+   <link rel="stylesheet" href="css/grafica.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <style>
-    .chart-container {
-      width: 80%;
-      max-width: 600px;
-      margin: 30px auto;
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.1);
-    }
-    .chart-title {
-      text-align: center;
-      margin-bottom: 20px;
-      color: #333;
-    }
-  </style>
 </head>
 <body>
   <main>
@@ -37,8 +20,31 @@
         </a>
       </div>
       
-      <div class="chart-container">
-        <canvas id="calificacionesChart"></canvas>
+      <div class="chart-selector">
+        <button class="chart-btn active" id="calificaciones" data-chart="calificaciones">Calificaciones IA</button>
+        <button class="chart-btn" id="rechazo" data-chart="aprobacion">Aprobación Indemnizaciones</button>
+        <button class="chart-btn" id="fechas" data-chart="porMes">Indemnizaciones por Mes</button>
+      </div>
+      
+      <!-- Selector de año (inicialmente oculto) -->
+      <div class="year-selector" id="yearSelector" style="display: none;">
+        <span class="year-label">Año:</span>
+        <% aniosDisponibles.forEach(anio => { %>
+          <button class="year-btn <%= anio === anioSeleccionado ? 'active' : '' %>" 
+                  data-year="<%= anio %>">
+            <%= anio %>
+          </button>
+        <% }); %>
+      </div>
+      
+      <div class="chart-container" id="doughnutChartContainer">
+        <h2 class="chart-title" id="chartTitle"><%- titulo %></h2>
+        <canvas id="doughnutChart"></canvas>
+      </div>
+      
+      <div class="bar-chart-container" id="barChartContainer" style="display: none;">
+        <h2 class="chart-title">Indemnizaciones por Mes (<span id="currentYear"><%= anioSeleccionado %></span>)</h2>
+        <canvas id="barChart"></canvas>
       </div>
     </div>
   </main>
@@ -48,18 +54,50 @@
     cargarComponente("#layout", "componentes_html/layout_user.html");
     
     document.addEventListener('DOMContentLoaded', function() {
-      const datosGrafica = <%- datosGrafica %>;
+      // Datos de las gráficas
+      const datosCalificaciones = <%- datosCalificaciones %>;
+      const datosAprobacion = <%- datosAprobacion %>;
+      let datosPorMes = <%- datosPorMes %>;
+      let currentYear = <%- anioSeleccionado %>;
       
-      const ctx = document.getElementById('calificacionesChart').getContext('2d');
-      new Chart(ctx, {
+      const doughnutCtx = document.getElementById('doughnutChart').getContext('2d');
+      const barCtx = document.getElementById('barChart').getContext('2d');
+      const chartTitle = document.getElementById('chartTitle');
+      const yearSelector = document.getElementById('yearSelector');
+      const currentYearElement = document.getElementById('currentYear');
+      
+      // Configuración común para gráficas doughnut
+      const doughnutOptions = {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'right',
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                const label = context.label || '';
+                const value = context.raw || 0;
+                const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                const percentage = Math.round((value / total) * 100);
+                return `${label}: ${value} (${percentage}%)`;
+              }
+            }
+          }
+        },
+        cutout: '65%'
+      };
+      
+      // Gráfica de calificaciones IA
+      const calificacionesChart = {
         type: 'doughnut',
         data: {
           labels: ['Eficiente', 'Regular', 'Deficiente'],
           datasets: [{
             data: [
-              datosGrafica.eficiente || 0,
-              datosGrafica.regular || 0,
-              datosGrafica.deficiente || 0
+              datosCalificaciones.eficiente || 0,
+              datosCalificaciones.regular || 0,
+              datosCalificaciones.deficiente || 0
             ],
             backgroundColor: [
               '#4BC0C0', // Turquesa para Eficiente
@@ -71,26 +109,144 @@
             hoverOffset: 15
           }]
         },
+        options: doughnutOptions
+      };
+      
+      // Gráfica de aprobación/rechazo
+      const aprobacionChart = {
+        type: 'doughnut',
+        data: {
+          labels: ['Aprobadas', 'Rechazadas'],
+          datasets: [{
+            data: [
+              datosAprobacion.aprobadas || 0,
+              datosAprobacion.rechazadas || 0
+            ],
+            backgroundColor: [
+              '#4CAF50', // Verde para Aprobadas
+              '#F44336', // Rojo para Rechazadas
+              '#FFC107'  // Amarillo para Pendientes
+            ],
+            borderColor: '#fff',
+            borderWidth: 2,
+            hoverOffset: 15
+          }]
+        },
+        options: doughnutOptions
+      };
+      
+      // Gráfica de barras por mes
+      let barChart = new Chart(barCtx, {
+        type: 'bar',
+        data: {
+          labels: datosPorMes.map(item => item.mes),
+          datasets: [{
+            label: 'Número de Indemnizaciones',
+            data: datosPorMes.map(item => item.cantidad),
+            backgroundColor: 'rgba(41, 128, 185, 0.7)', // Cambiado a azul más oscuro
+            borderColor: 'rgba(41, 128, 185, 1)',      // Cambiado a azul más oscuro
+            borderWidth: 1
+          }]
+        },
         options: {
           responsive: true,
           plugins: {
             legend: {
-              position: 'right',
+              display: false
             },
             tooltip: {
               callbacks: {
                 label: function(context) {
-                  const label = context.label || '';
-                  const value = context.raw || 0;
-                  const total = context.dataset.data.reduce((a, b) => a + b, 0);
-                  const percentage = Math.round((value / total) * 100);
-                  return `${label}: ${value} (${percentage}%)`;
+                  return `Indemnizaciones: ${context.raw}`;
                 }
               }
             }
           },
-          cutout: '65%'
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: {
+                stepSize: 1,
+                precision: 0
+              }
+            }
+          }
         }
+      });
+      
+      // Crear gráfica doughnut inicial
+      let doughnutChart = new Chart(doughnutCtx, calificacionesChart);
+      
+      // Función para actualizar la gráfica por mes
+async function actualizarGraficaPorMes(anio) {
+    try {
+        const response = await fetch(`/graficos/por-mes?anio=${anio}`);
+        
+        if (!response.ok) {
+            throw new Error('Error en la respuesta del servidor');
+        }
+        
+        const nuevosDatos = await response.json();
+        
+        // Actualizar los datos del gráfico
+        barChart.data.datasets[0].data = nuevosDatos.map(item => item.cantidad);
+        barChart.update();
+        
+        // Actualizar el año mostrado
+        currentYear = anio;
+        currentYearElement.textContent = anio;
+        
+        // Actualizar botón activo
+        document.querySelectorAll('.year-btn').forEach(btn => {
+            btn.classList.toggle('active', parseInt(btn.dataset.year) === anio);
+        });
+    } catch (error) {
+        console.error('Error al actualizar gráfica:', error);
+        alert('Error al cargar los datos. Por favor intenta nuevamente.');
+    }
+}
+      // Manejar el cambio entre gráficas
+      document.querySelectorAll('.chart-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          // Actualizar botones activos
+          document.querySelectorAll('.chart-btn').forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+          
+          // Mostrar/ocultar selector de año
+          yearSelector.style.display = this.dataset.chart === 'porMes' ? 'flex' : 'none';
+          
+          // Determinar qué gráfica mostrar
+          if (this.dataset.chart === 'porMes') {
+            // Mostrar gráfica de barras y ocultar doughnut
+            document.getElementById('doughnutChartContainer').style.display = 'none';
+            document.getElementById('barChartContainer').style.display = 'block';
+          } else {
+            // Mostrar gráfica doughnut y ocultar barras
+            document.getElementById('doughnutChartContainer').style.display = 'block';
+            document.getElementById('barChartContainer').style.display = 'none';
+            
+            // Actualizar título y datos de la gráfica doughnut
+            if (this.dataset.chart === 'calificaciones') {
+              chartTitle.textContent = 'Distribución de Calificaciones IA';
+              doughnutChart.destroy();
+              doughnutChart = new Chart(doughnutCtx, calificacionesChart);
+            } else {
+              chartTitle.textContent = 'Aprobación de Indemnizaciones';
+              doughnutChart.destroy();
+              doughnutChart = new Chart(doughnutCtx, aprobacionChart);
+            }
+          }
+        });
+      });
+      
+      // Manejar cambio de año
+      document.querySelectorAll('.year-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const anioSeleccionado = parseInt(this.dataset.year);
+          if (anioSeleccionado !== currentYear) {
+            actualizarGraficaPorMes(anioSeleccionado);
+          }
+        });
       });
     });
   </script>

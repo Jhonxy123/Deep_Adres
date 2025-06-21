@@ -320,25 +320,80 @@ export const paginaMenuAdmin = (req, res) => {
 
 export const mostrarGraficas = async (req, res) => {
     try {
-        const estadisticas = await indemnizacionDAO.obtenerEstadisticasCalificaciones();
+        // Obtener años disponibles
+        const aniosDisponibles = await indemnizacionDAO.obtenerAniosDisponibles();
+        const anioActual = new Date().getFullYear();
         
-        // Procesar datos para la gráfica
-        const datosGrafica = {
+        // Verificar si el año actual está en la lista, si no, usar el más reciente
+        const anioSeleccionado = aniosDisponibles.includes(anioActual) 
+            ? anioActual 
+            : aniosDisponibles[0] || anioActual;
+        
+        // Obtener datos para todas las gráficas
+        const estadisticasCalificaciones = await indemnizacionDAO.obtenerEstadisticasCalificaciones();
+        const estadisticasAprobacion = await indemnizacionDAO.obtenerEstadisticasAprobacion();
+        const indemnizacionesPorMes = await indemnizacionDAO.obtenerIndemnizacionesPorMes(anioSeleccionado);
+        
+        // Procesar datos para la gráfica de calificaciones
+        const datosCalificaciones = {
             eficiente: 0,
             regular: 0,
             deficiente: 0
         };
 
-        estadisticas.forEach(item => {
+        estadisticasCalificaciones.forEach(item => {
             const calificacion = item.calificacion.toLowerCase();
-            if (datosGrafica.hasOwnProperty(calificacion)) {
-                datosGrafica[calificacion] = parseInt(item.cantidad);
+            if (datosCalificaciones.hasOwnProperty(calificacion)) {
+                datosCalificaciones[calificacion] = parseInt(item.cantidad);
+            }
+        });
+
+        // Procesar datos para la gráfica de aprobación
+        const datosAprobacion = {
+            aprobadas: 0,
+            rechazadas: 0,
+            pendientes: 0
+        };
+
+        estadisticasAprobacion.forEach(item => {
+            if (item.estado === 'Aprobadas') {
+                datosAprobacion.aprobadas = parseInt(item.cantidad);
+            } else if (item.estado === 'Rechazadas') {
+                datosAprobacion.rechazadas = parseInt(item.cantidad);
+            } else if (item.estado === 'Pendientes') {
+                datosAprobacion.pendientes = parseInt(item.cantidad);
+            }
+        });
+
+        // Procesar datos para la gráfica por mes
+        const meses = [
+            "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+            "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+        ];
+        
+        // Inicializar todos los meses con 0
+        const datosPorMes = meses.map((mes, index) => {
+            return {
+                mes: mes,
+                cantidad: 0
+            };
+        });
+
+        // Actualizar con los datos reales
+        indemnizacionesPorMes.forEach(item => {
+            const mesIndex = parseInt(item.mes) - 1;
+            if (mesIndex >= 0 && mesIndex < 12) {
+                datosPorMes[mesIndex].cantidad = parseInt(item.cantidad);
             }
         });
 
         res.render('graficos_indem', { 
-            datosGrafica: JSON.stringify(datosGrafica),
-            titulo: 'Distribución de Calificaciones IA'
+            datosCalificaciones: JSON.stringify(datosCalificaciones),
+            datosAprobacion: JSON.stringify(datosAprobacion),
+            datosPorMes: JSON.stringify(datosPorMes),
+            aniosDisponibles: aniosDisponibles,
+            anioSeleccionado: anioSeleccionado,
+            titulo: 'Distribución de Calificaciones IA' // Título inicial
         });
 
     } catch (error) {
