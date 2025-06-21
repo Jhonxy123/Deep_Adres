@@ -11,7 +11,6 @@
     <div id="layout"></div>
   <main>
 
-   
     <form class="formulario" method="POST" action="/formulario">
        <h2>I. Datos del beneficiario de la reclamación</h2>
       <div class="fila">
@@ -27,11 +26,11 @@
       <div class="fila">
         <select name="beneficiario.tipo_documento">
           <option value="">Tipo de documento</option>
-          <option value="Cedula">Cédula</option>
-          <option value="Cedula de Extranjeria">Cédula de Extranjeria</option>
-          <option value="Pasaporte">Pasaporte</option>
-          <option value="Permiso Especial de Permanencia">Permiso Especial de Permanencia</option>
-          <option value="Permiso por Protección Temporal">Permiso por Protección Temporal</option>
+          <option value="Cedula">Cédula de Ciudadanía (CC)</option>
+          <option value="Cedula de Extranjeria">Cédula de Extranjeria (CE)</option>
+          <option value="Pasaporte">Pasaporte (PA)</option>
+          <option value="Permiso Especial de Permanencia">Permiso Especial de Permanencia (PE)</option>
+          <option value="Permiso por Protección Temporal">Permiso por Protección Temporal (PT)</option>
         </select>
       
         <input type="text" name="beneficiario.numero_documento" placeholder="No. de documento">
@@ -140,8 +139,8 @@
     <div class="fila">
         <select name="apoderado.tipo_documento">
             <option value="">Tipo de documento</option>
-            <option value="Cedula">Cédula</option>
-            <option value="Cedula de extrajeria">Cédula de Extranjería</option>
+            <option value="Cedula">Cédula de Ciudadanía (CC)</option>
+            <option value="Cedula de extrajeria">Cédula de Extranjería (CE)</option>
         </select>
         <input type="text" name="apoderado.numero_documento" placeholder="No. de documento">
     </div>
@@ -222,17 +221,17 @@
     <div class="fila">
         <select name="victima.tipo_documento">
             <option value="">Tipo de documento</option>
-            <option value="Cédula de Ciudadanía">Cédula de Ciudadanía (CC)</option>
-            <option value="Cédula de Extranjería">Cédula de Extranjería (CE)</option>
-            <option value="Tarjeta de Identidad">Tarjeta de Identidad (TI)</option>
+            <option value="Cedula de Ciudadania">Cédula de Ciudadanía (CC)</option>
+            <option value="Cedula de Extranjeria">Cédula de Extranjería (CE)</option>
+            <option value="Carnet Diplomático">Carnét Diplomático (CD)</option>
             <option value="Pasaporte">Pasaporte (PA)</option>
-            <option value="Registro Civil">Registro Civil (RC)</option>
-            <option value="Permiso Especial de Permanencia">Permiso Especial de Permanencia (PE)</option>
-            <option value="Permiso por Protección Temporal">Permiso por Protección Temporal (PT)</option>
             <option value="Salvoconducto">Salvoconducto (SC)</option>
-            <option value="Carné Diplomático">Carné Diplomático (CD)</option>
-            <option value="Documento Extranjero">Documento Extranjero (DE)</option>
+            <option value="Permiso Especial de Permanencia">Permiso Especial de Permanencia (PE)</option>
+            <option value="Registro Civil">Registro Civil (RC)</option>
+            <option value="Tarjeta de Identidad">Tarjeta de Identidad (TI)</option>
             <option value="Certificado de Nacimiento">Certificado de Nacimiento (CN)</option>
+            <option value="Documento Extranjero">Documento Extranjero (DE)</option>
+            <option value="Permiso por Proteccion Temporal">Permiso por Protección Temporal (PT)</option>
         </select>
         <input type="text" name="victima.numero_documento" placeholder="No. de documento">
     </div>
@@ -311,6 +310,7 @@
             <option value="Conductor">Conductor</option>
             <option value="Peatón">Peatón</option>
             <option value="Ocupante">Ocupante</option>
+            <option value="Ciclista">Ciclista</option>
         </select>
     </div>
 
@@ -324,12 +324,14 @@
     <hr>
     <h2>IV. Datos del sitio donde ocurrió el evento catastrófico o accidente de tránsito</h2>
 
-    <p><strong>Naturaleza del evento</strong></p>
+    <p><h3><strong>Naturaleza del evento</strong></h3></p>
 
     <div class="fila">
         <label>Accidente de tránsito:</label>
         <input type="checkbox" name="evento.accidente_transito" value="true">
+    </div>
 
+    <div class="fila">
         <label>Naturales:</label>
         <select name="evento.natural">
             <option value="Ninguno">Ninguno</option>
@@ -337,22 +339,25 @@
             <option value="Avalancha">Avalancha</option>
             <option value="Maremoto">Maremoto</option>
             <option value="Deslizamiento de tierra">Deslizamiento de tierra</option>
-            <option value="Erupciones volcanica">Erupciones volcánica</option>
+            <option value="Erupciones volcanicas">Erupciones volcánicas</option>
             <option value="Incendio natural">Incendio natural</option>
-            <option value="Huracan">Huracan</option>
+            <option value="Huracan">Huracán</option>
             <option value="Rayo">Rayo</option>
-            <option value="Inundacion">Inundación</option>
-            <option value="Vendabal">Ninguno</option
+            <option value="Inundaciones">Inundaciones</option>
+            <option value="Vendabal">Vendabal</option>
             <option value="Tornado">Tornado</option>
         </select>
+    </div>
 
+    <div class="fila">
         <label>Terroristas:</label>
         <select name="evento.terrorista">
             <option value="Ninguno">Ninguno</option>
+            <option value="Explosion">Explosión</option>
             <option value="Masacre">Masacre</option>
-            <option value="Mina Antipersona">Mina antipersona</option>
+            <option value="Mina Antipersonal">Mina antipersonal</option>
             <option value="Incendio">Incendio</option>
-            <option value="Ataque a municipio">Ataque a municipio</option>
+            <option value="Ataque a municipios">Ataque a municipios</option>
             <option value="Combate">Combate</option>
         </select>
     </div>
@@ -433,12 +438,12 @@
       <label>Estado de aseguramiento:</label>
       <select name="vehiculo.aseguramiento">
         <option value="">Seleccione...</option>
-        <option value="asegurado">Asegurado</option>
-        <option value="no_asegurado">No asegurado</option>
+        <option value="Asegurado">Asegurado</option>
+        <option value="No_asegurado">No asegurado</option>
         <option value="Vehiculo fantasma">Vehículo fantasma</option>
         <option value="Poliza falsa">Póliza falsa</option>
-        <option value="No asegurado y sin placa">No asegurado y sin placa</option>
-        <option value="No asegurado - propietario Indeterminado o sin información">No asegurado - propietario Indeterminado o sin información</option>
+        <option value="No asegurado - sin placa">No asegurado - sin placa</option>
+        <option value="No asegurado - propietario indeterminado o sin información">No asegurado - propietario indeterminado o sin información</option>
       </select>
     </div>
 
@@ -454,8 +459,7 @@
       <label>Tipo de servicio:</label>
       <select name="vehiculo.tipo_servicio">
         <option value="">Seleccione...</option>
-        <option value="Automovil">Automovil</option>
-        <option value="Motocicleta">Motocicleta</option>
+        <option value="Automovil">Automóvil</option>
         <option value="Bus">Bus</option>
         <option value="Buseta">Buseta</option>
         <option value="Camion">Camión</option>
@@ -463,11 +467,13 @@
         <option value="Campero">Campero</option>
         <option value="Microbus">Microbus</option>
         <option value="Tractocamion">Tractocamión</option>
+        <option value="Motocicleta">Motocicleta</option>
         <option value="Motocarro">Motocarro</option>
         <option value="Mototriciclo">Mototriciclo</option>
         <option value="Cuatrimoto">Cuatrimoto</option>
         <option value="Moto extranjera">Moto extranjera</option>
         <option value="Vehiculo extranjero">Vehículo extranjero</option>
+        <option value="Volqueta">Volqueta</option>
       </select>
 
       <label>Intervención de la autoridad:</label>
