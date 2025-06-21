@@ -88,6 +88,10 @@ h2 {
   color: #1a3f8d;
 }
 
+h3 {
+  color: #1a3f8d;
+}
+
 .formulario {
   display: flex;
   flex-direction: column;
