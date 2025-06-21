@@ -35,13 +35,44 @@
 
     <!-- Botón eliminar centrado -->
     <div class="boton-eliminar-container">
-      <button type="button" class="btn-eliminar">Eliminar Reporte</button>
+     <button type="button" class="btn-eliminar" id="btnEliminarReporte">Eliminar Reporte</button>
     </div>
   </main>
 
   <script src="/componentes_html/cargarcomponentes.js"></script>
   <script>
     cargarComponente("#layout", "/componentes_html/layout_admin.html");
+  </script>
+  <script>
+  document.getElementById('btnEliminarReporte').addEventListener('click', async () => {
+  const urlParts = window.location.pathname.split('/');
+  const radicado = urlParts[urlParts.length - 1];
+
+  if (!confirm('¿Está seguro que desea eliminar este reporte permanentemente?')) {
+    return;
+  }
+
+  try {
+    const response = await fetch(`/indemnizacion_por_verificar/eliminar/${radicado}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    });
+
+    const result = await response.json();
+
+    if (response.ok) {
+      alert(result.message || 'Reporte eliminado correctamente');
+      window.location.href = '/historial_indem_verificado'; // Redirige a donde necesites
+    } else {
+      throw new Error(result.error || 'Error al eliminar');
+    }
+  } catch(error) {
+    console.error('Error:', error);
+    alert(`Error al eliminar: ${error.message}`);
+  }
+});
   </script>
 </body>
 </html>

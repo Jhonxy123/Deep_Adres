@@ -17,6 +17,22 @@ async function encontrarIndemnizaciones(userId) {
     }
 }
 
+async function limpiarCamposIndemnizacion(no_radicado) {
+  const result = await db.query(
+    `UPDATE Indemnizacion SET 
+      form_verificado = NULL,
+      valor_indemnizacion = NULL,
+      fecha_verificacion = NULL,
+      descripcion = NULL,
+      auditor = NULL,
+      calificacion_reporteIA = NULL
+     WHERE no_radicado = $1
+     RETURNING *`,
+    [no_radicado]
+  );
+
+  return result.rows[0]; // Devuelve el registro actualizado con los campos "eliminados"
+}
 
 
 
@@ -134,6 +150,6 @@ async function traerDepartamentos() {
 
 
 
-module.exports = { encontrarIndemnizaciones, encontrarForm,traerDepartamentos,encontrarIndemnizacionesSinVerificar,buscarPorNoRadicado,guardarIndemnizacionVerificada,encontrarIndemnizacionesVerificadas};
+module.exports = { encontrarIndemnizaciones,limpiarCamposIndemnizacion, encontrarForm,traerDepartamentos,encontrarIndemnizacionesSinVerificar,buscarPorNoRadicado,guardarIndemnizacionVerificada,encontrarIndemnizacionesVerificadas};
 
 
