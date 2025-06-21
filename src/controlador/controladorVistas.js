@@ -32,7 +32,9 @@ export const historal_usuario = async (req,res) => {
    res.sendFile(path.join(__dirname, '..', 'vistas', 'historial.ejs'));
 };
 
-
+export const formulario_guardado = async(req,res) => {
+     res.sendFile(path.join(__dirname, '..', 'vistas', 'formulario_guardado.html'));
+};
 
 export const guardarFormulario = async (req, res) => {
   try {
