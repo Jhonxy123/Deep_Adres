@@ -162,6 +162,7 @@ async function obtenerEstadisticasCalificaciones() {
     }
 }
 
+<<<<<<< HEAD
 async function getByRadicado(no_radicado) {
     try {
       // Usar nombres de columna en minúsculas y sin comillas
@@ -186,5 +187,69 @@ async function getByRadicado(no_radicado) {
   }
 
 module.exports = { encontrarIndemnizaciones,limpiarCamposIndemnizacion, encontrarForm,traerDepartamentos,encontrarIndemnizacionesSinVerificar,buscarPorNoRadicado,guardarIndemnizacionVerificada,encontrarIndemnizacionesVerificadas, obtenerEstadisticasCalificaciones, getByRadicado};
+=======
+async function obtenerEstadisticasAprobacion() {
+    try {
+        const { rows } = await db.query(`
+            SELECT 
+                CASE 
+                    WHEN valor_indemnizacion IS NULL THEN 'Pendientes'
+                    WHEN valor_indemnizacion = 0 THEN 'Rechazadas'
+                    ELSE 'Aprobadas'
+                END as estado,
+                COUNT(*) as cantidad
+            FROM indemnizacion
+            WHERE valor_indemnizacion IS NOT NULL OR valor_indemnizacion = 0
+            GROUP BY estado
+        `);
+        return rows;
+    } catch (error) {
+        console.error('Error al obtener estadísticas de aprobación:', error);
+        throw error;
+    }
+}
 
+async function obtenerAniosDisponibles() {
+    try {
+        const { rows } = await db.query(`
+            SELECT DISTINCT EXTRACT(YEAR FROM fecha_radicacion) as anio
+            FROM indemnizacion
+            ORDER BY anio DESC
+        `);
+        return rows.map(row => row.anio);
+    } catch (error) {
+        console.error('Error al obtener años disponibles:', error);
+        throw error;
+    }
+}
+>>>>>>> front-end-daniel
+
+// Modificar la función existente para aceptar un año como parámetro
+async function obtenerIndemnizacionesPorMes(anio = null) {
+    try {
+        const query = {
+            text: `
+                SELECT 
+                    EXTRACT(MONTH FROM fecha_radicacion) as mes,
+                    COUNT(*) as cantidad
+                FROM indemnizacion
+                WHERE EXTRACT(YEAR FROM fecha_radicacion) = $1
+                GROUP BY mes
+                ORDER BY mes
+            `,
+            values: [anio || new Date().getFullYear()]
+        };
+        
+        const { rows } = await db.query(query);
+        return rows;
+    } catch (error) {
+        console.error('Error al obtener indemnizaciones por mes:', error);
+        throw error;
+    }
+}
+module.exports = { encontrarIndemnizaciones,limpiarCamposIndemnizacion, encontrarForm,traerDepartamentos,
+    encontrarIndemnizacionesSinVerificar,buscarPorNoRadicado,guardarIndemnizacionVerificada,
+    encontrarIndemnizacionesVerificadas, obtenerEstadisticasCalificaciones, obtenerEstadisticasAprobacion,
+    obtenerAniosDisponibles, obtenerIndemnizacionesPorMes};
+ 
 

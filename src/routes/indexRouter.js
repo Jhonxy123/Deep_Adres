@@ -2,7 +2,11 @@ const express = require('express');
 const router = express.Router();
 const controladorVistas = require('../controlador/controladorVistas');
 const controladorUsuario = require('../controlador/controladorUsuario');
+<<<<<<< HEAD
 const controladorIndem = require('../controlador/controladorIndem');
+=======
+const indemnizacionDAO = require('../modelo/DAO_indemnizacion'); 
+>>>>>>> front-end-daniel
 
 // Ruta raíz → index.html
 router.get('/', controladorVistas.paginaIndex);
@@ -49,5 +53,39 @@ router.post('/indemnizacion_por_verificar/observar_form/:radicado',controladorVi
 
 
 router.get('/graficos', controladorVistas.mostrarGraficas);
+// Agregar esta ruta en indexRouter.js
+router.get('/graficos/por-mes', async (req, res) => {
+    try {
+        const anio = req.query.anio || new Date().getFullYear();
+        const indemnizacionesPorMes = await indemnizacionDAO.obtenerIndemnizacionesPorMes(anio);
+        
+        const meses = [
+            "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+            "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+        ];
+        
+        // Inicializar todos los meses con 0
+        const datosPorMes = meses.map((mes, index) => {
+            return {
+                mes: mes,
+                cantidad: 0
+            };
+        });
+
+        // Actualizar con los datos reales
+        indemnizacionesPorMes.forEach(item => {
+            const mesIndex = parseInt(item.mes) - 1;
+            if (mesIndex >= 0 && mesIndex < 12) {
+                datosPorMes[mesIndex].cantidad = parseInt(item.cantidad);
+            }
+        });
+
+        res.json(datosPorMes);
+    } catch (error) {
+        console.error('Error al obtener datos por mes:', error);
+        res.status(500).json({ error: 'Error interno' });
+    }
+});
+
 
 module.exports = router;
