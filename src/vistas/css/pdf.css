@@ -1,0 +1,205 @@
+:root {
+  --color-blanco: #ffff;
+  --color-negro: #000000;
+  --color-fondo: #ebedef;
+  --color-azul_claro: #356cda;
+  --color-azul_oscuro: #1c3974;
+  --color-gris: #445151;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.menu-toggle {
+  display: none; /* Oculta el checkbox */
+}
+
+.menu-icon-container {
+  cursor: pointer;
+  display: inline-block;
+}
+
+/* Menú desplegable - inicialmente oculto */
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 60px;
+  left: 20px;
+  background-color: white;
+  min-width: 200px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  border-radius: 5px;
+  padding: 10px 0;
+}
+
+/* Cuando el checkbox está checked, mostramos el menú */
+.menu-toggle:checked ~ .dropdown-menu {
+  display: block;
+}
+
+.dropdown-item {
+  display: block;
+  padding: 10px 20px;
+  text-decoration: none;
+  color: #333;
+  transition: background-color 0.3s;
+}
+
+.dropdown-item:hover {
+  background-color: #f1f1f1;
+}
+
+.navbar {
+  background: linear-gradient(to right, #356cda, #1c3974);
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+.navbar .menu-icon,
+.navbar .user-icon {
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+}
+.navbar .user-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-blanco);
+  font-size: 1rem;
+}
+/* Main Header */
+.main-header {
+  text-align: center;
+  margin: 2rem 1rem;
+}
+.main-header h1 {
+  font-size: 2.5rem;
+  color: var(--color-azul_claro);
+  margin-bottom: 0.5rem;
+}
+.main-header p {
+  font-size: 1.25rem;
+  color: var(--color-negro);
+}
+
+.historial-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.historial-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.historial-title {
+  font-weight: bold;
+  font-size: 2.5rem;
+  text-align: center;
+  margin: 1rem 0;
+  width: 100%;
+  padding: 0 1rem;
+   color: var(--color-azul_oscuro);
+}
+
+/* Botón Volver - Estilo consistente con tu otro CSS */
+.back-button {
+  position: absolute;
+  right: 7%;
+  margin-top: 1.5%;
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--color-blanco);
+  border: none;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(to right, var(--color-gris), var(--color-negro));
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.back-button:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
+.pdf-viewer-container {
+  width: 100%;
+  height: 70vh;
+  margin: 20px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f8f9fa;
+}
+
+.pdf-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin: 15px 0;
+}
+
+.btn-pdf {
+  padding: 8px 16px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  text-decoration: none;
+}
+
+.btn-pdf:hover {
+  background: #0069d9;
+}
+
+.estado-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.historial-title {
+  font-weight: bold;
+  font-size: 2.5rem;
+  text-align: center;
+  margin: 1rem 0;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* Estilos específicos por estado */
+.titulo-aprobado {
+  color: #28a745;
+  text-shadow: 1px 1px 3px rgba(40, 167, 69, 0.3);
+}
+
+.titulo-rechazado {
+  color: #dc3545;
+  text-shadow: 1px 1px 3px rgba(220, 53, 69, 0.3);
+}
+
+.titulo-pendiente {
+  color: #ffc107;
+  text-transform: none; /* Solo para el estado pendiente */
+}
