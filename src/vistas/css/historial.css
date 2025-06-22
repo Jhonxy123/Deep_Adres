@@ -14,6 +14,8 @@
     padding: 0 1rem;
 }
 
+
+
 .historial-header {
     display: flex;
     justify-content: space-between;
@@ -26,6 +28,13 @@
     font-size: 2rem;
     color: var(--color-azul_oscuro);
     margin: 0;
+}
+
+.buttons-cell {
+  display: flex;
+  gap: 1rem;       /* Espacio entre botones */
+  justify-content: flex-start; /* Alinea a la izquierda */
+  padding-left: 1rem; /* Espaciado interno izquierdo */
 }
 
 /* Botón Volver - Estilo consistente con tu otro CSS */

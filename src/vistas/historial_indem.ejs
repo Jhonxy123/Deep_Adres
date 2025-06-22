@@ -35,7 +35,7 @@
             <tr>
               <td><%= indem.no_radicado %></td>
               <td><%= new Date(indem.fecha_radicacion).toLocaleDateString('es-CO', { year: 'numeric', month: 'long', day: 'numeric' }) %></td>
-              <td>
+              <td style="display: flex; gap: 0.5rem; justify-content: left;">
                 <a href="/formulario_guardado/<%= indem.no_radicado %>" class="action-button form-button">
                   <img src="/img/icon_form.svg" alt="Icono" style="width: 1.2em; height: 1.2em; vertical-align: middle;">
                    Formulario

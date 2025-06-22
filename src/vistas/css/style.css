@@ -33,6 +33,7 @@ footer {
     color: var(--color-blanco);
     font-size: 0.875rem;
      z-index: 1;
+         left: 0; /* Pegado al borde izquierdo */
   }
 
 
