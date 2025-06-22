@@ -162,7 +162,6 @@ async function obtenerEstadisticasCalificaciones() {
     }
 }
 
-<<<<<<< HEAD
 async function getByRadicado(no_radicado) {
     try {
       // Usar nombres de columna en minúsculas y sin comillas
@@ -186,8 +185,6 @@ async function getByRadicado(no_radicado) {
     }
   }
 
-module.exports = { encontrarIndemnizaciones,limpiarCamposIndemnizacion, encontrarForm,traerDepartamentos,encontrarIndemnizacionesSinVerificar,buscarPorNoRadicado,guardarIndemnizacionVerificada,encontrarIndemnizacionesVerificadas, obtenerEstadisticasCalificaciones, getByRadicado};
-=======
 async function obtenerEstadisticasAprobacion() {
     try {
         const { rows } = await db.query(`
@@ -222,7 +219,6 @@ async function obtenerAniosDisponibles() {
         throw error;
     }
 }
->>>>>>> front-end-daniel
 
 // Modificar la función existente para aceptar un año como parámetro
 async function obtenerIndemnizacionesPorMes(anio = null) {
@@ -250,6 +246,6 @@ async function obtenerIndemnizacionesPorMes(anio = null) {
 module.exports = { encontrarIndemnizaciones,limpiarCamposIndemnizacion, encontrarForm,traerDepartamentos,
     encontrarIndemnizacionesSinVerificar,buscarPorNoRadicado,guardarIndemnizacionVerificada,
     encontrarIndemnizacionesVerificadas, obtenerEstadisticasCalificaciones, obtenerEstadisticasAprobacion,
-    obtenerAniosDisponibles, obtenerIndemnizacionesPorMes};
+    obtenerAniosDisponibles, obtenerIndemnizacionesPorMes, getByRadicado};
  
 

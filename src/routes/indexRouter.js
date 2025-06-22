@@ -2,11 +2,8 @@ const express = require('express');
 const router = express.Router();
 const controladorVistas = require('../controlador/controladorVistas');
 const controladorUsuario = require('../controlador/controladorUsuario');
-<<<<<<< HEAD
 const controladorIndem = require('../controlador/controladorIndem');
-=======
 const indemnizacionDAO = require('../modelo/DAO_indemnizacion'); 
->>>>>>> front-end-daniel
 
 // Ruta raíz → index.html
 router.get('/', controladorVistas.paginaIndex);
