@@ -31,24 +31,35 @@
           </tr>
         </thead>
         <tbody>
-          <% resultado.forEach(indem => { %>
-            <tr>
-              <td><%= indem.no_radicado %></td>
-              <td><%= new Date(indem.fecha_radicacion).toLocaleDateString('es-CO', { year: 'numeric', month: 'long', day: 'numeric' }) %></td>
-              <td>
-                <a href="/formulario_guardado/<%= indem.no_radicado %>" class="action-button form-button">
+  <% resultado.forEach(indem => { %>
+    <tr>
+      <td><%= indem.no_radicado %></td>
+      <td><%= new Date(indem.fecha_radicacion).toLocaleDateString('es-CO', { year: 'numeric', month: 'long', day: 'numeric' }) %></td>
+      <td>
+        <a href="/formulario_guardado/<%= indem.no_radicado %>" class="action-button form-button">
                   <img src="/img/icon_form.svg" alt="Icono" style="width: 1.2em; height: 1.2em; vertical-align: middle;">
                    Formulario
-                </a>
-                <a class="action-button" href="/historialusuario/visualizar-pdf/<%= indem.no_radicado %>">
-                  <img src="/img/resultado_indem.svg" alt="Icono" style="width: 1.2em; height: 1.2em; vertical-align: middle;">
-  Resultado
-                  </a>
-              </td>
-            </tr>
-          <% }); %>
-        </tbody>
+         </a>
+
+        <% if (indem.form_verificado && indem.form_verificado.trim() !== '') { %>
+          <a class="action-button" href="/historialusuario/visualizar-pdf/<%= indem.no_radicado %>">
+            <img src="/img/resultado_indem.svg" alt="Icono" style="width: 1.2em; height: 1.2em; vertical-align: middle;">
+            Resultado
+          </a>
+        <% } else { %>
+          <a class="action-button" style="pointer-events: none; opacity: 0.5; cursor: not-allowed;" title="Aún no se ha verificado el formulario.">
+            <img src="/img/resultado_indem.svg" alt="Icono" style="width: 1.2em; height: 1.2em; vertical-align: middle;">
+            Resultado
+          </a>
+        <% } %>
+          </td>
+        </tr>
+      <% }); %>
+</tbody>
+
       </table>
+
+      
     </div>
   </main>
   
