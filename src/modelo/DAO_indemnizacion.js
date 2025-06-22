@@ -4,7 +4,7 @@ const db = require('../config/db');
 async function encontrarIndemnizaciones(userId) {
     try {
         const { rows } = await db.query(
-            `SELECT no_radicado, fecha_radicacion 
+            `SELECT no_radicado, fecha_radicacion, form_verificado 
              FROM indemnizacion 
              WHERE id_usuario = $1 
              ORDER BY fecha_radicacion DESC`,
@@ -72,7 +72,7 @@ async function guardarIndemnizacionVerificada(
 async function encontrarIndemnizacionesSinVerificar() {
     try {
         const { rows } = await db.query(
-            `SELECT no_radicado, fecha_radicacion 
+            `SELECT no_radicado, fecha_radicacion
              FROM indemnizacion
              WHERE form_verificado IS NULL 
              ORDER BY fecha_radicacion DESC`

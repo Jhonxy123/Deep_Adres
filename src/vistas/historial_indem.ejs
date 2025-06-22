@@ -31,24 +31,35 @@
           </tr>
         </thead>
         <tbody>
-          <% resultado.forEach(indem => { %>
-            <tr>
-              <td><%= indem.no_radicado %></td>
-              <td><%= new Date(indem.fecha_radicacion).toLocaleDateString('es-CO', { year: 'numeric', month: 'long', day: 'numeric' }) %></td>
-              <td>
-                <button class="action-button" onclick="window.location.href='/formulario_guardado.html'"> <!--Toca cambiar esta a futuro-->
-                   <img src="/img/icon_form.svg" alt="Icono" style="width: 1.2em; height: 1.2em; vertical-align: middle;">
-                    Formulario 
-                </button>
-                  <a class="action-button" href="/historialusuario/visualizar-pdf/<%= indem.no_radicado %>">
-                  <img src="/img/resultado_indem.svg" alt="Icono" style="width: 1.2em; height: 1.2em; vertical-align: middle;">
-  Resultado
-                  </a>
-              </td>
-            </tr>
-          <% }); %>
-        </tbody>
+  <% resultado.forEach(indem => { %>
+    <tr>
+      <td><%= indem.no_radicado %></td>
+      <td><%= new Date(indem.fecha_radicacion).toLocaleDateString('es-CO', { year: 'numeric', month: 'long', day: 'numeric' }) %></td>
+      <td>
+        <button class="action-button" onclick="window.location.href='/formulario_guardado.html'">
+          <img src="/img/icon_form.svg" alt="Icono" style="width: 1.2em; height: 1.2em; vertical-align: middle;">
+          Formulario 
+        </button>
+
+        <% if (indem.form_verificado && indem.form_verificado.trim() !== '') { %>
+          <a class="action-button" href="/historialusuario/visualizar-pdf/<%= indem.no_radicado %>">
+            <img src="/img/resultado_indem.svg" alt="Icono" style="width: 1.2em; height: 1.2em; vertical-align: middle;">
+            Resultado
+          </a>
+        <% } else { %>
+          <a class="action-button" style="pointer-events: none; opacity: 0.5; cursor: not-allowed;" title="Aún no se ha verificado el formulario.">
+            <img src="/img/resultado_indem.svg" alt="Icono" style="width: 1.2em; height: 1.2em; vertical-align: middle;">
+            Resultado
+          </a>
+        <% } %>
+          </td>
+        </tr>
+      <% }); %>
+</tbody>
+
       </table>
+
+      
     </div>
   </main>
   
