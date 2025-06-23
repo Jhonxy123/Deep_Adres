@@ -202,25 +202,60 @@ export const guardarIndemnizacionVerificada = async (req, res) => {
 export const traerHistorial = async (req, res) => {
   try {
     const userId = req.session.user.id;
+    const { busqueda } = req.query;
 
-    const resultado = await indemnizacionDAO.encontrarIndemnizaciones(userId);
+    let resultado;
+    if (busqueda) {
+      // Verificar si es un número de radicado (puede empezar con IND- seguido de números)
+      if (/^IND-\d+$/.test(busqueda) || /^\d+$/.test(busqueda)) {
+        const indemnizacion = await indemnizacionDAO.buscarPorNoRadicado(busqueda);
+        resultado = indemnizacion && indemnizacion.id_usuario === userId ? [indemnizacion] : [];
+      } 
+      // Verificar si es una fecha válida (formato YYYY-MM-DD)
+      else if (/^\d{4}-\d{2}-\d{2}$/.test(busqueda)) {
+        resultado = await indemnizacionDAO.buscarPorFecha(userId, busqueda);
+      } else {
+        // Si no coincide con ningún formato, buscar como texto en radicado
+        resultado = await indemnizacionDAO.buscarPorRadicadoTexto(userId, busqueda);
+      }
+    } else {
+      resultado = await indemnizacionDAO.encontrarIndemnizaciones(userId);
+    }
 
-    res.render("historial_indem", { resultado });
+    res.render("historial_indem", { resultado, busqueda: busqueda || '' });
   } catch (error) {
-    console.error("Error al traer la información: ".error);
-    res.status(500).send("Error interno");
+    console.error("Error al traer la información: ", error);
+    res.status(500).render("error", { mensaje: "Error interno al procesar la búsqueda" });
   }
 };
 
 export const indem_por_ver = async (req, res) => {
   try {
-    const resultado =
-      await indemnizacionDAO.encontrarIndemnizacionesSinVerificar();
+    const { busqueda } = req.query;
 
-    res.render("historial_sinverificar", { resultado });
+    let resultado;
+    if (busqueda) {
+      // Verificar si es un número de radicado
+      if (/^IND-\d+$/.test(busqueda) || /^\d+$/.test(busqueda)) {
+        const indemnizacion = await indemnizacionDAO.buscarPorNoRadicado(busqueda);
+        // Solo incluir si no está verificado
+        resultado = indemnizacion && !indemnizacion.form_verificado ? [indemnizacion] : [];
+      } 
+      // Verificar si es una fecha válida
+      else if (/^\d{4}-\d{2}-\d{2}$/.test(busqueda)) {
+        resultado = await indemnizacionDAO.buscarPorFechaSinVerificar(busqueda);
+      } else {
+        // Buscar como texto en radicado
+        resultado = await indemnizacionDAO.buscarPorRadicadoTextoSinVerificar(busqueda);
+      }
+    } else {
+      resultado = await indemnizacionDAO.encontrarIndemnizacionesSinVerificar();
+    }
+
+    res.render("historial_sinverificar", { resultado, busqueda: busqueda || '' });
   } catch (error) {
-    console.error("Error al traer la información: ".error);
-    res.status(500).send("Error interno");
+    console.error("Error al traer la información: ", error);
+    res.status(500).render("error", { mensaje: "Error interno al procesar la búsqueda" });
   }
 };
 
@@ -270,13 +305,31 @@ export const eliminarIndemnizacion = async (req, res) => {
 
 export const indem_verificada = async (req, res) => {
   try {
-    const resultado =
-      await indemnizacionDAO.encontrarIndemnizacionesVerificadas();
+    const { busqueda } = req.query;
 
-    res.render("historial_verificado", { resultado });
+    let resultado;
+    if (busqueda) {
+      // Verificar si es un número de radicado
+      if (/^IND-\d+$/.test(busqueda) || /^\d+$/.test(busqueda)) {
+        const indemnizacion = await indemnizacionDAO.buscarPorNoRadicado(busqueda);
+        // Solo incluir si está verificado
+        resultado = indemnizacion && indemnizacion.form_verificado ? [indemnizacion] : [];
+      } 
+      // Verificar si es una fecha válida
+      else if (/^\d{4}-\d{2}-\d{2}$/.test(busqueda)) {
+        resultado = await indemnizacionDAO.buscarPorFechaVerificada(busqueda);
+      } else {
+        // Buscar como texto en radicado
+        resultado = await indemnizacionDAO.buscarPorRadicadoTextoVerificado(busqueda);
+      }
+    } else {
+      resultado = await indemnizacionDAO.encontrarIndemnizacionesVerificadas();
+    }
+
+    res.render("historial_verificado", { resultado, busqueda: busqueda || '' });
   } catch (error) {
-    console.error("Error al traer la información: ".error);
-    res.status(500).send("Error interno");
+    console.error("Error al traer la información: ", error);
+    res.status(500).render("error", { mensaje: "Error interno al procesar la búsqueda" });
   }
 };
 
