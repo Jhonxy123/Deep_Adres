@@ -243,9 +243,119 @@ async function obtenerIndemnizacionesPorMes(anio = null) {
         throw error;
     }
 }
+
+async function buscarPorRadicadoTexto(userId, texto) {
+    try {
+        const { rows } = await db.query(
+            `SELECT no_radicado, fecha_radicacion, form_verificado 
+             FROM indemnizacion 
+             WHERE id_usuario = $1 
+             AND no_radicado LIKE $2
+             ORDER BY fecha_radicacion DESC`,
+            [userId, `%${texto}%`]
+        );
+        return rows;
+    } catch (error) {
+        console.error('Error al buscar indemnizaciones por texto:', error);
+        throw error;
+    }
+}
+
+async function buscarPorFecha(userId, fecha) {
+    try {
+        // Validar formato de fecha primero
+        if (!/^\d{4}-\d{2}-\d{2}$/.test(fecha)) {
+            throw new Error('Formato de fecha inválido. Use YYYY-MM-DD');
+        }
+
+        const { rows } = await db.query(
+            `SELECT no_radicado, fecha_radicacion, form_verificado 
+             FROM indemnizacion 
+             WHERE id_usuario = $1 
+             AND DATE(fecha_radicacion) = $2
+             ORDER BY fecha_radicacion DESC`,
+            [userId, fecha]
+        );
+        return rows;
+    } catch (error) {
+        console.error('Error al buscar indemnizaciones por fecha:', error);
+        throw error;
+    }
+}
+
+async function buscarPorFechaSinVerificar(fecha) {
+    try {
+        const { rows } = await db.query(
+            `SELECT no_radicado, fecha_radicacion 
+             FROM indemnizacion
+             WHERE form_verificado IS NULL 
+             AND DATE(fecha_radicacion) = $1
+             ORDER BY fecha_radicacion DESC`,
+            [fecha]
+        );
+        return rows;
+    } catch (error) {
+        console.error('Error al buscar indemnizaciones por fecha:', error);
+        throw error;
+    }
+}
+
+async function buscarPorRadicadoTextoSinVerificar(texto) {
+    try {
+        const { rows } = await db.query(
+            `SELECT no_radicado, fecha_radicacion 
+             FROM indemnizacion
+             WHERE form_verificado IS NULL 
+             AND no_radicado LIKE $1
+             ORDER BY fecha_radicacion DESC`,
+            [`%${texto}%`]
+        );
+        return rows;
+    } catch (error) {
+        console.error('Error al buscar indemnizaciones por texto:', error);
+        throw error;
+    }
+}
+
+async function buscarPorFechaVerificada(fecha) {
+    try {
+        const { rows } = await db.query(
+            `SELECT no_radicado, fecha_radicacion 
+             FROM indemnizacion
+             WHERE form_verificado IS NOT NULL 
+             AND DATE(fecha_radicacion) = $1
+             ORDER BY fecha_radicacion DESC`,
+            [fecha]
+        );
+        return rows;
+    } catch (error) {
+        console.error('Error al buscar indemnizaciones verificadas por fecha:', error);
+        throw error;
+    }
+}
+
+async function buscarPorRadicadoTextoVerificado(texto) {
+    try {
+        const { rows } = await db.query(
+            `SELECT no_radicado, fecha_radicacion 
+             FROM indemnizacion
+             WHERE form_verificado IS NOT NULL 
+             AND no_radicado LIKE $1
+             ORDER BY fecha_radicacion DESC`,
+            [`%${texto}%`]
+        );
+        return rows;
+    } catch (error) {
+        console.error('Error al buscar indemnizaciones verificadas por texto:', error);
+        throw error;
+    }
+}
+
 module.exports = { encontrarIndemnizaciones,limpiarCamposIndemnizacion, encontrarForm,traerDepartamentos,
     encontrarIndemnizacionesSinVerificar,buscarPorNoRadicado,guardarIndemnizacionVerificada,
     encontrarIndemnizacionesVerificadas, obtenerEstadisticasCalificaciones, obtenerEstadisticasAprobacion,
-    obtenerAniosDisponibles, obtenerIndemnizacionesPorMes, getByRadicado};
+    obtenerAniosDisponibles, obtenerIndemnizacionesPorMes, getByRadicado, buscarPorFecha, buscarPorRadicadoTexto,
+    buscarPorFechaSinVerificar, buscarPorRadicadoTextoSinVerificar, buscarPorFechaVerificada, 
+    buscarPorRadicadoTextoVerificado};
  
 

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard - Historial de Indemnizaciones</title>
+  <title>Dashboard - Historial de Indemnizaciones Verificadas</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/menu_user.css">
   <link rel="stylesheet" href="css/historial.css">
@@ -22,6 +22,29 @@
         </a>
       </div>
 
+      <!-- Formulario de búsqueda -->
+      <div class="search-container">
+        <form method="GET" action="/historial_indem_verificado" class="search-form" onsubmit="return validarBusqueda()">
+          <input 
+            type="text" 
+            name="busqueda" 
+            id="busqueda"
+            placeholder="Buscar por número de radicado (ej: IND-123) o fecha (YYYY-MM-DD)" 
+            value="<%= busqueda %>"
+            class="search-input"
+          >
+          <button type="submit" class="search-button">
+            <i class="bi bi-search"></i> Buscar
+          </button>
+          <% if (busqueda) { %>
+            <a href="/historial_indem_verificado" class="clear-search-button">
+              <i class="bi bi-x-circle"></i> Limpiar
+            </a>
+          <% } %>
+        </form>
+        <div id="error-message" class="error-message"></div>
+      </div>
+
       <table class="historial-table">
         <thead>
           <tr>
@@ -31,17 +54,23 @@
           </tr>
         </thead>
         <tbody>
-          <% resultado.forEach(indem => { %>
+          <% if (resultado.length > 0) { %>
+            <% resultado.forEach(indem => { %>
+              <tr>
+                <td><%= indem.no_radicado %></td>
+                <td><%= new Date(indem.fecha_radicacion).toLocaleDateString('es-CO', { year: 'numeric', month: 'long', day: 'numeric' }) %></td>
+                <td>
+                  <a href="/historial_indem_verificado/indem_validadas/<%= indem.no_radicado %>" class="action-button">
+                    <i class="bi bi-eye-fill"></i> Ver
+                  </a>
+                </td>
+              </tr>
+            <% }); %>
+          <% } else { %>
             <tr>
-              <td><%= indem.no_radicado %></td>
-              <td><%= new Date(indem.fecha_radicacion).toLocaleDateString('es-CO', { year: 'numeric', month: 'long', day: 'numeric' }) %></td>
-              <td>
-                <a href="/historial_indem_verificado/indem_validadas/<%= indem.no_radicado %>" class="action-button">
-                  <i class="bi bi-eye-fill"></i> Ver
-                </a>
-              </td>
+              <td colspan="3" class="no-results">No se encontraron resultados</td>
             </tr>
-          <% }); %>
+          <% } %>
         </tbody>
       </table>
     </div>
@@ -51,10 +80,28 @@
   <script>
     cargarComponente("#layout", "componentes_html/layout_admin.html");
     
-    function verDetalle(radicado) {
-      // Aquí puedes implementar la lógica para ver el detalle
-      console.log("Ver detalle de:", radicado);
-      // window.location.href = `/detalle?id=${radicado}`;
+    function validarBusqueda() {
+      const input = document.getElementById('busqueda');
+      const errorMsg = document.getElementById('error-message');
+      const value = input.value.trim();
+      
+      if (!value) {
+        return true; // Permitir búsqueda vacía (mostrar todo)
+      }
+      
+      // Validar si es número de radicado (IND- seguido de números o solo números)
+      const esRadicado = /^(IND-)?\d+$/.test(value);
+      
+      // Validar si es fecha (YYYY-MM-DD)
+      const esFecha = /^\d{4}-\d{2}-\d{2}$/.test(value);
+      
+      if (!esRadicado && !esFecha) {
+        errorMsg.textContent = 'Formato inválido. Use número de radicado (ej: IND-123) o fecha (YYYY-MM-DD)';
+        return false;
+      }
+      
+      errorMsg.textContent = '';
+      return true;
     }
   </script>
 </body>

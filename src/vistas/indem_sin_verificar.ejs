@@ -54,7 +54,6 @@
 
       <div class="actions">
         <button class="btn btn-primary" disabled>Guardar Cambios</button>
-        <button class="btn btn-secondary" disabled >Eliminar Reporte</button>
       </div>
     </div>
   </main>
@@ -69,15 +68,14 @@
     document.addEventListener('DOMContentLoaded', function() {
       const checkboxVerificacion = document.getElementById('verificacion');
       const btnGuardar = document.querySelector('.btn-primary');
-      const btnEliminar = document.querySelector('.btn-secondary');
+   
 
       function actualizarEstadoBotones() {
         if (checkboxVerificacion.checked) {
           btnGuardar.disabled = false;
-          btnEliminar.disabled = false;
+ 
         } else {
           btnGuardar.disabled = true;
-          btnEliminar.disabled = true;
         }
       }
 
